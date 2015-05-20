@@ -9,15 +9,15 @@ class Xternal_Mailer_Sendgrid extends Xternal_Mailer_Base
 		$email->setSubject($this->message->getSubject());
 		
 		$from = $this->message->getFrom();
-		foreach($from as $email => $name)
+		foreach($from as $address => $name)
 		{
-			$email->setFrom($email, $name);
+			$email->setFrom($address)->setFromName($name);
 		}
 		
 		$to = $this->message->getTo();
-		foreach($to as $email => $name)
+		foreach($to as $address => $name)
 		{
-			$email->addTo($email, $name);
+			$email->addTo($address)->addToName($name);
 		}
 		
 		foreach($this->attachments as $original_filename => $filename)
