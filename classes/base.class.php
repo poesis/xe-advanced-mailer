@@ -69,21 +69,18 @@ class Xternal_Mailer_Base
 	public function getSender()
 	{
 		$from = $this->message->getFrom();
-		if(count($from))
+		foreach($from as $email => $name)
 		{
-			if(strval(current($from)) === '')
+			if($name === '')
 			{
-				return strval(key($from));
+				return $email;
 			}
 			else
 			{
-				return current($from) . ' <' . key($from) . '>';
+				return $name . ' <' . $email . '>';
 			}
 		}
-		else
-		{
-			return FALSE;
-		}
+		return FALSE;
 	}
 	
 	/**
@@ -106,21 +103,18 @@ class Xternal_Mailer_Base
 	public function getReceiptor()
 	{
 		$to = $this->message->getTo();
-		if(count($to))
+		foreach($to as $email => $name)
 		{
-			if(strval(current($to)) === '')
+			if($name === '')
 			{
-				return strval(key($to));
+				return $email;
 			}
 			else
 			{
-				return current($to) . ' <' . key($to) . '>';
+				return $name . ' <' . $email . '>';
 			}
 		}
-		else
-		{
-			return FALSE;
-		}
+		return FALSE;
 	}
 	
 	/**
