@@ -270,7 +270,7 @@ class Xternal_Mailer_Base
 	 */
 	public function procAttachments()
 	{
-		
+		// no-op
 	}
 	
 	/**
@@ -278,7 +278,7 @@ class Xternal_Mailer_Base
 	 */
 	public function procCidAttachments()
 	{
-		
+		// no-op
 	}
 	
 	/**
@@ -289,16 +289,16 @@ class Xternal_Mailer_Base
 		foreach($this->attachments as $original_filename => $filename)
 		{
 			$attachment = \Swift_Attachment::fromPath($original_filename);
-        	$attachment->setFilename($filename);
-        	$this->message->attach($attachment);
-        }
-        foreach($this->cidAttachments as $cid => $original_filename)
-        {
-        	$embedded = \Swift_EmbeddedFile::fromPath($original_filename);
-        	$newcid = $this->message->embed($embedded);
-        	$this->content = str_replace(array("cid:$cid", $cid), $newcid, $this->content);
-        }
-        $content_type = $this->content_type === 'html' ? 'text/html' : 'text/plain';
+			$attachment->setFilename($filename);
+			$this->message->attach($attachment);
+		}
+		foreach($this->cidAttachments as $cid => $original_filename)
+		{
+			$embedded = \Swift_EmbeddedFile::fromPath($original_filename);
+			$newcid = $this->message->embed($embedded);
+			$this->content = str_replace(array("cid:$cid", $cid), $newcid, $this->content);
+		}
+		$content_type = $this->content_type === 'html' ? 'text/html' : 'text/plain';
 		$this->message->setBody($this->content, $content_type);
 	}
 	
@@ -308,6 +308,7 @@ class Xternal_Mailer_Base
 	public function send()
 	{
 		$this->procAssembleMessage();
+		
 		$transport = \Swift_NullTransport::newInstance();
 		$mailer = \Swift_Mailer::newInstance($transport);
 		$result = $mailer->send($this->message, $this->errors);
