@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<addon version="0.2">
+	<title xml:lang="ko">외부 서버 &amp; API 메일 발송</title>
+	<title xml:lang="en">Send mail with External Server or API</title>
+	<description xml:lang="ko">외부 SMTP 서버 또는 API를 사용하여 메일을 발송합니다.</description>
+	<description xml:lang="en">Send mail using an external SMTP server or API service.</description>
+	<version>1.0</version>
+	<date>2015-05-21</date>
+	<author email_address="kijin@kijinsung.com" link="https://github.com/kijin">
+		<name xml:lang="ko">Kijin Sung</name>
+		<name xml:lang="en">Kijin Sung</name>
+	</author>
+	<extra_vars>
+		<var name="send_type" type="select">
+			<title xml:lang="ko">발송 방법</title>
+			<title xml:lang="en">Sending method</title>
+			<options value="mail">
+				<title xml:lang="ko">PHP mail() 함수</title>
+				<title xml:lang="en">PHP mail() function</title>
+			</options>
+			<options value="smtp">
+				<title xml:lang="ko">외부 SMTP 서버</title>
+				<title xml:lang="en">External SMTP server</title>
+			</options>
+			<options value="ses">
+				<title xml:lang="ko">Amazon SES API</title>
+				<title xml:lang="en">Amazon SES API</title>
+			</options>
+			<options value="mailgun">
+				<title xml:lang="ko">Mailgun API</title>
+				<title xml:lang="en">Mailgun API</title>
+			</options>
+			<options value="mandrill">
+				<title xml:lang="ko">Mandrill API</title>
+				<title xml:lang="en">Mandrill API</title>
+			</options>
+			<options value="sendgrid">
+				<title xml:lang="ko">Sendgrid API</title>
+				<title xml:lang="en">Sendgrid API</title>
+			</options>
+		</var>
+		<var name="smtp_host" type="text">
+			<title xml:lang="ko">SMTP 서버</title>
+			<title xml:lang="en">SMTP server</title>
+		</var>
+		<var name="smtp_port" type="text">
+			<title xml:lang="ko">SMTP 포트</title>
+			<title xml:lang="en">SMTP port</title>
+		</var>
+		<var name="smtp_security" type="select">
+			<title xml:lang="ko">SMTP 보안</title>
+			<title xml:lang="en">SMTP security</title>
+			<options value="tls">
+				<title xml:lang="ko">TLS (STARTTLS)</title>
+				<title xml:lang="en">TLS (STARTTLS)</title>
+			</options>
+			<options value="ssl">
+				<title xml:lang="ko">SSL</title>
+				<title xml:lang="en">SSL</title>
+			</options>
+			<options value="none">
+				<title xml:lang="ko">사용하지 않음</title>
+				<title xml:lang="en">None</title>
+			</options>
+		</var>
+		<var name="username" type="text">
+			<title xml:lang="ko">아이디</title>
+			<title xml:lang="en">Username</title>
+		</var>
+		<var name="password" type="text">
+			<title xml:lang="ko">암호 또는 API 키</title>
+			<title xml:lang="en">Password or API key</title>
+		</var>
+	</extra_vars>
+</addon>

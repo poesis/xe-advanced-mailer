@@ -1,0 +1,13 @@
+{
+	"require": {
+		"mailgun/mailgun-php": "1.8.*",
+		"mandrill/mandrill": "1.0.*",
+		"sendgrid/sendgrid": "3.2.*",
+		"swiftmailer/swiftmailer": "5.4.*",
+		"jmhobbs/swiftmailer-transport-aws-ses": "0.9.2"
+	},
+	"scripts": {
+		"post-install-cmd": "find ./vendor -type d -regextype posix-extended -regex '.+/(docs?|tests?)' -print0 | xargs -0 rm -r --",
+		"post-update-cmd": "find ./vendor -type d -regextype posix-extended -regex '.+/(docs?|tests?)' -print0 | xargs -0 rm -r --"
+	}
+}
