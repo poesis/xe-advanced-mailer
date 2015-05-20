@@ -20,6 +20,7 @@ switch($addon_info->send_type)
 	case 'mailgun':
 	case 'mandrill':
 	case 'sendgrid':
+	case 'woorimail':
 		include_once __DIR__ . '/vendor/autoload.php';
 		include_once __DIR__ . '/classes/base.class.php';
 		include_once __DIR__ . '/classes/' . $addon_info->send_type . '.class.php';

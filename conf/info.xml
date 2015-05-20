@@ -38,6 +38,10 @@
 				<title xml:lang="ko">Sendgrid API</title>
 				<title xml:lang="en">Sendgrid API</title>
 			</options>
+			<options value="woorimail">
+				<title xml:lang="ko">Woorimail API</title>
+				<title xml:lang="en">Woorimail API</title>
+			</options>
 		</var>
 		<var name="smtp_host" type="text">
 			<title xml:lang="ko">SMTP 서버</title>
