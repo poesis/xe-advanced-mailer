@@ -29,12 +29,23 @@ class Xternal_Mailer_Woorimail extends Xternal_Mailer_Base
 			$data['sender_email'] = $email;
 			$data['sender_nickname'] = $name;
 		}
-		
 		$to = $this->message->getTo();
 		foreach($to as $email => $name)
 		{
 			$data['receiver_email'][] = $email;
-			$data['receiver_nickname'][] = $name;
+			$data['receiver_nickname'][] = str_replace(',', '', $name);
+		}
+		$cc = $this->message->getCc();
+		foreach($cc as $email => $name)
+		{
+			$data['receiver_email'][] = $email;
+			$data['receiver_nickname'][] = str_replace(',', '', $name);
+		}
+		$bcc = $this->message->getBcc();
+		foreach($bcc as $email => $name)
+		{
+			$data['receiver_email'][] = $email;
+			$data['receiver_nickname'][] = str_replace(',', '', $name);
 		}
 		
 		$data['receiver_email'] = implode(',', $data['receiver_email']);

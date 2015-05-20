@@ -19,6 +19,16 @@ class Xternal_Mailer_Sendgrid extends Xternal_Mailer_Base
 		{
 			$email->addTo($address)->addToName($name);
 		}
+		$cc = $this->message->getCc();
+		foreach($cc as $address => $name)
+		{
+			$email->addCc($address);
+		}
+		$bcc = $this->message->getBcc();
+		foreach($bcc as $address => $name)
+		{
+			$email->addBcc($address);
+		}
 		
 		foreach($this->attachments as $original_filename => $filename)
 		{

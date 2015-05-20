@@ -6,10 +6,27 @@ class Xternal_Mailer_Mandrill extends Xternal_Mailer_Base
 	{
 		$this->procAssembleMessage();
 		
+		$recipients = array();
+		$to = $this->message->getTo();
+		foreach($to as $address => $name)
+		{
+			$recipients[] = $address;
+		}
+		$cc = $this->message->getCc();
+		foreach($cc as $address => $name)
+		{
+			$recipients[] = $address;
+		}
+		$bcc = $this->message->getBcc();
+		foreach($bcc as $address => $name)
+		{
+			$recipients[] = $address;
+		}
+		
 		try
 		{
 			$mandrill = new \Mandrill(self::$config->password);
-			$result = $mandrill->messages->sendRaw($this->message->toString());
+			$result = $mandrill->messages->sendRaw($this->message->toString(), null, null, $recipients);
 		}
 		catch(\Mandrill_Error $e)
 		{

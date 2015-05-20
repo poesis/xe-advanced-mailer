@@ -6,16 +6,35 @@ class Xternal_Mailer_Mailgun extends Xternal_Mailer_Base
 	{
 		$this->procAssembleMessage();
 		
+		$args = array(
+			'subject' => $this->getTitle(),
+			'from' => $this->getSender(),
+			'to' => array(),
+			'cc' => array(),
+			'bcc' => array(),
+		);
+		foreach($to as $address => $name)
+		{
+			$args['to'][] = $address;
+		}
+		$cc = $this->message->getCc();
+		foreach($cc as $address => $name)
+		{
+			$args['cc'][] = $address;
+		}
+		$bcc = $this->message->getBcc();
+		foreach($bcc as $address => $name)
+		{
+			$args['bcc'][] = $address;
+		}
+		$args['to'] = implode(', ', $args['to']);
+		$args['cc'] = implode(', ', $args['cc']);
+		$args['bcc'] = implode(', ', $args['bcc']);
+		
 		try
 		{
-			$domain = self::$config->username;
-			$args = array(
-				'from' => $this->getSender(),
-				'to' => $this->getReceiptor(),
-				'subject' => $this->getTitle(),
-			);
 			$mailgun = new \Mailgun\Mailgun(self::$config->password);
-			$result = $mailgun->sendMessage($domain, $args, $this->message->toString());
+			$result = $mailgun->sendMessage(self::$config->username, $args, $this->message->toString());
 		}
 		catch(\Exception $e)
 		{
