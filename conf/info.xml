@@ -34,6 +34,10 @@
 				<title xml:lang="ko">Mandrill API</title>
 				<title xml:lang="en">Mandrill API</title>
 			</options>
+			<options value="postmark">
+				<title xml:lang="ko">Postmark API</title>
+				<title xml:lang="en">Postmark API</title>
+			</options>
 			<options value="sendgrid">
 				<title xml:lang="ko">Sendgrid API</title>
 				<title xml:lang="en">Sendgrid API</title>

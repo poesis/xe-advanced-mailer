@@ -19,6 +19,7 @@ switch($addon_info->send_type)
 	case 'ses':
 	case 'mailgun':
 	case 'mandrill':
+	case 'postmark':
 	case 'sendgrid':
 	case 'woorimail':
 		include_once __DIR__ . '/vendor/autoload.php';
