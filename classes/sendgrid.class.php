@@ -23,12 +23,12 @@ class Xternal_Mailer_Sendgrid extends Xternal_Mailer_Base
 		foreach($this->attachments as $original_filename => $filename)
 		{
 			$email->addAttachment($original_filename, $filename);
-        }
-        foreach($this->cidAttachments as $cid => $original_filename)
-        {
+		}
+		foreach($this->cidAttachments as $cid => $original_filename)
+		{
 			$email->addAttachment($original_filename, basename($filename), $cid);
-        }
-        
+		}
+		
 		if($this->content_type === 'html')
 		{
 			$email->setHtml($this->content);
