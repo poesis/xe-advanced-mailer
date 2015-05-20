@@ -9,8 +9,13 @@ class Xternal_Mailer_Mailgun extends Xternal_Mailer_Base
 		try
 		{
 			$domain = self::$config->username;
-			$mailgun = new \Mailgun(self::$config->password);
-			$result = $mailgun->sendMessage($domain, null, $this->message->toString());
+			$args = array(
+				'from' => $this->getSender(),
+				'to' => $this->getReceiptor(),
+				'subject' => $this->getTitle(),
+			);
+			$mailgun = new \Mailgun\Mailgun(self::$config->password);
+			$result = $mailgun->sendMessage($domain, $args, $this->message->toString());
 		}
 		catch(\Exception $e)
 		{
