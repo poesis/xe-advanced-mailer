@@ -25,6 +25,6 @@ class Xternal_Mailer_Mandrill extends Xternal_Mailer_Base
 				$this->errors[] = 'Mandrill: ' . $item['email'] . ' - ' . $item['status'] . ' (' . $item['reject_reason'] . ')';
 			}
 		}
-		return count($this->errors) ? true : false;
+		return count($this->errors) ? false : true;
 	}
 }
