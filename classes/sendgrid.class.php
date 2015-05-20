@@ -4,7 +4,7 @@ class Xternal_Mailer_Sendgrid extends Xternal_Mailer_Base
 {
 	public function send()
 	{
-		$sendgrid = new \Sendgrid(self::$config->username, self::$config->password);
+		$sendgrid = new \SendGrid(self::$config->username, self::$config->password);
 		$email = new \SendGrid\Email();
 		$email->setSubject($this->message->getSubject());
 		
@@ -38,7 +38,25 @@ class Xternal_Mailer_Sendgrid extends Xternal_Mailer_Base
 			$email->setBody($this->content);
 		}
 		
-		$result = $sendgrid->send($email);
-		return $result;
+		try
+		{
+			$result = $sendgrid->send($email);
+		}
+		catch(\SendGrid\Exception $e)
+		{
+			$this->errors = array('SendGrid: Exception ' . $e->getCode() . ' - ' . $e->getMessage());
+			return false;
+		}
+		
+		$result = $result->getBody();
+		if($result['message'] === 'success')
+		{
+			return true;
+		}
+		else
+		{
+			$this->errors = array('SendGrid: ' . $result['message']);
+			return false;
+		}
 	}
 }

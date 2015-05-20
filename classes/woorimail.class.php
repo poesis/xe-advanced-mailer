@@ -51,6 +51,18 @@ class Xternal_Mailer_Woorimail extends Xternal_Mailer_Base
 		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, true);
     	$result = curl_exec($ch);
 		curl_close($ch);
-		return $result;
+		
+		if($result !== false && ($result = @json_decode($result, true)) && $result['result'] === 'OK')
+		{
+			return true;
+		}
+		else
+		{
+			if(isset($result['error_msg']))
+			{
+				$this->errors = array('Woorimail: ' . $result['error_msg']);
+			}
+			return false;
+		}
 	}
 }

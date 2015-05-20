@@ -6,9 +6,34 @@ class Xternal_Mailer_Mailgun extends Xternal_Mailer_Base
 	{
 		$this->procAssembleMessage();
 		
-		$domain = self::$config->username;
-		$mailgun = new \Mailgun(self::$config->password);
-		$result = $mailgun->sendMessage($domain, null, $this->message->toString());
-		return $result;
+		try
+		{
+			$domain = self::$config->username;
+			$mailgun = new \Mailgun(self::$config->password);
+			$result = $mailgun->sendMessage($domain, null, $this->message->toString());
+		}
+		catch(\Exception $e)
+		{
+			$this->errors = array(get_class($e) . ': ' . $e->getMessage());
+			return false;
+		}
+		
+		$response_code = intval($result->http_response_code);
+		if($response_code === 200)
+		{
+			return true;
+		}
+		else
+		{
+			$this->errors = array('Mailgun: server returned code ' . $response_code);
+			if(isset($result->http_response_body->items))
+			{
+				foreach($result->http_response_body->items as $item)
+				{
+					$this->errors[] = $item->message;
+				}
+			}
+			return false;
+		}
 	}
 }
