@@ -13,6 +13,7 @@ class Xternal_Mailer_Mailgun extends Xternal_Mailer_Base
 			'cc' => array(),
 			'bcc' => array(),
 		);
+		$to = $this->message->getTo();
 		foreach($to as $address => $name)
 		{
 			$args['to'][] = $address;
