@@ -1,9 +1,16 @@
 <?php
 
+/**
+ * This is the Base class for Xternal Mailer.
+ * All other classes inherit this class and replace the XE Mail class.
+ * 
+ * @author Kijin Sung <kijin@kijinsung.com>
+ * @license LGPL v2.1 <http://www.gnu.org/licenses/lgpl-2.1.html>
+ */
 class Xternal_Mailer_Base
 {
 	/**
-	 * Properties for compatibility
+	 * Properties for compatibility with XE Mail class
 	 */
 	public $content = '';
 	public $content_type = 'html';
@@ -84,10 +91,10 @@ class Xternal_Mailer_Base
 	}
 	
 	/**
-	 * Set Receiptor (TO:)
+	 * Set Recipient (To:)
 	 *
-	 * @param string $name Receiptor name
-	 * @param string $email Receiptor email address
+	 * @param string $name Recipient name
+	 * @param string $email Recipient email address
 	 * @return void
 	 */
 	public function setReceiptor($name, $email)
@@ -96,7 +103,7 @@ class Xternal_Mailer_Base
 	}
 	
 	/**
-	 * Get Receiptor (TO:)
+	 * Get Recipient (To:)
 	 *
 	 * @return string
 	 */
@@ -118,18 +125,18 @@ class Xternal_Mailer_Base
 	}
 	
 	/**
-	 * Set Email's Title
+	 * Set Subject
 	 *
-	 * @param string $title Title to set
+	 * @param string $subject The subject
 	 * @return void
 	 */
-	public function setTitle($title)
+	public function setTitle($subject)
 	{
-		$this->message->setSubject($title);
+		$this->message->setSubject($subject);
 	}
 	
 	/**
-	 * Get Email's Title
+	 * Get Subject
 	 *
 	 * @return string
 	 */
@@ -150,7 +157,7 @@ class Xternal_Mailer_Base
 	}
 	
 	/**
-	 * Set ReplyTo param
+	 * Set ReplyTo
 	 *
 	 * @param string $replyTo
 	 * @return void
@@ -196,11 +203,14 @@ class Xternal_Mailer_Base
 	}
 	
 	/**
-	 * Set the type of body's content
+	 * Set the type of message content (html or plain text)
+	 * 
+	 * @param string $mode The type
+	 * @return void
 	 */
-	public function setContentType($mode = 'html')
+	public function setContentType($type = 'html')
 	{
-		$this->content_type = $mode === 'html' ? 'html' : '';
+		$this->content_type = $type === 'html' ? 'html' : '';
 	}
 	
 	/**
@@ -215,6 +225,8 @@ class Xternal_Mailer_Base
 	
 	/**
 	 * Get the HTML content of body message
+	 * 
+	 * @return string
 	 */
 	public function getHTMLContent()
 	{
@@ -269,6 +281,8 @@ class Xternal_Mailer_Base
 	
 	/**
 	 * Process the images from body content. This functions is used if Mailer is set as mail not as SMTP
+	 * 
+	 * @return void
 	 */
 	public function procCidAttachments()
 	{
@@ -277,6 +291,8 @@ class Xternal_Mailer_Base
 	
 	/**
 	 * Process the message before sending
+	 * 
+	 * @return void
 	 */
 	public function procAssembleMessage()
 	{
@@ -298,6 +314,8 @@ class Xternal_Mailer_Base
 	
 	/**
 	 * Send email
+	 * 
+	 * @return bool
 	 */
 	public function send()
 	{
@@ -311,6 +329,9 @@ class Xternal_Mailer_Base
 	
 	/**
 	 * Check if DNS of param is real or fake
+	 * 
+	 * @param string $email_address Email address to check
+	 * @return bool
 	 */
 	public function checkMailMX($email_address)
 	{
@@ -335,6 +356,9 @@ class Xternal_Mailer_Base
 	
 	/**
 	 * Check if param is a valid email or not
+	 * 
+	 * @param string $email_address Email address to check
+	 * @return string
 	 */
 	public function isVaildMailAddress($email_address)
 	{

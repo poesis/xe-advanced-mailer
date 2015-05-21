@@ -9,6 +9,7 @@ class Xternal_Mailer_Mailgun extends Xternal_Mailer_Base
 		$args = array(
 			'subject' => $this->getTitle(),
 			'from' => $this->getSender(),
+			'h:Reply-To' => $this->message->getReplyTo(),
 			'to' => array(),
 			'cc' => array(),
 			'bcc' => array(),

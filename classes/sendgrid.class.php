@@ -29,6 +29,16 @@ class Xternal_Mailer_Sendgrid extends Xternal_Mailer_Base
 		{
 			$email->addBcc($address);
 		}
+		$replyTo = $this->message->getReplyTo();
+		if(strval($replyTo) !== '')
+		{
+			$email->setReplyTo($replyTo);
+		}
+		$references = $this->message->getHeaders()->get('References')->toString();
+		if(strlen(trim($references)) > 12)
+		{
+			$email->addHeader('References', substr($references, 12));
+		}
 		
 		foreach($this->attachments as $original_filename => $filename)
 		{
