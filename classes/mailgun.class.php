@@ -37,8 +37,8 @@ class Mailgun extends Base
 		
 		try
 		{
-			$mailgun = new \Mailgun\Mailgun(self::$config->password);
-			$result = $mailgun->sendMessage(self::$config->username, $args, $this->message->toString());
+			$mailgun = new \Mailgun\Mailgun(self::$config->api_key);
+			$result = $mailgun->sendMessage(self::$config->domain, $args, $this->message->toString());
 		}
 		catch(\Exception $e)
 		{
