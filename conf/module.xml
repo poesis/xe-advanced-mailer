@@ -3,8 +3,8 @@
 	<grants />
 	<permissions />
 	<actions>
-		<action name="dispAdvanced_MailerAdminConfig" type="view" admin_index="true" menu_name="advanced_mailer" />
-		<action name="procAdvanced_MailerAdminInsertConfig" type="controller" />
+		<action name="dispAdvanced_mailerAdminConfig" type="view" admin_index="true" menu_name="advanced_mailer" />
+		<action name="procAdvanced_mailerAdminInsertConfig" type="controller" />
 	</actions>
 	<menus>
 		<menu name="advanced_mailer" type="all">

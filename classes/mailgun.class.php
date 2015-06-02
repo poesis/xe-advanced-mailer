@@ -1,6 +1,8 @@
 <?php
 
-class Xternal_Mailer_Mailgun extends Xternal_Mailer_Base
+namespace Advanced_Mailer;
+
+class Mailgun extends Base
 {
 	public function send()
 	{

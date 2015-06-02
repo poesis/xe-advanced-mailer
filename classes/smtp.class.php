@@ -1,6 +1,8 @@
 <?php
 
-class Xternal_Mailer_Smtp extends Xternal_Mailer_Base
+namespace Advanced_Mailer;
+
+class Smtp extends Base
 {
 	public function send()
 	{

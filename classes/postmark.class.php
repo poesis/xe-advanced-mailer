@@ -1,6 +1,8 @@
 <?php
 
-class Xternal_Mailer_Postmark extends Xternal_Mailer_Base
+namespace Advanced_Mailer;
+
+class Postmark extends Base
 {
 	public function send()
 	{

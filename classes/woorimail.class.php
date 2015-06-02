@@ -1,6 +1,8 @@
 <?php
 
-class Xternal_Mailer_Woorimail extends Xternal_Mailer_Base
+namespace Advanced_Mailer;
+
+class Woorimail extends Base
 {
 	public function send()
 	{

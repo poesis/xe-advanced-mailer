@@ -1,6 +1,8 @@
 <?php
 
-class Xternal_Mailer_Ses extends Xternal_Mailer_Base
+namespace Advanced_Mailer;
+
+class Ses extends Base
 {
 	public function send()
 	{

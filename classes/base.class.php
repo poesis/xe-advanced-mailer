@@ -1,13 +1,8 @@
 <?php
 
-/**
- * This is the Base class for Xternal Mailer.
- * All other classes inherit this class and replace the XE Mail class.
- * 
- * @author Kijin Sung <kijin@kijinsung.com>
- * @license LGPL v2.1 <http://www.gnu.org/licenses/lgpl-2.1.html>
- */
-class Xternal_Mailer_Base
+namespace Advanced_Mailer;
+
+class Base
 {
 	/**
 	 * Properties for compatibility with XE Mail class
@@ -335,7 +330,7 @@ class Xternal_Mailer_Base
 	 */
 	public function checkMailMX($email_address)
 	{
-		if(!Mail::isVaildMailAddress($email_address))
+		if(!self::isVaildMailAddress($email_address))
 		{
 			return FALSE;
 		}

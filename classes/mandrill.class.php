@@ -1,6 +1,8 @@
 <?php
 
-class Xternal_Mailer_Mandrill extends Xternal_Mailer_Base
+namespace Advanced_Mailer;
+
+class Mandrill extends Base
 {
 	public function send()
 	{

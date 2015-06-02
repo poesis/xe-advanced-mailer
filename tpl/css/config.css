@@ -1,0 +1,15 @@
+
+div.hidden-by-default {
+	display: none;
+}
+
+div.full-width input {
+	width: 90%;
+}
+
+span.sender_info {
+	display: inline-block;
+	margin-top: 12px;
+	margin-left: 24px;
+	font-family: Consolas, monospace;
+}

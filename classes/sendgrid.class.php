@@ -1,6 +1,8 @@
 <?php
 
-class Xternal_Mailer_Sendgrid extends Xternal_Mailer_Base
+namespace Advanced_Mailer;
+
+class Sendgrid extends Base
 {
 	public function send()
 	{
