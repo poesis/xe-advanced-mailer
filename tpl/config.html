@@ -9,8 +9,10 @@
 	<input type="hidden" name="module" value="advanced_mailer" />
 	<input type="hidden" name="act" value="procAdvanced_mailerAdminInsertConfig" />
 	<input type="hidden" name="success_return_url" value="{getRequestUriByServerEnviroment()}" />
-
-	<section class="section" id="advanced_mailer">
+	
+	<section class="section">
+		
+		<h2 style="padding-top:12px">{$lang->cmd_advanced_mailer_settings}</h2>
 		
 		<div class="x_control-group">
 			<label class="x_control-label" for="advanced_mailer_send_type">{$lang->cmd_advanced_mailer_send_type}</label>
@@ -113,9 +115,40 @@
 			</div>
 		</div>
 		
-		<div class="x_control-group" style="padding-top: 24px; margin-bottom: -12px">
-			<label class="x_control-label"></label>
+	</section>
+	
+	<div class="btnArea x_clearfix">
+		<button type="submit" class="x_btn x_btn-primary x_pull-right">{$lang->cmd_registration}</button>
+	</div>
+	
+	<section class="section">
+		
+		<h2>{$lang->cmd_advanced_mailer_test}</h2>
+		
+		<div class="x_control-group">
+			<label class="x_control-label" for="advanced_mailer_recipient_name">{$lang->cmd_advanced_mailer_recipient_name}</label>
 			<div class="x_controls">
+				<input type="text" id="advanced_mailer_recipient_name" value="" />
+			</div>
+		</div>
+		
+		<div class="x_control-group">
+			<label class="x_control-label" for="advanced_mailer_recipient_email">{$lang->cmd_advanced_mailer_recipient_email}</label>
+			<div class="x_controls">
+				<input type="text" id="advanced_mailer_recipient_email" value="" />
+				<button id="advanced_mailer_test_send" type="button">{$lang->cmd_advanced_mailer_send}</button>
+			</div>
+		</div>
+		
+		<div class="x_control-group">
+			<label class="x_control-label">{$lang->cmd_advanced_mailer_test_result}</label>
+			<div class="x_controls">
+				<div id="advanced_mailer_test_result"></div>
+			</div>
+		</div>
+		
+		<div class="x_control-group">
+			<div style="padding-top: 12px; margin-bottom: -24px; margin-left: 32px">
 				{$lang->cmd_advanced_mailer_admin_config_prefix}
 				<a href="./index.php?module=admin&act=dispMemberAdminConfig" target="_blank">{$lang->cmd_advanced_mailer_admin_config_link}</a>
 				{$lang->cmd_advanced_mailer_admin_config_suffix}<br />
@@ -125,9 +158,5 @@
 		</div>
 		
 	</section>
-	
-	<div class="btnArea x_clearfix">
-		<button type="submit" class="x_btn x_btn-primary x_pull-right">{$lang->cmd_registration}</button>
-	</div>
 	
 </form>

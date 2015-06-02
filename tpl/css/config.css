@@ -1,4 +1,13 @@
 
+#advanced_mailer_test_send {
+	padding: 3px 10px;
+}
+
+#advanced_mailer_test_result {
+	font-family: Consolas, monospace;
+	padding: 5px 0;
+}
+
 div.hidden-by-default {
 	display: none;
 }
