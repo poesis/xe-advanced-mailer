@@ -85,7 +85,7 @@
 			$.exec_json(
 				"advanced_mailer.procAdvanced_mailerAdminTestSend", data,
 				function(response) {
-					$("#advanced_mailer_test_result").text(response.test_result);
+					$("#advanced_mailer_test_result").html(response.test_result);
 					$("#advanced_mailer_test_send").removeAttr("disabled");
 				},
 				function(response) {

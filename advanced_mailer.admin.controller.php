@@ -114,7 +114,7 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 			{
 				if (count($oMail->errors))
 				{
-					$this->add('test_result', implode("\n", $oMail->errors));
+					$this->add('test_result', nl2br(htmlspecialchars(implode("\n", $oMail->errors))));
 					return;
 				}
 				else
@@ -127,7 +127,7 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 		catch (Exception $e)
 		{
 			$new_class_name::$config = $previous_config;
-			$this->add('test_result', $e->getMessage());
+			$this->add('test_result', nl2br(htmlspecialchars($e->getMessage())));
 			return;
 		}
 		
