@@ -32,6 +32,15 @@
 			<label class="x_control-label" for="advanced_mailer_smtp_host">{$lang->cmd_advanced_mailer_smtp_host}</label>
 			<div class="x_controls">
 				<input type="text" name="smtp_host" id="advanced_mailer_smtp_host" value="{$advanced_mailer_config->smtp_host}" />
+				<select id="advanced_mailer_smtp_manual_entry">
+					<option value="">{$lang->cmd_advanced_mailer_smtp_manual_entry}</option>
+					<option value="gmail">Gmail</option>
+					<option value="hanmail">Hanmail</option>
+					<option value="naver">Naver</option>
+					<option value="naver_works">Naver Works</option>
+					<option value="outlook">Outlook.com</option>
+					<option value="yahoo">Yahoo</option>
+				</select>
 			</div>
 		</div>
 		
@@ -45,7 +54,7 @@
 		<div class="x_control-group hidden-by-default" data-visible-types="smtp">
 			<label class="x_control-label">{$lang->cmd_advanced_mailer_smtp_security}</label>
 			<div class="x_controls">
-				<label class="x_inline" for="advanced_mailer_smtp_security_none"><input type="radio" name="smtp_security" id="advanced_mailer_smtp_security_tls" value="tls" checked="checked"|cond="!in_array($advanced_mailer_config->smtp_security, array('ssl', 'tls'))" /> {$lang->cmd_advanced_mailer_smtp_security_none}</label>
+				<label class="x_inline" for="advanced_mailer_smtp_security_none"><input type="radio" name="smtp_security" id="advanced_mailer_smtp_security_none" value="none" checked="checked"|cond="!in_array($advanced_mailer_config->smtp_security, array('ssl', 'tls'))" /> {$lang->cmd_advanced_mailer_smtp_security_none}</label>
 				<label class="x_inline" for="advanced_mailer_smtp_security_ssl"><input type="radio" name="smtp_security" id="advanced_mailer_smtp_security_ssl" value="ssl" checked="checked"|cond="$advanced_mailer_config->smtp_security === 'ssl'" /> {$lang->cmd_advanced_mailer_smtp_security_ssl}</label>
 				<label class="x_inline" for="advanced_mailer_smtp_security_tls"><input type="radio" name="smtp_security" id="advanced_mailer_smtp_security_tls" value="tls" checked="checked"|cond="$advanced_mailer_config->smtp_security === 'tls'" /> {$lang->cmd_advanced_mailer_smtp_security_tls}</label>
 			</div>

@@ -40,6 +40,10 @@
 		<value xml:lang="ko"><![CDATA[Woorimail API]]></value>
 		<value xml:lang="en"><![CDATA[Woorimail API]]></value>
 	</item>
+	<item name="cmd_advanced_mailer_smtp_manual_entry">
+		<value xml:lang="ko"><![CDATA[직접 입력]]></value>
+		<value xml:lang="en"><![CDATA[Manual entry]]></value>
+	</item>
 	<item name="cmd_advanced_mailer_smtp_host">
 		<value xml:lang="ko"><![CDATA[SMTP 서버]]></value>
 		<value xml:lang="en"><![CDATA[SMTP 서버]]></value>
