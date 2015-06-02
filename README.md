@@ -1,10 +1,19 @@
 
-고급 메일 발송 모듈 (Advanced Mailer) for XE
-============================================
+Advanced Mailer Module for XE
+=============================
 
-Gmail 등의 외부 SMTP 서버, 우리메일 API,
-그리고 Amazon SES, Mailgun, Mandrill, Postmark, SendGrid 등
-세계적인 메일 발송 전문업체들의 API를 사용하여 메일을 발송하도록 해주는 모듈입니다.
+서버의 `mail()` 함수에 의존하지 않고도 다양한 외부 서비스를 이용하여
+메일을 발송할 수 있도록 해주는 모듈입니다.
+
+현재 아래와 같은 서비스를 지원합니다.
+
+  - SMTP (Gmail, Outlook.com, Yahoo, 한메일, 네이버 등)
+  - [Amazon SES](https://aws.amazon.com/ses/)
+  - [Mailgun](http://www.mailgun.com/)
+  - [Mandrill](https://www.mandrill.com/)
+  - [Postmark](https://postmarkapp.com/)
+  - [SendGrid](https://sendgrid.com/)
+  - [우리메일](http://woorimail.com/)
 
 외부 SMTP 서버나 메일 발송 전문업체의 API를 사용하면
 일반적인 웹호스팅 서버에서 직접 메일을 발송하는 것보다 훨씬 안정적으로 메일이 전달되고,
