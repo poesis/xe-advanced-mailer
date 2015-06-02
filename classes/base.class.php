@@ -24,7 +24,16 @@ class Base
 	 */
 	public function __construct()
 	{
+		include_once dirname(__DIR__) . '/vendor/autoload.php';
 		$this->message = \Swift_Message::newInstance();
+	}
+	
+	/**
+	 * Method for checking whether this class is from Advanced Mailer
+	 */
+	public function isAdvancedMailer()
+	{
+		return true;
 	}
 	
 	/**

@@ -8,7 +8,6 @@ class Advanced_MailerModel extends Advanced_Mailer
 		
 		$config = $this->getConfig();
 		
-		include_once __DIR__ . '/vendor/autoload.php';
 		include_once __DIR__ . '/classes/base.class.php';
 		include_once __DIR__ . '/classes/' . $config->send_type . '.class.php';
 		class_alias('Advanced_Mailer\\' . ucfirst($config->send_type), 'Mail');
