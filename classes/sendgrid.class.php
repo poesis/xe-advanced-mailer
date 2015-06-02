@@ -36,7 +36,8 @@ class Sendgrid extends Base
 		{
 			$email->setReplyTo($replyTo);
 		}
-		$references = $this->message->getHeaders()->get('References')->toString();
+		$references = $this->message->getHeaders()->get('References');
+		if(is_object($references)) $references = $references->toString();
 		if(strlen(trim($references)) > 12)
 		{
 			$email->addHeader('References', substr($references, 12));
