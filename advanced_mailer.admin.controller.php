@@ -6,6 +6,36 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 	{
 		$config = $this->getRequestVars();
 		
+		// Validate the sender identity.
+		
+		if (!$config->sender_name)
+		{
+			return new Object(-1, 'msg_advanced_mailer_sender_name_is_empty');
+		}
+		if (!$config->sender_email)
+		{
+			return new Object(-1, 'msg_advanced_mailer_sender_email_is_empty');
+		}
+		if (!Mail::isVaildMailAddress($config->sender_email))
+		{
+			return new Object(-1, 'msg_advanced_mailer_sender_email_is_invalid');
+		}
+		if ($config->reply_to && !Mail::isVaildMailAddress($config->reply_to))
+		{
+			return new Object(-1, 'msg_advanced_mailer_reply_to_is_invalid');
+		}
+		
+		// Update the webmaster's name and email in the member module.
+		
+		$args = (object)array(
+			'webmaster_name' => $config->sender_name,
+			'webmaster_email' => $config->sender_email,
+		);
+		$oModuleController = getController('module');
+		$output = $oModuleController->updateModuleConfig('member', $args);
+		
+		// Save the new configuration.
+		
 		$output = getController('module')->insertModuleConfig('advanced_mailer', $config);
 		if ($output->toBool())
 		{
@@ -31,10 +61,6 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 		$test_config = $this->getRequestVars();
 		$test_config->send_type = preg_replace('/\W/', '', $test_config->send_type);
 		$new_class_name = 'Advanced_Mailer\\' . ucfirst($test_config->send_type);
-		
-		$member_config = getModel('module')->getModuleConfig('member');
-		$sender_name = $member_config->webmaster_name ? $member_config->webmaster_name : 'webmaster';
-		$sender_email = $member_config->webmaster_email;
 		
 		$recipient_config = Context::gets('recipient_name', 'recipient_email');
 		$recipient_name = $recipient_config->recipient_name;
@@ -64,19 +90,24 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 			return;
 		}
 		
-		if (!$sender_name)
+		if (!$test_config->sender_name)
 		{
 			$this->add('test_result', 'Error: Sender name is empty.');
 			return;
 		}
-		if (!$sender_email)
+		if (!$test_config->sender_email)
 		{
 			$this->add('test_result', 'Error: Sender email is empty.');
 			return;
 		}
-		if (!Mail::isVaildMailAddress($sender_email))
+		if (!Mail::isVaildMailAddress($test_config->sender_email))
 		{
 			$this->add('test_result', 'Error: Sender email is invalid.');
+			return;
+		}
+		if ($test_config->reply_to && !Mail::isVaildMailAddress($test_config->reply_to))
+		{
+			$this->add('test_result', 'Error: Reply-To email is invalid.');
 			return;
 		}
 		
@@ -96,7 +127,6 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 			return;
 		}
 		
-		
 		$previous_config = $new_class_name::$config;
 		$new_class_name::$config = $test_config;
 		
@@ -105,7 +135,6 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 			$oMail = new $new_class_name();
 			$oMail->setTitle('Advanced Mailer Test');
 			$oMail->setContent('<p>This is a <b>test email</b> from Advanced Mailer.</p><p>Thank you for trying Advanced Mailer.</p>');
-			$oMail->setSender($sender_name, $sender_email);
 			$oMail->setReceiptor($recipient_name, $recipient_email);
 			$result = $oMail->send();
 			
@@ -150,6 +179,9 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 		$args->aws_region = trim($request_args->aws_region ?: '');
 		$args->aws_access_key = trim($request_args->aws_access_key ?: '');
 		$args->aws_secret_key = trim($request_args->aws_secret_key ?: '');
+		$args->sender_name = trim($request_args->sender_name ?: '');
+		$args->sender_email = trim($request_args->sender_email ?: '');
+		$args->reply_to = trim($request_args->reply_to ?: '');
 		return $args;
 	}
 }

@@ -10,9 +10,17 @@
 	<input type="hidden" name="act" value="procAdvanced_mailerAdminInsertConfig" />
 	<input type="hidden" name="success_return_url" value="{getRequestUriByServerEnviroment()}" />
 	
+	<div cond="$XE_VALIDATOR_MESSAGE" class="message {$XE_VALIDATOR_MESSAGE_TYPE}">
+		<p>{$XE_VALIDATOR_MESSAGE}</p>
+	</div>
+	
 	<section class="section">
 		
-		<h2 style="padding-top:12px">{$lang->cmd_advanced_mailer_settings}</h2>
+		<h2 style="padding-top:12px">{$lang->cmd_advanced_mailer_sending_method}</h2>
+		
+		<div class="advanced_mailer_description">
+			※ {$lang->cmd_advanced_mailer_about_sending_method}
+		</div>
 		
 		<div class="x_control-group">
 			<label class="x_control-label" for="advanced_mailer_send_type">{$lang->cmd_advanced_mailer_send_type}</label>
@@ -117,6 +125,37 @@
 		
 	</section>
 	
+	<section class="section">
+		
+		<h2 style="padding-top:12px">{$lang->cmd_advanced_mailer_sender_identity}</h2>
+		
+		<div class="advanced_mailer_description">
+			※ {$lang->cmd_advanced_mailer_about_sender_identity}
+		</div>
+		
+		<div class="x_control-group">
+			<label class="x_control-label" for="advanced_mailer_sender_name">{$lang->cmd_advanced_mailer_sender_name}</label>
+			<div class="x_controls">
+				<input type="text" name="sender_name" id="advanced_mailer_sender_name" value="{$webmaster_name}" />
+			</div>
+		</div>
+		
+		<div class="x_control-group">
+			<label class="x_control-label" for="advanced_mailer_sender_email">{$lang->cmd_advanced_mailer_sender_email}</label>
+			<div class="x_controls">
+				<input type="text" name="sender_email" id="advanced_mailer_sender_email" value="{$webmaster_email}" />
+			</div>
+		</div>
+	
+		<div class="x_control-group">
+			<label class="x_control-label" for="advanced_mailer_reply_to">{$lang->cmd_advanced_mailer_reply_to}</label>
+			<div class="x_controls">
+				<input type="text" name="reply_to" id="advanced_mailer_reply_to" value="{$advanced_mailer_config->reply_to}" />
+			</div>
+		</div>
+	
+	</section>
+	
 	<div class="btnArea x_clearfix">
 		<button type="submit" class="x_btn x_btn-primary x_pull-right">{$lang->cmd_registration}</button>
 	</div>
@@ -124,6 +163,10 @@
 	<section class="section">
 		
 		<h2>{$lang->cmd_advanced_mailer_test}</h2>
+		
+		<div class="advanced_mailer_description">
+			※ {$lang->cmd_advanced_mailer_about_test}
+		</div>
 		
 		<div class="x_control-group">
 			<label class="x_control-label" for="advanced_mailer_recipient_name">{$lang->cmd_advanced_mailer_recipient_name}</label>
@@ -144,16 +187,6 @@
 			<label class="x_control-label">{$lang->cmd_advanced_mailer_test_result}</label>
 			<div class="x_controls">
 				<div id="advanced_mailer_test_result"></div>
-			</div>
-		</div>
-		
-		<div class="x_control-group">
-			<div style="padding-top: 12px; margin-bottom: -24px; margin-left: 32px">
-				{$lang->cmd_advanced_mailer_admin_config_prefix}
-				<a href="./index.php?module=admin&amp;act=dispMemberAdminConfig" target="_blank">{$lang->cmd_advanced_mailer_admin_config_link}</a>
-				{$lang->cmd_advanced_mailer_admin_config_suffix}<br />
-				{$lang->cmd_advanced_mailer_webmaster_info}<br />
-				<span class="sender_info">{$webmaster_name} &lt;{$webmaster_email}&gt;</span>
 			</div>
 		</div>
 		

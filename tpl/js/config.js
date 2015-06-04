@@ -79,6 +79,9 @@
 				aws_region: $("#advanced_mailer_aws_region").val(),
 				aws_access_key: $("#advanced_mailer_aws_access_key").val(),
 				aws_secret_key: $("#advanced_mailer_aws_secret_key").val(),
+				sender_name: $("#advanced_mailer_sender_name").val(),
+				sender_email: $("#advanced_mailer_sender_email").val(),
+				reply_to: $("#advanced_mailer_reply_to").val(),
 				recipient_name: $("#advanced_mailer_recipient_name").val(),
 				recipient_email: $("#advanced_mailer_recipient_email").val()
 			};

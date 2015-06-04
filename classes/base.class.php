@@ -26,6 +26,15 @@ class Base
 	{
 		include_once dirname(__DIR__) . '/vendor/autoload.php';
 		$this->message = \Swift_Message::newInstance();
+		if(self::$config->sender_email)
+		{
+			$sender_name = self::$config->sender_name ?: 'webmaster';
+			$this->message->setFrom(array(self::$config->sender_email => $sender_name));
+		}
+		if(self::$config->reply_to)
+		{
+			$this->message->setReplyTo(array(self::$config->reply_to));
+		}
 	}
 	
 	/**

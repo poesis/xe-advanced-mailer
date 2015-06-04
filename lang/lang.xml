@@ -4,13 +4,17 @@
 		<value xml:lang="ko"><![CDATA[고급 메일 발송 모듈]]></value>
 		<value xml:lang="en"><![CDATA[Advanced Mailer]]></value>
 	</item>
-	<item name="cmd_advanced_mailer_settings">
-		<value xml:lang="ko"><![CDATA[메일 발송 설정]]></value>
-		<value xml:lang="en"><![CDATA[Settings]]></value>
+	<item name="cmd_advanced_mailer_sending_method">
+		<value xml:lang="ko"><![CDATA[발송 방법 설정]]></value>
+		<value xml:lang="en"><![CDATA[Sending Method]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_about_sending_method">
+		<value xml:lang="ko"><![CDATA[반드시 모든 항목을 입력하시기 바랍니다.]]></value>
+		<value xml:lang="en"><![CDATA[Please fill all of the boxes.]]></value>
 	</item>
 	<item name="cmd_advanced_mailer_send_type">
-		<value xml:lang="ko"><![CDATA[발송 방법]]></value>
-		<value xml:lang="en"><![CDATA[Send Type]]></value>
+		<value xml:lang="ko"><![CDATA[발송 방법 선택]]></value>
+		<value xml:lang="en"><![CDATA[Sending Method]]></value>
 	</item>
 	<item name="cmd_advanced_mailer_send_type_mail">
 		<value xml:lang="ko"><![CDATA[PHP mail() 함수]]></value>
@@ -100,9 +104,33 @@
 		<value xml:lang="ko"><![CDATA[AWS Secret Key]]></value>
 		<value xml:lang="en"><![CDATA[AWS Secret Key]]></value>
 	</item>
+	<item name="cmd_advanced_mailer_sender_identity">
+		<value xml:lang="ko"><![CDATA[보낸이 설정]]></value>
+		<value xml:lang="en"><![CDATA[Sender Identity]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_about_sender_identity">
+		<value xml:lang="ko"><![CDATA[보낸이 설정은 <a href="./index.php?module=admin&amp;act=dispMemberAdminConfig" target="_blank">회원 모듈</a>의 웹마스터 이름 및 메일 주소에도 동일하게 적용됩니다.]]></value>
+		<value xml:lang="en"><![CDATA[Sender identity will be applied to the webmaster's name and email address in the <a href="./index.php?module=admin&amp;act=dispMemberAdminConfig" target="_blank">member module</a> as well.]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_sender_name">
+		<value xml:lang="ko"><![CDATA[보낸이 이름]]></value>
+		<value xml:lang="en"><![CDATA[Sender's name]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_sender_email">
+		<value xml:lang="ko"><![CDATA[보낸이 메일 주소]]></value>
+		<value xml:lang="en"><![CDATA[Sender's email]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_reply_to">
+		<value xml:lang="ko"><![CDATA[Reply-To 주소]]></value>
+		<value xml:lang="en"><![CDATA[Reply-To email]]></value>
+	</item>
 	<item name="cmd_advanced_mailer_test">
 		<value xml:lang="ko"><![CDATA[메일 발송 테스트]]></value>
 		<value xml:lang="en"><![CDATA[Mail Test]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_about_test">
+		<value xml:lang="ko"><![CDATA[저장 여부와 관계없이 현재 화면에 표시된 설정을 테스트합니다.]]></value>
+		<value xml:lang="en"><![CDATA[The test will use the configuration currently shown above, even if not saved.]]></value>
 	</item>
 	<item name="cmd_advanced_mailer_recipient_name">
 		<value xml:lang="ko"><![CDATA[받는이 이름]]></value>
@@ -120,20 +148,20 @@
 		<value xml:lang="ko"><![CDATA[테스트 결과]]></value>
 		<value xml:lang="en"><![CDATA[Test result]]></value>
 	</item>
-	<item name="cmd_advanced_mailer_admin_config_prefix">
-		<value xml:lang="ko"><![CDATA[보내는 메일 주소는]]></value>
-		<value xml:lang="en"><![CDATA[You can set the sender's email address in the]]></value>
+	<item name="msg_advanced_mailer_sender_name_is_empty">
+		<value xml:lang="ko"><![CDATA[보낸이 이름을 입력해 주십시오.]]></value>
+		<value xml:lang="en"><![CDATA[Please enter the sender's name.]]></value>
 	</item>
-	<item name="cmd_advanced_mailer_admin_config_link">
-		<value xml:lang="ko"><![CDATA[회원 설정]]></value>
-		<value xml:lang="en"><![CDATA[Member Configuration]]></value>
+	<item name="msg_advanced_mailer_sender_email_is_empty">
+		<value xml:lang="ko"><![CDATA[보낸이 메일 주소를 입력해 주십시오.]]></value>
+		<value xml:lang="en"><![CDATA[Please enter the sender's email address.]]></value>
 	</item>
-	<item name="cmd_advanced_mailer_admin_config_suffix">
-		<value xml:lang="ko"><![CDATA[페이지에서 변경할 수 있습니다.]]></value>
-		<value xml:lang="en"><![CDATA[page.]]></value>
+	<item name="msg_advanced_mailer_sender_email_is_invalid">
+		<value xml:lang="ko"><![CDATA[보낸이 메일 주소가 올바른 메일 주소가 아닙니다.]]></value>
+		<value xml:lang="en"><![CDATA[The sender's email address is invalid.]]></value>
 	</item>
-	<item name="cmd_advanced_mailer_webmaster_info">
-		<value xml:lang="ko"><![CDATA[현재 설정은 다음과 같습니다:]]></value>
-		<value xml:lang="en"><![CDATA[The current setting is as follows:]]></value>
+	<item name="msg_advanced_mailer_reply_to_is_invalid">
+		<value xml:lang="ko"><![CDATA[Reply-To 메일 주소가 올바른 메일 주소가 아닙니다.]]></value>
+		<value xml:lang="en"><![CDATA[The Reply-To email address is invalid.]]></value>
 	</item>
 </lang>
