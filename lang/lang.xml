@@ -148,6 +148,50 @@
 		<value xml:lang="ko"><![CDATA[테스트 결과]]></value>
 		<value xml:lang="en"><![CDATA[Test result]]></value>
 	</item>
+	<item name="msg_advanced_mailer_send_type_is_invalid">
+		<value xml:lang="ko"><![CDATA[올바른 발송 방법을 선택해 주십시오.]]></value>
+		<value xml:lang="en"><![CDATA[Please select a valid sending method.]]></value>
+	</item>
+	<item name="msg_advanced_mailer_smtp_host_is_invalid">
+		<value xml:lang="ko"><![CDATA[올바른 SMTP 서버 이름을 입력해 주십시오.]]></value>
+		<value xml:lang="en"><![CDATA[Please enter a valid SMTP server name.]]></value>
+	</item>
+	<item name="msg_advanced_mailer_smtp_port_is_invalid">
+		<value xml:lang="ko"><![CDATA[올바른 SMTP 포트 번호를 입력해 주십시오.]]></value>
+		<value xml:lang="en"><![CDATA[Please enter a valid SMTP port number.]]></value>
+	</item>
+	<item name="msg_advanced_mailer_smtp_security_is_invalid">
+		<value xml:lang="ko"><![CDATA[올바른 SMTP 보안 방식을 선택해 주십시오.]]></value>
+		<value xml:lang="en"><![CDATA[Please select a valid SMTP security scheme.]]></value>
+	</item>
+	<item name="msg_advanced_mailer_username_is_empty">
+		<value xml:lang="ko"><![CDATA[선택한 발송 방법에 필요한 아이디를 입력해 주십시오.]]></value>
+		<value xml:lang="en"><![CDATA[Please enter a username for the sending method you selected.]]></value>
+	</item>
+	<item name="msg_advanced_mailer_password_is_empty">
+		<value xml:lang="ko"><![CDATA[선택한 발송 방법에 필요한 비밀번호를 입력해 주십시오.]]></value>
+		<value xml:lang="en"><![CDATA[Please enter a password for the sending method you selected.]]></value>
+	</item>
+	<item name="msg_advanced_mailer_aws_region_is_invalid">
+		<value xml:lang="ko"><![CDATA[올바른 AWS Region을 선택해 주십시오.]]></value>
+		<value xml:lang="en"><![CDATA[Please select a valid AWS Region.]]></value>
+	</item>
+	<item name="msg_advanced_mailer_aws_access_key_is_empty">
+		<value xml:lang="ko"><![CDATA[AWS Access Key를 입력해 주십시오.]]></value>
+		<value xml:lang="en"><![CDATA[Please enter a valid AWS Access Key.]]></value>
+	</item>
+	<item name="msg_advanced_mailer_aws_secret_key_is_empty">
+		<value xml:lang="ko"><![CDATA[AWS Secret Key를 입력해 주십시오.]]></value>
+		<value xml:lang="en"><![CDATA[Please enter a valid AWS Secret Key.]]></value>
+	</item>
+	<item name="msg_advanced_mailer_domain_is_empty">
+		<value xml:lang="ko"><![CDATA[올바른 도메인을 입력해 주십시오.]]></value>
+		<value xml:lang="en"><![CDATA[Please enter a valid domain.]]></value>
+	</item>
+	<item name="msg_advanced_mailer_api_key_is_empty">
+		<value xml:lang="ko"><![CDATA[올바른 API Key를 입력해 주십시오.]]></value>
+		<value xml:lang="en"><![CDATA[Please enter a valid API Key.]]></value>
+	</item>
 	<item name="msg_advanced_mailer_sender_name_is_empty">
 		<value xml:lang="ko"><![CDATA[보낸이 이름을 입력해 주십시오.]]></value>
 		<value xml:lang="en"><![CDATA[Please enter the sender's name.]]></value>
@@ -163,5 +207,29 @@
 	<item name="msg_advanced_mailer_reply_to_is_invalid">
 		<value xml:lang="ko"><![CDATA[Reply-To 메일 주소가 올바른 메일 주소가 아닙니다.]]></value>
 		<value xml:lang="en"><![CDATA[The Reply-To email address is invalid.]]></value>
+	</item>
+	<item name="msg_advanced_mailer_recipient_name_is_empty">
+		<value xml:lang="ko"><![CDATA[받는이 이름을 입력해 주십시오.]]></value>
+		<value xml:lang="en"><![CDATA[Please enter the recipient's name.]]></value>
+	</item>
+	<item name="msg_advanced_mailer_recipient_email_is_empty">
+		<value xml:lang="ko"><![CDATA[받는이 메일 주소를 입력해 주십시오.]]></value>
+		<value xml:lang="en"><![CDATA[Please enter the recipient's email address.]]></value>
+	</item>
+	<item name="msg_advanced_mailer_recipient_email_is_invalid">
+		<value xml:lang="ko"><![CDATA[받는이 메일 주소가 올바른 메일 주소가 아닙니다.]]></value>
+		<value xml:lang="en"><![CDATA[The recipient's email address is invalid.]]></value>
+	</item>
+	<item name="msg_advanced_mailer_cannot_find_mail_class">
+		<value xml:lang="ko"><![CDATA[Mail 클래스가 존재하지 않습니다.]]></value>
+		<value xml:lang="en"><![CDATA[Mail class does not exist.]]></value>
+	</item>
+	<item name="msg_advanced_mailer_cannot_replace_mail_class">
+		<value xml:lang="ko"><![CDATA[Mail 클래스를 Advanced Mailer로 대체할 수 없습니다.]]></value>
+		<value xml:lang="en"><![CDATA[Mail class cannot be replaced with Advanced Mailer.]]></value>
+	</item>
+	<item name="msg_advanced_mailer_test_success">
+		<value xml:lang="ko"><![CDATA[테스트에 성공하였습니다. 메일을 확인해 보시고, 설정을 저장하는 것을 잊지 마시기 바랍니다.]]></value>
+		<value xml:lang="en"><![CDATA[The test was successful. Please check your email, and don't forget to save the current configuration.]]></value>
 	</item>
 </lang>

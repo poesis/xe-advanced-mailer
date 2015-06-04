@@ -5,24 +5,10 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 	public function procAdvanced_MailerAdminInsertConfig()
 	{
 		$config = $this->getRequestVars();
-		
-		// Validate the sender identity.
-		
-		if (!$config->sender_name)
+		$validation = $this->validateConfiguration($config);
+		if ($validation !== true)
 		{
-			return new Object(-1, 'msg_advanced_mailer_sender_name_is_empty');
-		}
-		if (!$config->sender_email)
-		{
-			return new Object(-1, 'msg_advanced_mailer_sender_email_is_empty');
-		}
-		if (!Mail::isVaildMailAddress($config->sender_email))
-		{
-			return new Object(-1, 'msg_advanced_mailer_sender_email_is_invalid');
-		}
-		if ($config->reply_to && !Mail::isVaildMailAddress($config->reply_to))
-		{
-			return new Object(-1, 'msg_advanced_mailer_reply_to_is_invalid');
+			return new Object(-1, $validation);
 		}
 		
 		// Update the webmaster's name and email in the member module.
@@ -68,12 +54,12 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 		
 		if (!class_exists('Mail'))
 		{
-			$this->add('test_result', 'Error: Mail class not found.');
+			$this->add('test_result', 'Error: ' . Context::getLang('msg_advanced_mailer_cannot_find_mail_class'));
 			return;
 		}
 		if (!method_exists('Mail', 'isAdvancedMailer') || !Mail::isAdvancedMailer())
 		{
-			$this->add('test_result', 'Error: Mail class was not replaced with Advanced Mailer.');
+			$this->add('test_result', 'Error: ' . Context::getLang('msg_advanced_mailer_cannot_replace_mail_class'));
 			return;
 		}
 		
@@ -86,44 +72,30 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 		}
 		if (!class_exists($new_class_name))
 		{
-			$this->add('test_result', 'Error: Invalid send type: ' . $test_config->send_type);
+			$this->add('test_result', 'Error: ' . Context::getLang('msg_advanced_mailer_send_type_is_invalid'));
 			return;
 		}
 		
-		if (!$test_config->sender_name)
+		$validation = $this->validateConfiguration($test_config);
+		if ($validation !== true)
 		{
-			$this->add('test_result', 'Error: Sender name is empty.');
-			return;
-		}
-		if (!$test_config->sender_email)
-		{
-			$this->add('test_result', 'Error: Sender email is empty.');
-			return;
-		}
-		if (!Mail::isVaildMailAddress($test_config->sender_email))
-		{
-			$this->add('test_result', 'Error: Sender email is invalid.');
-			return;
-		}
-		if ($test_config->reply_to && !Mail::isVaildMailAddress($test_config->reply_to))
-		{
-			$this->add('test_result', 'Error: Reply-To email is invalid.');
+			$this->add('test_result', 'Error: ' . Context::getLang($validation));
 			return;
 		}
 		
 		if (!$recipient_name)
 		{
-			$this->add('test_result', 'Error: Recipient name is empty.');
+			$this->add('test_result', 'Error: ' . Context::getLang('msg_advanced_mailer_recipient_name_is_empty'));
 			return;
 		}
 		if (!$recipient_email)
 		{
-			$this->add('test_result', 'Error: Recipient email is empty.');
+			$this->add('test_result', 'Error: ' . Context::getLang('msg_advanced_mailer_recipient_email_is_empty'));
 			return;
 		}
 		if (!Mail::isVaildMailAddress($recipient_email))
 		{
-			$this->add('test_result', 'Error: Recipient email is invalid.');
+			$this->add('test_result', 'Error: ' . Context::getLang('msg_advanced_mailer_recipient_email_is_invalid'));
 			return;
 		}
 		
@@ -160,7 +132,7 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 			return;
 		}
 		
-		$this->add('test_result', 'Success!');
+		$this->add('test_result', Context::getLang('msg_advanced_mailer_test_success'));
 		return;
 	}
 	
@@ -183,5 +155,107 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 		$args->sender_email = trim($request_args->sender_email ?: '');
 		$args->reply_to = trim($request_args->reply_to ?: '');
 		return $args;
+	}
+	
+	protected function validateConfiguration($args)
+	{
+		switch ($args->send_type)
+		{
+			case 'mail':
+				break;
+			
+			case 'smtp':
+				if (!$args->smtp_host || !preg_match('/^[a-z0-9.-]+$/', $args->smtp_host))
+				{
+					return 'msg_advanced_mailer_smtp_host_is_invalid';
+				}
+				if (!$args->smtp_port || !ctype_digit($args->smtp_port))
+				{
+					return 'msg_advanced_mailer_smtp_port_is_invalid';
+				}
+				if (!in_array($args->smtp_security, array('none', 'ssl', 'tls')))
+				{
+					return 'msg_advanced_mailer_smtp_security_is_invalid';
+				}
+				if (!$args->username)
+				{
+					return 'msg_advanced_mailer_username_is_empty';
+				}
+				if (!$args->password)
+				{
+					return 'msg_advanced_mailer_password_is_empty';
+				}
+				break;
+				
+			case 'ses':
+				if (!$args->aws_region || !preg_match('/^[a-z0-9.-]+$/', $args->aws_region))
+				{
+					return 'msg_advanced_mailer_aws_region_is_invalid';
+				}
+				if (!$args->aws_access_key)
+				{
+					return 'msg_advanced_mailer_aws_access_key_is_empty';
+				}
+				if (!$args->aws_secret_key)
+				{
+					return 'msg_advanced_mailer_aws_secret_key_is_empty';
+				}
+				break;
+				
+			case 'mailgun':
+			case 'woorimail':
+				if (!$args->domain)
+				{
+					return 'msg_advanced_mailer_domain_is_empty';
+				}
+				if (!$args->api_key)
+				{
+					return 'msg_advanced_mailer_api_key_is_empty';
+				}
+				break;
+				
+			case 'mandrill':
+			case 'postmark':
+				if (!$args->api_key)
+				{
+					return 'msg_advanced_mailer_api_key_is_empty';
+				}
+				break;
+				
+			case 'sendgrid':
+				if (!$args->username)
+				{
+					return 'msg_advanced_mailer_username_is_empty';
+				}
+				if (!$args->password)
+				{
+					return 'msg_advanced_mailer_password_is_empty';
+				}
+				break;
+				
+			default:
+				return 'msg_advanced_mailer_send_type_is_invalid';
+		}
+		
+		// Validate the sender identity.
+		
+		if (!$args->sender_name)
+		{
+			return 'msg_advanced_mailer_sender_name_is_empty';
+		}
+		if (!$args->sender_email)
+		{
+			return 'msg_advanced_mailer_sender_email_is_empty';
+		}
+		if (!Mail::isVaildMailAddress($args->sender_email))
+		{
+			return 'msg_advanced_mailer_sender_email_is_invalid';
+		}
+		if ($args->reply_to && !Mail::isVaildMailAddress($args->reply_to))
+		{
+			return 'msg_advanced_mailer_reply_to_is_invalid';
+		}
+		
+		return true;
 	}
 }
