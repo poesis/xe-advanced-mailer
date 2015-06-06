@@ -32,9 +32,10 @@ class Sendgrid extends Base
 			$email->addBcc($address);
 		}
 		$replyTo = $this->message->getReplyTo();
-		if(strval($replyTo) !== '')
+		if(count($replyTo))
 		{
-			$email->setReplyTo($replyTo);
+			reset($replyTo);
+			$email->setReplyTo(key($replyTo));
 		}
 		$references = $this->message->getHeaders()->get('References');
 		if(is_object($references)) $references = $references->toString();

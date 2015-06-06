@@ -11,11 +11,16 @@ class Mailgun extends Base
 		$args = array(
 			'subject' => $this->getTitle(),
 			'from' => $this->getSender(),
-			'h:Reply-To' => $this->message->getReplyTo(),
 			'to' => array(),
 			'cc' => array(),
 			'bcc' => array(),
 		);
+		$replyTo = $this->message->getReplyTo();
+		if(count($replyTo))
+		{
+			reset($replyTo);
+			$args['h:Reply-To'] = key($replyTo);
+		}
 		$to = $this->message->getTo();
 		foreach($to as $address => $name)
 		{
