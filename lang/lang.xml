@@ -144,6 +144,26 @@
 		<value xml:lang="ko"><![CDATA[TXT 레코드 값:]]></value>
 		<value xml:lang="en"><![CDATA[TXT record value:]]></value>
 	</item>
+	<item name="cmd_advanced_mailer_check">
+		<value xml:lang="ko"><![CDATA[체크]]></value>
+		<value xml:lang="en"><![CDATA[Check]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_nothing_to_check">
+		<value xml:lang="ko"><![CDATA[체크할 것이 없습니다.]]></value>
+		<value xml:lang="en"><![CDATA[There is nothing to check.]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_check_failure">
+		<value xml:lang="ko"><![CDATA[체크에 실패했습니다.]]></value>
+		<value xml:lang="en"><![CDATA[Check failure.]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_check_no_records">
+		<value xml:lang="ko"><![CDATA[호스트에는 TXT 레코드가 없습니다.]]></value>
+		<value xml:lang="en"><![CDATA[has no TXT records.]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_check_result">
+		<value xml:lang="ko"><![CDATA[호스트의 TXT 레코드는 다음과 같습니다.]]></value>
+		<value xml:lang="en"><![CDATA[has the following TXT records.]]></value>
+	</item>
 	<item name="cmd_advanced_mailer_other_info">
 		<value xml:lang="ko"><![CDATA[참고:]]></value>
 		<value xml:lang="en"><![CDATA[Note:]]></value>

@@ -42,6 +42,39 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 		}
 	}
 	
+	public function procAdvanced_MailerAdminCheckDNSRecord()
+	{
+		$check_config = Context::gets('hostname', 'record_type');
+		if (!preg_match('/^[a-z0-9_.-]+$/', $check_config->hostname))
+		{
+			$this->add('record_content', false);
+			return;
+		}
+		if (!defined('DNS_' . $check_config->record_type))
+		{
+			$this->add('record_content', false);
+			return;
+		}
+		
+		$records = @dns_get_record($check_config->hostname, constant('DNS_' . $check_config->record_type));
+		if ($records === false)
+		{
+			$this->add('record_content', false);
+			return;
+		}
+		
+		$return_values = array();
+		foreach ($records as $record)
+		{
+			if (isset($record[strtolower($check_config->record_type)]))
+			{
+				$return_values[] = $record[strtolower($check_config->record_type)];
+			}
+		}
+		$this->add('record_content', implode("\n\n", $return_values));
+		return;
+	}
+	
 	public function procAdvanced_MailerAdminTestSend()
 	{
 		$test_config = $this->getRequestVars();

@@ -39,6 +39,10 @@ div.full-width input {
 	width: 90%;
 }
 
+div.x_modal-body .monospace {
+	font-family: Consolas, monospace;
+}
+
 span.sender_info {
 	display: inline-block;
 	margin-top: 12px;

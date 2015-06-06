@@ -163,6 +163,10 @@
 	<section class="section" id="spf_dkim_setting"
 		data-server-ip="{$advanced_mailer_server_ip}"
 		data-ellipsis="{$lang->cmd_advanced_mailer_ellipsis}"
+		data-nothing-to-check="{$lang->cmd_advanced_mailer_nothing_to_check}"
+		data-check-failure="{$lang->cmd_advanced_mailer_check_failure}"
+		data-check-no-records="{$lang->cmd_advanced_mailer_check_no_records}"
+		data-check-result="{$lang->cmd_advanced_mailer_check_result}"
 		data-other-mail-spf="{htmlspecialchars($lang->cmd_advanced_mailer_other_info_mail_spf)}"
 		data-other-ses-dkim="{htmlspecialchars($lang->cmd_advanced_mailer_other_info_ses_dkim)}"
 		data-other-mailgun-dkim="{htmlspecialchars($lang->cmd_advanced_mailer_other_info_mailgun_dkim)}"
@@ -178,7 +182,7 @@
 			<label class="x_control-label">SPF</label>
 			<div class="x_controls">
 				<div class="not_applicable spf">{$lang->cmd_advanced_mailer_not_applicable}</div>
-				<div class="config_description spf">{$lang->cmd_advanced_mailer_dns_hostname} <span class="hostname"></span></div>
+				<div class="config_description spf">{$lang->cmd_advanced_mailer_dns_hostname} <span class="hostname"></span> &nbsp; <a href="#" id="advanced_mailer_check_spf">{$lang->cmd_advanced_mailer_check}</a></div>
 				<div class="config_value spf">{$lang->cmd_advanced_mailer_txt_record} <span class="value"></span></div>
 				<div class="config_other spf">{$lang->cmd_advanced_mailer_other_info} <span class="other"></span></div>
 			</div>
@@ -188,7 +192,7 @@
 			<label class="x_control-label">DKIM</label>
 			<div class="x_controls">
 				<div class="not_applicable dkim">{$lang->cmd_advanced_mailer_not_applicable}</div>
-				<div class="config_description dkim">{$lang->cmd_advanced_mailer_dns_hostname} <span class="hostname"></span></div>
+				<div class="config_description dkim">{$lang->cmd_advanced_mailer_dns_hostname} <span class="hostname"></span> &nbsp; <a href="#" id="advanced_mailer_check_dkim">{$lang->cmd_advanced_mailer_check}</a></div>
 				<div class="config_value dkim">{$lang->cmd_advanced_mailer_txt_record} <span class="value"></span></div>
 				<div class="config_other dkim">{$lang->cmd_advanced_mailer_other_info} <span class="other"></span></div>
 			</div>
