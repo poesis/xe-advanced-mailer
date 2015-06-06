@@ -19,7 +19,7 @@
 			
 		var list_spf_dkim = {
 			"mail" : ["", ""],
-			"ses" : ["include:amazonses.com", ""],
+			"ses" : ["", ""],
 			"mailgun" : ["include:mailgun.org", "mailo._domainkey"],
 			"mandrill" : ["include:spf.mandrillapp.com", "mandrill._domainkey"],
 			"postmark": ["include:spf.mtasv.net", "********.pm._domainkey"],
