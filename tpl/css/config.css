@@ -8,6 +8,20 @@
 	padding: 5px 0;
 }
 
+#spf_dkim_setting div.not_applicable {
+	padding: 5px 0;
+}
+#spf_dkim_setting div.config_description, #spf_dkim_setting div.config_value {
+	padding: 5px 0;
+	display: none;
+}
+#spf_dkim_setting span.hostname, #spf_dkim_setting span.value {
+	color: #666;
+	font-family: Consolas, monospace;
+	margin-left: 8px;
+	display: inline-block;
+}
+
 section {
 	margin-bottom: 10px !important;
 }

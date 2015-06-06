@@ -3,6 +3,73 @@
 	
 	$(function() {
 		
+		var ignore_domains = {
+			"gmail.com" : true,
+			"googlemail.com" : true,
+			"hanmail.net" : true,
+			"hanmail2.net" : true,
+			"daum.net" : true,
+			"naver.com" : true,
+			"hotmail.com" : true,
+			"hotmail.co.kr" : true,
+			"outlook.com" : true,
+			"yahoo.com" : true,
+			"yahoo.co.kr" : true
+		};
+			
+		var list_spf_dkim = {
+			"mail" : ["", ""],
+			"mailgun" : ["include:mailgun.org", "mailo._domainkey"],
+			"mandrill" : ["include:spf.mandrillapp.com", "mandrill._domainkey"],
+			"postmark": ["include:spf.mtasv.net", "********.pm._domainkey"],
+			"sendgrid" : ["include:sendgrid.net", "smtpapi._domainkey"]
+		};
+		
+		var reset_spf_dkim = function() {
+			var div_spf_dkim = $("#spf_dkim_setting");
+			div_spf_dkim.find("div.not_applicable").show();
+			div_spf_dkim.find("div.config_value,div.config_description").hide();
+		};
+		
+		var update_spf_dkim = function() {
+			var send_type = $("#advanced_mailer_send_type").val();
+			if (!list_spf_dkim[send_type]) {
+				return reset_spf_dkim();
+			}
+			var sender_email = $("#advanced_mailer_sender_email").val();
+			var sender_domain = null;
+			if (sender_email.lastIndexOf("@") > -1) {
+				sender_domain = sender_email.substr(sender_email.lastIndexOf("@") + 1).toLowerCase();
+				if (!sender_domain || ignore_domains[sender_domain]) {
+					return reset_spf_dkim();
+				}
+			} else {
+				return reset_spf_dkim();
+			}
+			var div_spf_dkim = $("#spf_dkim_setting");
+			div_spf_dkim.find("div.not_applicable").hide();
+			if (list_spf_dkim[send_type][0]) {
+				div_spf_dkim.find("div.spf.config_description").show().find("span.hostname").text(sender_domain);
+				div_spf_dkim.find("div.spf.config_value").show().find("span.value").text(("v=spf1 a mx " + list_spf_dkim[send_type][0] + " ~all").replace("  ", " "));
+			} else {
+				div_spf_dkim.find("div.spf.not_applicable").show();
+				div_spf_dkim.find("div.spf.config_value,div.spf.config_description").hide();
+			}
+			if (list_spf_dkim[send_type][1]) {
+				div_spf_dkim.find("div.dkim.config_description").show().find("span.hostname").text(list_spf_dkim[send_type][1] + "." + sender_domain);
+				div_spf_dkim.find("div.dkim.config_value").show().find("span.value").text("v=DKIM1; k=rsa; p=MIGfMA ..." + $("#spf_dkim_setting").data("ellipsis") + "... QAB;");
+			} else {
+				div_spf_dkim.find("div.dkim.not_applicable").show();
+				div_spf_dkim.find("div.dkim.config_value,div.dkim.config_description").hide();
+			}
+		};
+		
+		if ($("#spf_dkim_setting").data("server-ip")) {
+			list_spf_dkim["mail"][0] = "ip4:" + $("#spf_dkim_setting").data("server-ip");
+		}
+		
+		$("#advanced_mailer_sender_email").on("change keyup blur", update_spf_dkim);
+		
 		$("#advanced_mailer_send_type").on("change", function() {
 			var send_type = $(this).val();
 			$("div.x_control-group").each(function() {
@@ -15,6 +82,7 @@
 					$(this).hide();
 				}
 			});
+			update_spf_dkim();
 		}).trigger("change");
 		
 		$("#advanced_mailer_smtp_manual_entry").on("change", function() {

@@ -124,6 +124,30 @@
 		<value xml:lang="ko"><![CDATA[Reply-To 주소]]></value>
 		<value xml:lang="en"><![CDATA[Reply-To email]]></value>
 	</item>
+	<item name="cmd_advanced_mailer_spf_dkim_setting">
+		<value xml:lang="ko"><![CDATA[SPF, DKIM 설정 가이드]]></value>
+		<value xml:lang="en"><![CDATA[SPF, DKIM Setting Guide]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_about_spf_dkim_setting">
+		<value xml:lang="ko"><![CDATA[자신의 도메인에서 메일을 보내는 경우에만 해당됩니다. 일부 API는 지원하지 않거나 별도의 매뉴얼을 참고하셔야 합니다.]]></value>
+		<value xml:lang="en"><![CDATA[This is only applicable when sending emails from your own domain. Some APIs are not supported.]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_not_applicable">
+		<value xml:lang="ko"><![CDATA[해당되지 않습니다.]]></value>
+		<value xml:lang="en"><![CDATA[해당되지 않습니다.]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_dns_hostname">
+		<value xml:lang="ko"><![CDATA[DNS 호스트명:]]></value>
+		<value xml:lang="en"><![CDATA[DNS hostname:]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_txt_record">
+		<value xml:lang="ko"><![CDATA[TXT 레코드 값:]]></value>
+		<value xml:lang="en"><![CDATA[TXT record value:]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_ellipsis">
+		<value xml:lang="ko"><![CDATA[(중략)]]></value>
+		<value xml:lang="en"><![CDATA[(see API for full value)]]></value>
+	</item>
 	<item name="cmd_advanced_mailer_test">
 		<value xml:lang="ko"><![CDATA[메일 발송 테스트]]></value>
 		<value xml:lang="en"><![CDATA[Mail Test]]></value>
