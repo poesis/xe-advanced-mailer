@@ -19,6 +19,7 @@
 			
 		var list_spf_dkim = {
 			"mail" : ["", ""],
+			"ses" : ["include:amazonses.com", ""],
 			"mailgun" : ["include:mailgun.org", "mailo._domainkey"],
 			"mandrill" : ["include:spf.mandrillapp.com", "mandrill._domainkey"],
 			"postmark": ["include:spf.mtasv.net", "********.pm._domainkey"],
@@ -28,7 +29,7 @@
 		var reset_spf_dkim = function() {
 			var div_spf_dkim = $("#spf_dkim_setting");
 			div_spf_dkim.find("div.not_applicable").show();
-			div_spf_dkim.find("div.config_value,div.config_description").hide();
+			div_spf_dkim.find("div.config_description,div.config_value,div.config_other").hide();
 		};
 		
 		var update_spf_dkim = function() {
@@ -53,14 +54,26 @@
 				div_spf_dkim.find("div.spf.config_value").show().find("span.value").text(("v=spf1 a mx " + list_spf_dkim[send_type][0] + " ~all").replace("  ", " "));
 			} else {
 				div_spf_dkim.find("div.spf.not_applicable").show();
-				div_spf_dkim.find("div.spf.config_value,div.spf.config_description").hide();
+				div_spf_dkim.find("div.spf.config_value,div.spf.config_description,div.spf.config_other").hide();
+			}
+			if ($("#spf_dkim_setting").data("other-" + send_type + "-spf")) {
+				div_spf_dkim.find("div.spf.not_applicable").hide();
+				div_spf_dkim.find("div.spf.config_other").show().find("span.other").html($("#spf_dkim_setting").data("other-" + send_type + "-spf"));
+			} else {
+				div_spf_dkim.find("div.spf.config_other").hide();
 			}
 			if (list_spf_dkim[send_type][1]) {
 				div_spf_dkim.find("div.dkim.config_description").show().find("span.hostname").text(list_spf_dkim[send_type][1] + "." + sender_domain);
 				div_spf_dkim.find("div.dkim.config_value").show().find("span.value").text("v=DKIM1; k=rsa; p=MIGfMA ..." + $("#spf_dkim_setting").data("ellipsis") + "... QAB;");
 			} else {
 				div_spf_dkim.find("div.dkim.not_applicable").show();
-				div_spf_dkim.find("div.dkim.config_value,div.dkim.config_description").hide();
+				div_spf_dkim.find("div.dkim.config_value,div.dkim.config_description,div.dkim.config_other").hide();
+			}
+			if ($("#spf_dkim_setting").data("other-" + send_type + "-dkim")) {
+				div_spf_dkim.find("div.dkim.not_applicable").hide();
+				div_spf_dkim.find("div.dkim.config_other").show().find("span.other").html($("#spf_dkim_setting").data("other-" + send_type + "-dkim"));
+			} else {
+				div_spf_dkim.find("div.dkim.config_other").hide();
 			}
 		};
 		

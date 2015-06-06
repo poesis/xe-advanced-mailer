@@ -11,7 +11,7 @@
 #spf_dkim_setting div.not_applicable {
 	padding: 5px 0;
 }
-#spf_dkim_setting div.config_description, #spf_dkim_setting div.config_value {
+#spf_dkim_setting div.config_description, #spf_dkim_setting div.config_value, #spf_dkim_setting div.config_other {
 	padding: 5px 0;
 	display: none;
 }

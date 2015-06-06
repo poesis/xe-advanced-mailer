@@ -160,7 +160,13 @@
 		<button type="submit" class="x_btn x_btn-primary x_pull-right">{$lang->cmd_registration}</button>
 	</div>
 	
-	<section class="section" id="spf_dkim_setting" data-server-ip="{$advanced_mailer_server_ip}" data-ellipsis="{$lang->cmd_advanced_mailer_ellipsis}">
+	<section class="section" id="spf_dkim_setting"
+		data-server-ip="{$advanced_mailer_server_ip}"
+		data-ellipsis="{$lang->cmd_advanced_mailer_ellipsis}"
+		data-other-mail-spf="{htmlspecialchars($lang->cmd_advanced_mailer_other_info_mail_spf)}"
+		data-other-ses-dkim="{htmlspecialchars($lang->cmd_advanced_mailer_other_info_ses_dkim)}"
+		data-other-mailgun-dkim="{htmlspecialchars($lang->cmd_advanced_mailer_other_info_mailgun_dkim)}"
+		data-other-postmark-dkim="{htmlspecialchars($lang->cmd_advanced_mailer_other_info_postmark_dkim)}">
 		
 		<h2 style="padding-top:12px">{$lang->cmd_advanced_mailer_spf_dkim_setting}</h2>
 		
@@ -174,6 +180,7 @@
 				<div class="not_applicable spf">{$lang->cmd_advanced_mailer_not_applicable}</div>
 				<div class="config_description spf">{$lang->cmd_advanced_mailer_dns_hostname} <span class="hostname"></span></div>
 				<div class="config_value spf">{$lang->cmd_advanced_mailer_txt_record} <span class="value"></span></div>
+				<div class="config_other spf">{$lang->cmd_advanced_mailer_other_info} <span class="other"></span></div>
 			</div>
 		</div>
 		
@@ -183,6 +190,7 @@
 				<div class="not_applicable dkim">{$lang->cmd_advanced_mailer_not_applicable}</div>
 				<div class="config_description dkim">{$lang->cmd_advanced_mailer_dns_hostname} <span class="hostname"></span></div>
 				<div class="config_value dkim">{$lang->cmd_advanced_mailer_txt_record} <span class="value"></span></div>
+				<div class="config_other dkim">{$lang->cmd_advanced_mailer_other_info} <span class="other"></span></div>
 			</div>
 		</div>
 		

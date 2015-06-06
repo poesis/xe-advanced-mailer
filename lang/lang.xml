@@ -144,6 +144,26 @@
 		<value xml:lang="ko"><![CDATA[TXT 레코드 값:]]></value>
 		<value xml:lang="en"><![CDATA[TXT record value:]]></value>
 	</item>
+	<item name="cmd_advanced_mailer_other_info">
+		<value xml:lang="ko"><![CDATA[참고:]]></value>
+		<value xml:lang="en"><![CDATA[Note:]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_other_info_mail_spf">
+		<value xml:lang="ko"><![CDATA[mail() 함수를 사용하려면 반드시 인터넷진흥원에 <a href="https://www.kisarbl.or.kr/" target="_blank">화이트 도메인</a> 등록을 하시기 바랍니다.]]></value>
+		<value xml:lang="en"><![CDATA[In order to send mail to Korean recipients from your own server, please register a <a href="https://www.kisarbl.or.kr/" target="_blank">white domain</a> with KISA.]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_other_info_ses_dkim">
+		<value xml:lang="ko"><![CDATA[Amazon SES에서 DKIM을 사용하려면 관리 콘솔의 안내에 따라 3개의 CNAME 레코드를 생성해야 합니다.]]></value>
+		<value xml:lang="en"><![CDATA[Please create three CNAME records according to the directions found in your AWS management console.]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_other_info_mailgun_dkim">
+		<value xml:lang="ko"><![CDATA[DKIM 호스트명은 달라질 수 있습니다.]]></value>
+		<value xml:lang="en"><![CDATA[The DKIM hostname may be different from what is shown here.]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_other_info_postmark_dkim">
+		<value xml:lang="ko"><![CDATA[정확한 DKIM 호스트명은 Postmark 계정의 Sender Signatures 페이지를 참고하시기 바랍니다.]]></value>
+		<value xml:lang="en"><![CDATA[Please see the Sender Signatures page of your Postmark account for the exact DKIm hostname to use.]]></value>
+	</item>
 	<item name="cmd_advanced_mailer_ellipsis">
 		<value xml:lang="ko"><![CDATA[(중략)]]></value>
 		<value xml:lang="en"><![CDATA[(see API for full value)]]></value>
