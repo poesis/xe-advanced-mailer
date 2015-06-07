@@ -181,6 +181,17 @@ class Base
 	}
 	
 	/**
+	 * Set Return Path
+	 *
+	 * @param string $returnPath
+	 * @return void
+	 */
+	public function setReturnPath($returnPath)
+	{
+		$this->message->setReturnPath($returnPath);
+	}
+	
+	/**
 	 * Set Message ID
 	 *
 	 * @param string $messageId
