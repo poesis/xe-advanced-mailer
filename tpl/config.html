@@ -80,7 +80,7 @@
 		<div class="x_control-group hidden-by-default" data-visible-types="smtp sendgrid">
 			<label class="x_control-label" for="advanced_mailer_password">{$lang->cmd_advanced_mailer_password}</label>
 			<div class="x_controls">
-				<input type="text" name="password" id="advanced_mailer_password" value="{$advanced_mailer_config->password}" />
+				<input type="password" name="password" id="advanced_mailer_password" value="{$advanced_mailer_config->password}" />
 			</div>
 		</div>
 		
@@ -119,7 +119,7 @@
 		<div class="x_control-group hidden-by-default" data-visible-types="ses">
 			<label class="x_control-label" for="advanced_mailer_aws_secret_key">{$lang->cmd_advanced_mailer_aws_secret_key}</label>
 			<div class="x_controls full-width">
-				<input type="text" name="aws_secret_key" id="advanced_mailer_aws_secret_key" value="{$advanced_mailer_config->aws_secret_key}" />
+				<input type="password" name="aws_secret_key" id="advanced_mailer_aws_secret_key" value="{$advanced_mailer_config->aws_secret_key}" />
 			</div>
 		</div>
 		
