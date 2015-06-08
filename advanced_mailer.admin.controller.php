@@ -79,7 +79,6 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 	{
 		$test_config = $this->getRequestVars();
 		$test_config->send_type = preg_replace('/\W/', '', $test_config->send_type);
-		$new_class_name = 'Advanced_Mailer\\' . ucfirst($test_config->send_type);
 		
 		$recipient_config = Context::gets('recipient_name', 'recipient_email');
 		$recipient_name = $recipient_config->recipient_name;
@@ -93,19 +92,6 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 		if (!method_exists('Mail', 'isAdvancedMailer') || !Mail::isAdvancedMailer())
 		{
 			$this->add('test_result', 'Error: ' . Context::getLang('msg_advanced_mailer_cannot_replace_mail_class'));
-			return;
-		}
-		
-		if (!class_exists($new_class_name))
-		{
-			if (file_exists(__DIR__ . '/classes/' . $test_config->send_type . '.class.php'))
-			{
-				include_once __DIR__ . '/classes/' . $test_config->send_type . '.class.php';
-			}
-		}
-		if (!class_exists($new_class_name))
-		{
-			$this->add('test_result', 'Error: ' . Context::getLang('msg_advanced_mailer_send_type_is_invalid'));
 			return;
 		}
 		
@@ -132,18 +118,18 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 			return;
 		}
 		
-		$previous_config = $new_class_name::$config;
-		$new_class_name::$config = $test_config;
+		$previous_config = Mail::$config;
+		Mail::$config = $test_config;
 		
 		try
 		{
-			$oMail = new $new_class_name();
+			$oMail = new Mail();
 			$oMail->setTitle('Advanced Mailer Test');
 			$oMail->setContent('<p>This is a <b>test email</b> from Advanced Mailer.</p><p>Thank you for trying Advanced Mailer.</p>');
 			$oMail->setReceiptor($recipient_name, $recipient_email);
 			$result = $oMail->send();
 			
-			$new_class_name::$config = $previous_config;
+			Mail::$config = $previous_config;
 			if (!$result)
 			{
 				if (count($oMail->errors))
@@ -160,7 +146,7 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 		}
 		catch (Exception $e)
 		{
-			$new_class_name::$config = $previous_config;
+			Mail::$config = $previous_config;
 			$this->add('test_result', nl2br(htmlspecialchars($e->getMessage())));
 			return;
 		}

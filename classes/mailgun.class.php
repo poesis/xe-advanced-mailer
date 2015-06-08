@@ -4,10 +4,10 @@ namespace Advanced_Mailer;
 
 class Mailgun extends Base
 {
+	public $assembleMessage = true;
+	
 	public function send()
 	{
-		$this->procAssembleMessage();
-		
 		$args = array(
 			'subject' => $this->getTitle(),
 			'from' => $this->getSender(),

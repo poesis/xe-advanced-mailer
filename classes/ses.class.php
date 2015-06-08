@@ -4,10 +4,10 @@ namespace Advanced_Mailer;
 
 class Ses extends Base
 {
+	public $assembleMessage = true;
+	
 	public function send()
 	{
-		$this->procAssembleMessage();
-		
 		$debug = array($this, 'debugCallback');
 		$endpoint = 'https://email.' . strtolower(self::$config->aws_region) . '.amazonaws.com/';
 		

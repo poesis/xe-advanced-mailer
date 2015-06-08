@@ -19,6 +19,8 @@ class Woorimail extends Base
 		'me_012' => '포인트가 부족합니다.',
 	);
 	
+	public $assembleMessage = false;
+	
 	public function send()
 	{
 		$data = array(

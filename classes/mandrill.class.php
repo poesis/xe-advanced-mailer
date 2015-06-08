@@ -4,10 +4,10 @@ namespace Advanced_Mailer;
 
 class Mandrill extends Base
 {
+	public $assembleMessage = true;
+	
 	public function send()
 	{
-		$this->procAssembleMessage();
-		
 		$recipients = array();
 		$to = $this->message->getTo();
 		foreach($to as $address => $name)

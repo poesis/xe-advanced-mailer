@@ -4,6 +4,8 @@ namespace Advanced_Mailer;
 
 class Sendgrid extends Base
 {
+	public $assembleMessage = false;
+	
 	public function send()
 	{
 		$sendgrid = new \SendGrid(self::$config->username, self::$config->password);

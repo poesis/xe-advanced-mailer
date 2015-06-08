@@ -18,6 +18,7 @@ class Base
 	public static $config = array();
 	public $errors = array();
 	public $message = NULL;
+	public $assembleMessage = true;
 	
 	/**
 	 * Constructor
@@ -343,12 +344,24 @@ class Base
 	 */
 	public function send()
 	{
-		$this->procAssembleMessage();
+		$send_type = self::$config->send_type;
 		
-		$transport = \Swift_NullTransport::newInstance();
-		$mailer = \Swift_Mailer::newInstance($transport);
-		$result = $mailer->send($this->message, $this->errors);
-		return (bool)$result;
+		include_once __DIR__ . '/' . strtolower($send_type) . '.class.php';
+		$subclass_name = __NAMESPACE__ . '\\' . ucfirst($send_type);
+		$subclass = new $subclass_name();
+		$data = get_object_vars($this);
+		foreach($data as $key => $value)
+		{
+			$subclass->$key = $value;
+		}
+		if($subclass->assembleMessage)
+		{
+			$subclass->procAssembleMessage();
+		}
+		
+		$result = $subclass->send();
+		$this->errors = $subclass->errors;
+		return $result;
 	}
 	
 	/**

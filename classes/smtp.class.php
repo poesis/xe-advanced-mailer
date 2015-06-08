@@ -4,10 +4,10 @@ namespace Advanced_Mailer;
 
 class Smtp extends Base
 {
+	public $assembleMessage = true;
+	
 	public function send()
 	{
-		$this->procAssembleMessage();
-		
 		$smtp_host = self::$config->smtp_host;
 		$smtp_port = self::$config->smtp_port;
 		$smtp_security = self::$config->smtp_security === 'none' ? null : self::$config->smtp_security;
