@@ -23,7 +23,8 @@
 			"mailgun" : ["include:mailgun.org", "mailo._domainkey"],
 			"mandrill" : ["include:spf.mandrillapp.com", "mandrill._domainkey"],
 			"postmark": ["include:spf.mtasv.net", "********.pm._domainkey"],
-			"sendgrid" : ["include:sendgrid.net", "smtpapi._domainkey"]
+			"sendgrid" : ["include:sendgrid.net", "smtpapi._domainkey"],
+			"woorimail" : ["include:woorimail.com", ""]
 		};
 		
 		var reset_spf_dkim = function() {
