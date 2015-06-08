@@ -25,13 +25,18 @@ class Base
 	 */
 	public function __construct()
 	{
+		// Load SwiftMailer
 		include_once dirname(__DIR__) . '/vendor/autoload.php';
 		$this->message = \Swift_Message::newInstance();
+		
+		// Auto-fill the sender info
 		if(self::$config->sender_email)
 		{
 			$sender_name = self::$config->sender_name ?: 'webmaster';
 			$this->message->setFrom(array(self::$config->sender_email => $sender_name));
 		}
+		
+		// Auto-fill the Reply-To address
 		if(self::$config->reply_to)
 		{
 			$this->message->setReplyTo(array(self::$config->reply_to));
@@ -321,18 +326,23 @@ class Base
 	 */
 	public function procAssembleMessage()
 	{
+		// Add all attachments
 		foreach($this->attachments as $original_filename => $filename)
 		{
 			$attachment = \Swift_Attachment::fromPath($original_filename);
 			$attachment->setFilename($filename);
 			$this->message->attach($attachment);
 		}
+		
+		// Add all CID attachments
 		foreach($this->cidAttachments as $cid => $original_filename)
 		{
 			$embedded = \Swift_EmbeddedFile::fromPath($original_filename);
 			$newcid = $this->message->embed($embedded);
 			$this->content = str_replace(array("cid:$cid", $cid), $newcid, $this->content);
 		}
+		
+		// Set content type
 		$content_type = $this->content_type === 'html' ? 'text/html' : 'text/plain';
 		$this->message->setBody($this->content, $content_type);
 	}
@@ -344,8 +354,10 @@ class Base
 	 */
 	public function send()
 	{
+		// Get the currently configured sending method
 		$send_type = self::$config->send_type;
 		
+		// Create an a copy of the email using the sending method
 		include_once __DIR__ . '/' . strtolower($send_type) . '.class.php';
 		$subclass_name = __NAMESPACE__ . '\\' . ucfirst($send_type);
 		$subclass = new $subclass_name();
@@ -355,19 +367,25 @@ class Base
 			$subclass->$key = $value;
 		}
 		
+		// Call the 'before' trigger
 		$output = \ModuleHandler::triggerCall('advanced_mailer.send', 'before', $subclass);
 		if(!$output->toBool()) return $output;
 		
+		// Assemble all attachments
 		if($subclass->assembleMessage)
 		{
 			$subclass->procAssembleMessage();
 		}
+		
+		// Send the email and retrieve any errors
 		$result = $subclass->send();
 		$this->errors = $subclass->errors;
 		
+		// Call the 'after' trigger
 		$output = \ModuleHandler::triggerCall('advanced_mailer.send', 'after', $subclass);
 		if(!$output->toBool()) return $output;
 		
+		// Return the result (bool)
 		return $result;
 	}
 	
