@@ -291,7 +291,7 @@ class Base
 	 */
 	public function replaceResourceRealPath($matches)
 	{
-		return preg_replace('/src=(["\']?)files/i', 'src=$1' . Context::getRequestUri() . 'files', $matches[0]);
+		return preg_replace('/src=(["\']?)files/i', 'src=$1' . \Context::getRequestUri() . 'files', $matches[0]);
 	}
 	
 	/**
@@ -354,13 +354,20 @@ class Base
 		{
 			$subclass->$key = $value;
 		}
+		
+		$output = \ModuleHandler::triggerCall('advanced_mailer.send', 'before', $subclass);
+		if(!$output->toBool()) return $output;
+		
 		if($subclass->assembleMessage)
 		{
 			$subclass->procAssembleMessage();
 		}
-		
 		$result = $subclass->send();
 		$this->errors = $subclass->errors;
+		
+		$output = \ModuleHandler::triggerCall('advanced_mailer.send', 'after', $subclass);
+		if(!$output->toBool()) return $output;
+		
 		return $result;
 	}
 	
