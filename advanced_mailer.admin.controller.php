@@ -167,6 +167,7 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 		$args->password = trim($request_args->password ?: '');
 		$args->domain = trim($request_args->domain ?: '');
 		$args->api_key = trim($request_args->api_key ?: '');
+		$args->account_type = trim($request_args->account_type ?: 'free');
 		$args->aws_region = trim($request_args->aws_region ?: '');
 		$args->aws_access_key = trim($request_args->aws_access_key ?: '');
 		$args->aws_secret_key = trim($request_args->aws_secret_key ?: '');

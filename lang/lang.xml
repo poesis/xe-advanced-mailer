@@ -104,6 +104,18 @@
 		<value xml:lang="ko"><![CDATA[AWS Secret Key]]></value>
 		<value xml:lang="en"><![CDATA[AWS Secret Key]]></value>
 	</item>
+	<item name="cmd_advanced_mailer_account_type">
+		<value xml:lang="ko"><![CDATA[계정 종류]]></value>
+		<value xml:lang="en"><![CDATA[Account type]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_free_account">
+		<value xml:lang="ko"><![CDATA[무료]]></value>
+		<value xml:lang="en"><![CDATA[Free account]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_paid_account">
+		<value xml:lang="ko"><![CDATA[유료 (전용채널 사용)]]></value>
+		<value xml:lang="en"><![CDATA[Paid account (Use dedicated channel)]]></value>
+	</item>
 	<item name="cmd_advanced_mailer_sender_identity">
 		<value xml:lang="ko"><![CDATA[보낸이 설정]]></value>
 		<value xml:lang="en"><![CDATA[Sender Identity]]></value>

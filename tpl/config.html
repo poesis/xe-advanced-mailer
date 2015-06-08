@@ -98,6 +98,14 @@
 			</div>
 		</div>
 		
+		<div class="x_control-group hidden-by-default" data-visible-types="woorimail">
+			<label class="x_control-label">{$lang->cmd_advanced_mailer_account_type}</label>
+			<div class="x_controls full-width">
+				<label class="x_inline" for="advanced_mailer_account_type_free"><input type="radio" name="account_type" id="advanced_mailer_account_type_free" value="free" checked="checked"|cond="$advanced_mailer_config->account_type !== 'paid'" /> {$lang->cmd_advanced_mailer_free_account}</label>
+				<label class="x_inline" for="advanced_mailer_account_type_paid"><input type="radio" name="account_type" id="advanced_mailer_account_type_paid" value="paid" checked="checked"|cond="$advanced_mailer_config->account_type === 'paid'" /> {$lang->cmd_advanced_mailer_paid_account}</label>
+			</div>
+		</div>
+		
 		<div class="x_control-group hidden-by-default" data-visible-types="ses">
 			<label class="x_control-label" for="advanced_mailer_aws_region">{$lang->cmd_advanced_mailer_aws_region}</label>
 			<div class="x_controls full-width">

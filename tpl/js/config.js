@@ -192,6 +192,7 @@
 				password: $("#advanced_mailer_password").val(),
 				domain: $("#advanced_mailer_domain").val(),
 				api_key: $("#advanced_mailer_api_key").val(),
+				account_type: $("input[type='radio'][name='account_type']:checked").val(),
 				aws_region: $("#advanced_mailer_aws_region").val(),
 				aws_access_key: $("#advanced_mailer_aws_access_key").val(),
 				aws_secret_key: $("#advanced_mailer_aws_secret_key").val(),

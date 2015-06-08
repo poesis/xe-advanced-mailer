@@ -48,11 +48,24 @@ class Woorimail extends Base
 			$data['sender_email'] = $email;
 			$data['sender_nickname'] = $name;
 		}
-		$replyTo = $this->message->getReplyTo();
-		if(count($replyTo))
+		
+		if(self::$config->account_type === 'paid')
 		{
-			reset($replyTo);
-			$data['sender_email'] = key($replyTo);
+			$sender_email = explode('@', $data['sender_email']);
+			if(count($sender_email) === 2)
+			{
+				$data['wms_nick'] = $sender_email[0];
+				$data['wms_domain'] = $sender_email[1];
+			}
+		}
+		else
+		{
+			$replyTo = $this->message->getReplyTo();
+			if(count($replyTo))
+			{
+				reset($replyTo);
+				$data['sender_email'] = key($replyTo);
+			}
 		}
 		$to = $this->message->getTo();
 		foreach($to as $email => $name)
