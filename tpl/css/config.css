@@ -26,6 +26,10 @@ section {
 	margin-bottom: 10px !important;
 }
 
+input[type=password] {
+	font-family: "Segoe UI", Arial, sans-serif !important;
+}
+
 div.advanced_mailer_description {
 	margin-bottom: 10px;
 	margin-left: 10px;
