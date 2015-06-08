@@ -38,6 +38,9 @@
 			if (!list_spf_dkim[send_type]) {
 				return reset_spf_dkim();
 			}
+			if (send_type === "woorimail" && !($("#advanced_mailer_account_type_paid").is(":checked"))) {
+				return reset_spf_dkim();
+			}
 			var sender_email = $("#advanced_mailer_sender_email").val();
 			var sender_domain = null;
 			if (sender_email.lastIndexOf("@") > -1) {
@@ -151,6 +154,7 @@
 			} else {
 				$("#advanced_mailer_reply_to").removeAttr("disabled");
 			}
+			update_spf_dkim();
 		}).triggerHandler("change");
 		
 		$("#advanced_mailer_check_spf,#advanced_mailer_check_dkim").click(function(event) {

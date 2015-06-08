@@ -196,6 +196,10 @@
 		<value xml:lang="ko"><![CDATA[정확한 DKIM 호스트명은 Postmark 계정의 Sender Signatures 페이지를 참고하시기 바랍니다.]]></value>
 		<value xml:lang="en"><![CDATA[Please see the Sender Signatures page of your Postmark account for the exact DKIm hostname to use.]]></value>
 	</item>
+	<item name="cmd_advanced_mailer_other_info_woorimail_dkim">
+		<value xml:lang="ko"><![CDATA[DKIM 설정은 우리메일에 로그인하여 확인하십시오.]]></value>
+		<value xml:lang="en"><![CDATA[Please log into Woorimail to see your DKIM settings.]]></value>
+	</item>
 	<item name="cmd_advanced_mailer_ellipsis">
 		<value xml:lang="ko"><![CDATA[(중략)]]></value>
 		<value xml:lang="en"><![CDATA[(see API for full value)]]></value>
