@@ -96,7 +96,7 @@
 				}
 			});
 			update_spf_dkim();
-		}).trigger("change");
+		}).triggerHandler("change");
 		
 		$("#advanced_mailer_smtp_manual_entry").on("change", function() {
 			var auto_fill = $(this).val();
@@ -143,6 +143,14 @@
 				$("#advanced_mailer_smtp_security_none").parent().removeClass("checked");
 			}
 		});
+		
+		$("#advanced_mailer_account_type_free,#advanced_mailer_account_type_paid").on("change", function() {
+			if ($("#advanced_mailer_account_type_paid").is(":checked")) {
+				$("#advanced_mailer_reply_to").attr("disabled", "disabled");
+			} else {
+				$("#advanced_mailer_reply_to").removeAttr("disabled");
+			}
+		}).triggerHandler("change");
 		
 		$("#advanced_mailer_check_spf,#advanced_mailer_check_dkim").click(function(event) {
 			event.preventDefault();
