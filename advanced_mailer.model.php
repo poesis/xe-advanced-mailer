@@ -2,6 +2,10 @@
 
 class Advanced_MailerModel extends Advanced_Mailer
 {
+	/**
+	 * Replace the built-in Mail class with the Advanced Mailer equivalent.
+	 * This method is called by the moduleHandler.init trigger.
+	 */
 	public function triggerReplaceMailClass()
 	{
 		if(class_exists('Mail', false)) return;

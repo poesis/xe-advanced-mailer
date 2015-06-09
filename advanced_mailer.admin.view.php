@@ -2,6 +2,9 @@
 
 class Advanced_MailerAdminView extends Advanced_Mailer
 {
+	/**
+	 * Display the configuration form.
+	 */
 	public function dispAdvanced_MailerAdminConfig()
 	{
 		$config = $this->getConfig();
@@ -17,6 +20,9 @@ class Advanced_MailerAdminView extends Advanced_Mailer
 		$this->setTemplateFile('config');
 	}
 	
+	/**
+	 * Get the public IPv4 address of the current server.
+	 */
 	public function getServerIP()
 	{
 		if(isset($_SESSION['advanced_mailer_ip_cache']) && $_SESSION['advanced_mailer_ip_cache'][1] > time() - 3600)

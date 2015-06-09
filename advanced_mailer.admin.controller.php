@@ -2,8 +2,12 @@
 
 class Advanced_MailerAdminController extends Advanced_Mailer
 {
+	/**
+	 * Save the configuration.
+	 */
 	public function procAdvanced_MailerAdminInsertConfig()
 	{
+		// Get and validate the new configuration.
 		$config = $this->getRequestVars();
 		$validation = $this->validateConfiguration($config);
 		if ($validation !== true)
@@ -12,7 +16,6 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 		}
 		
 		// Update the webmaster's name and email in the member module.
-		
 		$args = (object)array(
 			'webmaster_name' => $config->sender_name,
 			'webmaster_email' => $config->sender_email,
@@ -21,7 +24,6 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 		$output = $oModuleController->updateModuleConfig('member', $args);
 		
 		// Save the new configuration.
-		
 		$output = getController('module')->insertModuleConfig('advanced_mailer', $config);
 		if ($output->toBool())
 		{
@@ -42,6 +44,9 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 		}
 	}
 	
+	/**
+	 * Check the DNS record of a domain.
+	 */
 	public function procAdvanced_MailerAdminCheckDNSRecord()
 	{
 		$check_config = Context::gets('hostname', 'record_type');
@@ -75,6 +80,9 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 		return;
 	}
 	
+	/**
+	 * Send a test email using a temporary configuration.
+	 */
 	public function procAdvanced_MailerAdminTestSend()
 	{
 		$test_config = $this->getRequestVars();
@@ -154,6 +162,9 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 		return;
 	}
 	
+	/**
+	 * Get configuration from the current request.
+	 */
 	protected function getRequestVars()
 	{
 		$request_args = Context::getRequestVars();
@@ -173,6 +184,9 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 		return $args;
 	}
 	
+	/**
+	 * Validate configuration from the current request.
+	 */
 	protected function validateConfiguration($args)
 	{
 		switch ($args->sending_method)
@@ -252,8 +266,6 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 			default:
 				return 'msg_advanced_mailer_sending_method_is_invalid';
 		}
-		
-		// Validate the sender identity.
 		
 		if (!$args->sender_name)
 		{
