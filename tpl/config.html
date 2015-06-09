@@ -44,7 +44,7 @@
 		
 		<!--@foreach($sending_methods as $sending_method => $sending_conf)-->
 		<!--@foreach($sending_conf['conf'] as $conf_name)-->
-		{''; $conf_value = $advanced_mailer_config[$sending_method . '_' . $conf_name]}
+		{@ $conf_value = $advanced_mailer_config[$sending_method . '_' . $conf_name]}
 		
 		<!--@if($conf_name === 'host')-->
 		<div class="x_control-group hidden-by-default show-for-{$sending_method}">
@@ -251,14 +251,14 @@
 		<div class="x_control-group">
 			<label class="x_control-label" for="advanced_mailer_recipient_name">{$lang->cmd_advanced_mailer_recipient_name}</label>
 			<div class="x_controls">
-				<input type="text" id="advanced_mailer_recipient_name" value="" />
+				<input type="text" id="advanced_mailer_recipient_name" value="{Context::get('logged_info')->nick_name}" />
 			</div>
 		</div>
 		
 		<div class="x_control-group">
 			<label class="x_control-label" for="advanced_mailer_recipient_email">{$lang->cmd_advanced_mailer_recipient_email}</label>
 			<div class="x_controls">
-				<input type="text" id="advanced_mailer_recipient_email" value="" />
+				<input type="text" id="advanced_mailer_recipient_email" value="{Context::get('logged_info')->email_address}" />
 				<button id="advanced_mailer_test_send" type="button">{$lang->cmd_advanced_mailer_send}</button>
 			</div>
 		</div>
