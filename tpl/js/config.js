@@ -34,11 +34,11 @@
 		};
 		
 		var update_spf_dkim = function() {
-			var send_type = $("#advanced_mailer_send_type").val();
-			if (!list_spf_dkim[send_type]) {
+			var sending_method = $("#advanced_mailer_sending_method").val();
+			if (!list_spf_dkim[sending_method]) {
 				return reset_spf_dkim();
 			}
-			if (send_type === "woorimail" && !($("#advanced_mailer_account_type_paid").is(":checked"))) {
+			if (sending_method === "woorimail" && !($("#advanced_mailer_account_type_paid").is(":checked"))) {
 				return reset_spf_dkim();
 			}
 			var sender_email = $("#advanced_mailer_sender_email").val();
@@ -53,29 +53,29 @@
 			}
 			var div_spf_dkim = $("#spf_dkim_setting");
 			div_spf_dkim.find("div.not_applicable").hide();
-			if (list_spf_dkim[send_type][0]) {
+			if (list_spf_dkim[sending_method][0]) {
 				div_spf_dkim.find("div.spf.config_description").show().find("span.hostname").text(sender_domain);
-				div_spf_dkim.find("div.spf.config_value").show().find("span.value").text(("v=spf1 a mx " + list_spf_dkim[send_type][0] + " ~all").replace("  ", " "));
+				div_spf_dkim.find("div.spf.config_value").show().find("span.value").text(("v=spf1 a mx " + list_spf_dkim[sending_method][0] + " ~all").replace("  ", " "));
 			} else {
 				div_spf_dkim.find("div.spf.not_applicable").show();
 				div_spf_dkim.find("div.spf.config_value,div.spf.config_description,div.spf.config_other").hide();
 			}
-			if ($("#spf_dkim_setting").data("other-" + send_type + "-spf")) {
+			if ($("#spf_dkim_setting").data("other-" + sending_method + "-spf")) {
 				div_spf_dkim.find("div.spf.not_applicable").hide();
-				div_spf_dkim.find("div.spf.config_other").show().find("span.other").html($("#spf_dkim_setting").data("other-" + send_type + "-spf"));
+				div_spf_dkim.find("div.spf.config_other").show().find("span.other").html($("#spf_dkim_setting").data("other-" + sending_method + "-spf"));
 			} else {
 				div_spf_dkim.find("div.spf.config_other").hide();
 			}
-			if (list_spf_dkim[send_type][1]) {
-				div_spf_dkim.find("div.dkim.config_description").show().find("span.hostname").text(list_spf_dkim[send_type][1] + "." + sender_domain);
+			if (list_spf_dkim[sending_method][1]) {
+				div_spf_dkim.find("div.dkim.config_description").show().find("span.hostname").text(list_spf_dkim[sending_method][1] + "." + sender_domain);
 				div_spf_dkim.find("div.dkim.config_value").show().find("span.value").text("v=DKIM1; k=rsa; p=MIGfMA ..." + $("#spf_dkim_setting").data("ellipsis") + "... QAB;");
 			} else {
 				div_spf_dkim.find("div.dkim.not_applicable").show();
 				div_spf_dkim.find("div.dkim.config_value,div.dkim.config_description,div.dkim.config_other").hide();
 			}
-			if ($("#spf_dkim_setting").data("other-" + send_type + "-dkim")) {
+			if ($("#spf_dkim_setting").data("other-" + sending_method + "-dkim")) {
 				div_spf_dkim.find("div.dkim.not_applicable").hide();
-				div_spf_dkim.find("div.dkim.config_other").show().find("span.other").html($("#spf_dkim_setting").data("other-" + send_type + "-dkim"));
+				div_spf_dkim.find("div.dkim.config_other").show().find("span.other").html($("#spf_dkim_setting").data("other-" + sending_method + "-dkim"));
 			} else {
 				div_spf_dkim.find("div.dkim.config_other").hide();
 			}
@@ -87,13 +87,13 @@
 		
 		$("#advanced_mailer_sender_email").on("change keyup blur", update_spf_dkim);
 		
-		$("#advanced_mailer_send_type").on("change", function() {
-			var send_type = $(this).val();
+		$("#advanced_mailer_sending_method").on("change", function() {
+			var sending_method = $(this).val();
 			$("div.x_control-group").each(function() {
 				var visible_types = $(this).data("visible-types");
 				if (!visible_types) return;
 				visible_types = visible_types.split(" ");
-				if ($.inArray(send_type, visible_types) > -1) {
+				if ($.inArray(sending_method, visible_types) > -1) {
 					$(this).show();
 				} else {
 					$(this).hide();
@@ -197,7 +197,7 @@
 			$("#advanced_mailer_test_result").text("");
 			$(this).attr("disabled", "disabled");
 			var data = {
-				send_type: $("#advanced_mailer_send_type").val(),
+				sending_method: $("#advanced_mailer_sending_method").val(),
 				smtp_host: $("#advanced_mailer_smtp_host").val(),
 				smtp_port: $("#advanced_mailer_smtp_port").val(),
 				smtp_security: $("input[type='radio'][name='smtp_security']:checked").val(),

@@ -4,47 +4,47 @@
 		<value xml:lang="ko"><![CDATA[고급 메일 발송 모듈]]></value>
 		<value xml:lang="en"><![CDATA[Advanced Mailer]]></value>
 	</item>
-	<item name="cmd_advanced_mailer_sending_method">
+	<item name="cmd_advanced_mailer_sending_method_config">
 		<value xml:lang="ko"><![CDATA[발송 방법 설정]]></value>
 		<value xml:lang="en"><![CDATA[Sending Method]]></value>
 	</item>
-	<item name="cmd_advanced_mailer_about_sending_method">
+	<item name="cmd_advanced_mailer_about_sending_method_config">
 		<value xml:lang="ko"><![CDATA[반드시 모든 항목을 입력하시기 바랍니다.]]></value>
 		<value xml:lang="en"><![CDATA[Please fill all of the boxes.]]></value>
 	</item>
-	<item name="cmd_advanced_mailer_send_type">
+	<item name="cmd_advanced_mailer_sending_method">
 		<value xml:lang="ko"><![CDATA[발송 방법 선택]]></value>
 		<value xml:lang="en"><![CDATA[Sending Method]]></value>
 	</item>
-	<item name="cmd_advanced_mailer_send_type_mail">
+	<item name="cmd_advanced_mailer_sending_method_mail">
 		<value xml:lang="ko"><![CDATA[PHP mail() 함수]]></value>
 		<value xml:lang="en"><![CDATA[PHP mail() function]]></value>
 	</item>
-	<item name="cmd_advanced_mailer_send_type_smtp">
+	<item name="cmd_advanced_mailer_sending_method_smtp">
 		<value xml:lang="ko"><![CDATA[외부 SMTP 서버]]></value>
 		<value xml:lang="en"><![CDATA[External SMTP server]]></value>
 	</item>
-	<item name="cmd_advanced_mailer_send_type_ses">
+	<item name="cmd_advanced_mailer_sending_method_ses">
 		<value xml:lang="ko"><![CDATA[Amazon SES API]]></value>
 		<value xml:lang="en"><![CDATA[Amazon SES API]]></value>
 	</item>
-	<item name="cmd_advanced_mailer_send_type_mailgun">
+	<item name="cmd_advanced_mailer_sending_method_mailgun">
 		<value xml:lang="ko"><![CDATA[Mailgun API]]></value>
 		<value xml:lang="en"><![CDATA[Mailgun API]]></value>
 	</item>
-	<item name="cmd_advanced_mailer_send_type_mandrill">
+	<item name="cmd_advanced_mailer_sending_method_mandrill">
 		<value xml:lang="ko"><![CDATA[Mandrill API]]></value>
 		<value xml:lang="en"><![CDATA[Mandrill API]]></value>
 	</item>
-	<item name="cmd_advanced_mailer_send_type_postmark">
+	<item name="cmd_advanced_mailer_sending_method_postmark">
 		<value xml:lang="ko"><![CDATA[Postmark API]]></value>
 		<value xml:lang="en"><![CDATA[Postmark API]]></value>
 	</item>
-	<item name="cmd_advanced_mailer_send_type_sendgrid">
+	<item name="cmd_advanced_mailer_sending_method_sendgrid">
 		<value xml:lang="ko"><![CDATA[SendGrid API]]></value>
 		<value xml:lang="en"><![CDATA[SendGrid API]]></value>
 	</item>
-	<item name="cmd_advanced_mailer_send_type_woorimail">
+	<item name="cmd_advanced_mailer_sending_method_woorimail">
 		<value xml:lang="ko"><![CDATA[Woorimail API]]></value>
 		<value xml:lang="en"><![CDATA[Woorimail API]]></value>
 	</item>
@@ -228,7 +228,7 @@
 		<value xml:lang="ko"><![CDATA[테스트 결과]]></value>
 		<value xml:lang="en"><![CDATA[Test result]]></value>
 	</item>
-	<item name="msg_advanced_mailer_send_type_is_invalid">
+	<item name="msg_advanced_mailer_sending_method_is_invalid">
 		<value xml:lang="ko"><![CDATA[올바른 발송 방법을 선택해 주십시오.]]></value>
 		<value xml:lang="en"><![CDATA[Please select a valid sending method.]]></value>
 	</item>

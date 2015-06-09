@@ -355,11 +355,11 @@ class Base
 	public function send()
 	{
 		// Get the currently configured sending method
-		$send_type = self::$config->send_type;
+		$sending_method = self::$config->sending_method;
 		
 		// Create an a copy of the email using the sending method
-		include_once __DIR__ . '/' . strtolower($send_type) . '.class.php';
-		$subclass_name = __NAMESPACE__ . '\\' . ucfirst($send_type);
+		include_once __DIR__ . '/' . strtolower($sending_method) . '.class.php';
+		$subclass_name = __NAMESPACE__ . '\\' . ucfirst($sending_method);
 		$subclass = new $subclass_name();
 		$data = get_object_vars($this);
 		foreach($data as $key => $value)

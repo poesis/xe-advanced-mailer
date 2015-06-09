@@ -5,10 +5,14 @@ class Advanced_Mailer extends ModuleObject
 	public function getConfig()
 	{
 		$config = getModel('module')->getModuleConfig('advanced_mailer');
-		if(!is_object($config) || !isset($config->send_type))
+		if(!is_object($config))
 		{
 			$config = new stdClass();
-			$config->send_type = 'mail';
+			$config->sending_method = 'mail';
+		}
+		if(!isset($config->sending_method) && isset($config->send_type))
+		{
+			$config->sending_method = $config->send_type;
 		}
 		return $config;
 	}

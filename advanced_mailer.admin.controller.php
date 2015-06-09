@@ -78,7 +78,6 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 	public function procAdvanced_MailerAdminTestSend()
 	{
 		$test_config = $this->getRequestVars();
-		$test_config->send_type = preg_replace('/\W/', '', $test_config->send_type);
 		
 		$recipient_config = Context::gets('recipient_name', 'recipient_email');
 		$recipient_name = $recipient_config->recipient_name;
@@ -159,7 +158,8 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 	{
 		$request_args = Context::getRequestVars();
 		$args = new stdClass();
-		$args->send_type = trim($request_args->send_type ?: 'mail');
+		$args->sending_method = trim($request_args->sending_method ?: 'mail');
+		$args->sending_method = preg_replace('/\W/', '', $args->sending_method);
 		$args->smtp_host = trim($request_args->smtp_host ?: '');
 		$args->smtp_port = trim($request_args->smtp_port ?: '');
 		$args->smtp_security = trim($request_args->smtp_security ?: 'none');
@@ -179,7 +179,7 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 	
 	protected function validateConfiguration($args)
 	{
-		switch ($args->send_type)
+		switch ($args->sending_method)
 		{
 			case 'mail':
 				break;
@@ -254,7 +254,7 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 				break;
 				
 			default:
-				return 'msg_advanced_mailer_send_type_is_invalid';
+				return 'msg_advanced_mailer_sending_method_is_invalid';
 		}
 		
 		// Validate the sender identity.
