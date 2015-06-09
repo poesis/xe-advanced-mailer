@@ -123,7 +123,7 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 		try
 		{
 			$oMail = new Mail();
-			$oMail->setTitle('Advanced Mailer Test');
+			$oMail->setTitle('Advanced Mailer Test : ' . strtoupper($test_config->sending_method));
 			$oMail->setContent('<p>This is a <b>test email</b> from Advanced Mailer.</p><p>Thank you for trying Advanced Mailer.</p>');
 			$oMail->setReceiptor($recipient_name, $recipient_email);
 			$result = $oMail->send();
