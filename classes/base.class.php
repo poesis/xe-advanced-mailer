@@ -2,6 +2,12 @@
 
 namespace Advanced_Mailer;
 
+/**
+ * @file base.class.php
+ * @author Kijin Sung <kijin@kijinsung.com>
+ * @license LGPL v2.1 <http://www.gnu.org/licenses/lgpl-2.1.html>
+ * @brief Advanced Mailer Base Class
+ */
 class Base
 {
 	/**

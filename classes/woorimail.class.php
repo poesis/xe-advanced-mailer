@@ -2,6 +2,12 @@
 
 namespace Advanced_Mailer;
 
+/**
+ * @file woorimail.class.php
+ * @author Kijin Sung <kijin@kijinsung.com>
+ * @license LGPL v2.1 <http://www.gnu.org/licenses/lgpl-2.1.html>
+ * @brief Advanced Mailer Transport: Woorimail
+ */
 class Woorimail extends Base
 {
 	public static $_error_codes = array(

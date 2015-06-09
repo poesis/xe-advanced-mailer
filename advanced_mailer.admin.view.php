@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * @file advanced_mailer.admin.view.php
+ * @author Kijin Sung <kijin@kijinsung.com>
+ * @license LGPL v2.1 <http://www.gnu.org/licenses/lgpl-2.1.html>
+ * @brief Advanced Mailer Admin View
+ */
 class Advanced_MailerAdminView extends Advanced_Mailer
 {
 	/**
