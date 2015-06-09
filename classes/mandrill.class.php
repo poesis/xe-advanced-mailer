@@ -27,7 +27,7 @@ class Mandrill extends Base
 		
 		try
 		{
-			$mandrill = new \Mandrill(self::$config->api_key);
+			$mandrill = new \Mandrill(self::$config->mandrill_api_key);
 			$result = $mandrill->messages->sendRaw($this->message->toString(), null, null, $recipients);
 		}
 		catch(\Mandrill_Error $e)

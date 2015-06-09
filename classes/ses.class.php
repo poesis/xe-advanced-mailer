@@ -9,9 +9,9 @@ class Ses extends Base
 	public function send()
 	{
 		$debug = array($this, 'debugCallback');
-		$endpoint = 'https://email.' . strtolower(self::$config->aws_region) . '.amazonaws.com/';
+		$endpoint = 'https://email.' . strtolower(self::$config->ses_region) . '.amazonaws.com/';
 		
-		$transport = \Swift_AWSTransport::newInstance(self::$config->aws_access_key, self::$config->aws_secret_key);
+		$transport = \Swift_AWSTransport::newInstance(self::$config->ses_access_key, self::$config->ses_secret_key);
 		$transport->setDebug($debug);
 		$transport->setEndpoint($endpoint);
 		

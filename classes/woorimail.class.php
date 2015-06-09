@@ -31,8 +31,8 @@ class Woorimail extends Base
 			'receiver_email' => array(),
 			'receiver_nickname' => array(),
 			'member_regdate' => date('YmdHis'),
-			'domain' => self::$config->domain,
-			'authkey' => self::$config->api_key,
+			'domain' => self::$config->woorimail_domain,
+			'authkey' => self::$config->woorimail_api_key,
 			'wms_domain' => 'woorimail.com',
 			'wms_nick' => 'NOREPLY',
 			'type' => 'api',
@@ -49,7 +49,7 @@ class Woorimail extends Base
 			$data['sender_nickname'] = $name;
 		}
 		
-		if(self::$config->account_type === 'paid')
+		if(self::$config->woorimail_account_type === 'paid')
 		{
 			$sender_email = explode('@', $data['sender_email']);
 			if(count($sender_email) === 2)

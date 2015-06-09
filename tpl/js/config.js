@@ -16,16 +16,6 @@
 			"yahoo.com" : true,
 			"yahoo.co.kr" : true
 		};
-			
-		var list_spf_dkim = {
-			"mail" : ["", ""],
-			"ses" : ["", ""],
-			"mailgun" : ["include:mailgun.org", "mailo._domainkey"],
-			"mandrill" : ["include:spf.mandrillapp.com", "mandrill._domainkey"],
-			"postmark": ["include:spf.mtasv.net", "********.pm._domainkey"],
-			"sendgrid" : ["include:sendgrid.net", "smtpapi._domainkey"],
-			"woorimail" : ["include:woorimail.com", ""]
-		};
 		
 		var reset_spf_dkim = function() {
 			var div_spf_dkim = $("#spf_dkim_setting");
@@ -35,10 +25,10 @@
 		
 		var update_spf_dkim = function() {
 			var sending_method = $("#advanced_mailer_sending_method").val();
-			if (!list_spf_dkim[sending_method]) {
+			if (!advanced_mailer_sending_methods[sending_method]) {
 				return reset_spf_dkim();
 			}
-			if (sending_method === "woorimail" && !($("#advanced_mailer_account_type_paid").is(":checked"))) {
+			if (sending_method === "woorimail" && !($("#advanced_mailer_woorimail_account_type_paid").is(":checked"))) {
 				return reset_spf_dkim();
 			}
 			var sender_email = $("#advanced_mailer_sender_email").val();
@@ -53,9 +43,9 @@
 			}
 			var div_spf_dkim = $("#spf_dkim_setting");
 			div_spf_dkim.find("div.not_applicable").hide();
-			if (list_spf_dkim[sending_method][0]) {
+			if (advanced_mailer_sending_methods[sending_method]["spf"]) {
 				div_spf_dkim.find("div.spf.config_description").show().find("span.hostname").text(sender_domain);
-				div_spf_dkim.find("div.spf.config_value").show().find("span.value").text(("v=spf1 a mx " + list_spf_dkim[sending_method][0] + " ~all").replace("  ", " "));
+				div_spf_dkim.find("div.spf.config_value").show().find("span.value").text(("v=spf1 a mx " + advanced_mailer_sending_methods[sending_method]["spf"] + " ~all").replace("  ", " "));
 			} else {
 				div_spf_dkim.find("div.spf.not_applicable").show();
 				div_spf_dkim.find("div.spf.config_value,div.spf.config_description,div.spf.config_other").hide();
@@ -66,8 +56,8 @@
 			} else {
 				div_spf_dkim.find("div.spf.config_other").hide();
 			}
-			if (list_spf_dkim[sending_method][1]) {
-				div_spf_dkim.find("div.dkim.config_description").show().find("span.hostname").text(list_spf_dkim[sending_method][1] + "." + sender_domain);
+			if (advanced_mailer_sending_methods[sending_method]["dkim"]) {
+				div_spf_dkim.find("div.dkim.config_description").show().find("span.hostname").text(advanced_mailer_sending_methods[sending_method]["dkim"] + "." + sender_domain);
 				div_spf_dkim.find("div.dkim.config_value").show().find("span.value").text("v=DKIM1; k=rsa; p=MIGfMA ..." + $("#spf_dkim_setting").data("ellipsis") + "... QAB;");
 			} else {
 				div_spf_dkim.find("div.dkim.not_applicable").show();
@@ -82,18 +72,15 @@
 		};
 		
 		if ($("#spf_dkim_setting").data("server-ip")) {
-			list_spf_dkim["mail"][0] = "ip4:" + $("#spf_dkim_setting").data("server-ip");
+			advanced_mailer_sending_methods["mail"]["spf"] = "ip4:" + $("#spf_dkim_setting").data("server-ip");
 		}
 		
 		$("#advanced_mailer_sender_email").on("change keyup blur", update_spf_dkim);
 		
 		$("#advanced_mailer_sending_method").on("change", function() {
 			var sending_method = $(this).val();
-			$("div.x_control-group").each(function() {
-				var visible_types = $(this).data("visible-types");
-				if (!visible_types) return;
-				visible_types = visible_types.split(" ");
-				if ($.inArray(sending_method, visible_types) > -1) {
+			$("div.x_control-group.hidden-by-default").not(".show-always").each(function() {
+				if ($(this).hasClass("show-for-" + sending_method)) {
 					$(this).show();
 				} else {
 					$(this).hide();
@@ -148,8 +135,8 @@
 			}
 		});
 		
-		$("#advanced_mailer_account_type_free,#advanced_mailer_account_type_paid").on("change", function() {
-			if ($("#advanced_mailer_account_type_paid").is(":checked")) {
+		$("#advanced_mailer_woorimail_account_type_free,#advanced_mailer_woorimail_account_type_paid").on("change", function() {
+			if ($("#advanced_mailer_woorimail_account_type_paid").is(":checked")) {
 				$("#advanced_mailer_reply_to").attr("disabled", "disabled");
 			} else {
 				$("#advanced_mailer_reply_to").removeAttr("disabled");
@@ -196,27 +183,26 @@
 			event.preventDefault();
 			$("#advanced_mailer_test_result").text("");
 			$(this).attr("disabled", "disabled");
-			var data = {
+			var ajax_data = {
 				sending_method: $("#advanced_mailer_sending_method").val(),
-				smtp_host: $("#advanced_mailer_smtp_host").val(),
-				smtp_port: $("#advanced_mailer_smtp_port").val(),
-				smtp_security: $("input[type='radio'][name='smtp_security']:checked").val(),
-				username: $("#advanced_mailer_username").val(),
-				password: $("#advanced_mailer_password").val(),
-				domain: $("#advanced_mailer_domain").val(),
-				api_key: $("#advanced_mailer_api_key").val(),
-				account_type: $("input[type='radio'][name='account_type']:checked").val(),
-				aws_region: $("#advanced_mailer_aws_region").val(),
-				aws_access_key: $("#advanced_mailer_aws_access_key").val(),
-				aws_secret_key: $("#advanced_mailer_aws_secret_key").val(),
 				sender_name: $("#advanced_mailer_sender_name").val(),
 				sender_email: $("#advanced_mailer_sender_email").val(),
 				reply_to: $("#advanced_mailer_reply_to").val(),
 				recipient_name: $("#advanced_mailer_recipient_name").val(),
 				recipient_email: $("#advanced_mailer_recipient_email").val()
 			};
+			$.each(advanced_mailer_sending_methods, function(sending_method, sending_conf) {
+				$.each(sending_conf.conf, function(key, conf_name) {
+					var conf_input = $("#advanced_mailer_" + sending_method + "_" + conf_name);
+					if (conf_input.size()) {
+						ajax_data[sending_method + "_" + conf_name] = conf_input.val();
+					} else {
+						ajax_data[sending_method + "_" + conf_name] = $("input[type='radio'][name='" + sending_method + "_" + conf_name + "']:checked").val();
+					}
+				});
+			});
 			$.exec_json(
-				"advanced_mailer.procAdvanced_mailerAdminTestSend", data,
+				"advanced_mailer.procAdvanced_mailerAdminTestSend", ajax_data,
 				function(response) {
 					$("#advanced_mailer_test_result").html(response.test_result);
 					$("#advanced_mailer_test_send").removeAttr("disabled");

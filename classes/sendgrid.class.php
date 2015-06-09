@@ -8,7 +8,7 @@ class Sendgrid extends Base
 	
 	public function send()
 	{
-		$sendgrid = new \SendGrid(self::$config->username, self::$config->password);
+		$sendgrid = new \SendGrid(self::$config->sendgrid_username, self::$config->sendgrid_password);
 		$email = new \SendGrid\Email();
 		$email->setSubject($this->message->getSubject());
 		

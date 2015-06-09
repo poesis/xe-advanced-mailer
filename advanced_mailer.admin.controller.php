@@ -160,17 +160,13 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 		$args = new stdClass();
 		$args->sending_method = trim($request_args->sending_method ?: 'mail');
 		$args->sending_method = preg_replace('/\W/', '', $args->sending_method);
-		$args->smtp_host = trim($request_args->smtp_host ?: '');
-		$args->smtp_port = trim($request_args->smtp_port ?: '');
-		$args->smtp_security = trim($request_args->smtp_security ?: 'none');
-		$args->username = trim($request_args->username ?: '');
-		$args->password = trim($request_args->password ?: '');
-		$args->domain = trim($request_args->domain ?: '');
-		$args->api_key = trim($request_args->api_key ?: '');
-		$args->account_type = trim($request_args->account_type ?: 'free');
-		$args->aws_region = trim($request_args->aws_region ?: '');
-		$args->aws_access_key = trim($request_args->aws_access_key ?: '');
-		$args->aws_secret_key = trim($request_args->aws_secret_key ?: '');
+		foreach ($this->sending_methods as $sending_method => $sending_conf)
+		{
+			foreach ($sending_conf['conf'] as $conf_name)
+			{
+				$args->{$sending_method . '_' . $conf_name} = trim($request_args->{$sending_method . '_' . $conf_name} ?: '');
+			}
+		}
 		$args->sender_name = trim($request_args->sender_name ?: '');
 		$args->sender_email = trim($request_args->sender_email ?: '');
 		$args->reply_to = trim($request_args->reply_to ?: '');
@@ -197,26 +193,26 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 				{
 					return 'msg_advanced_mailer_smtp_security_is_invalid';
 				}
-				if (!$args->username)
+				if (!$args->smtp_username)
 				{
 					return 'msg_advanced_mailer_username_is_empty';
 				}
-				if (!$args->password)
+				if (!$args->smtp_password)
 				{
 					return 'msg_advanced_mailer_password_is_empty';
 				}
 				break;
 				
 			case 'ses':
-				if (!$args->aws_region || !preg_match('/^[a-z0-9.-]+$/', $args->aws_region))
+				if (!$args->ses_region || !preg_match('/^[a-z0-9.-]+$/', $args->ses_region))
 				{
 					return 'msg_advanced_mailer_aws_region_is_invalid';
 				}
-				if (!$args->aws_access_key)
+				if (!$args->ses_access_key)
 				{
 					return 'msg_advanced_mailer_aws_access_key_is_empty';
 				}
-				if (!$args->aws_secret_key)
+				if (!$args->ses_secret_key)
 				{
 					return 'msg_advanced_mailer_aws_secret_key_is_empty';
 				}
@@ -224,11 +220,11 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 				
 			case 'mailgun':
 			case 'woorimail':
-				if (!$args->domain)
+				if (!$args->{$args->sending_method . '_domain'})
 				{
 					return 'msg_advanced_mailer_domain_is_empty';
 				}
-				if (!$args->api_key)
+				if (!$args->{$args->sending_method . '_api_key'})
 				{
 					return 'msg_advanced_mailer_api_key_is_empty';
 				}
@@ -236,18 +232,18 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 				
 			case 'mandrill':
 			case 'postmark':
-				if (!$args->api_key)
+				if (!$args->{$args->sending_method . '_api_key'})
 				{
 					return 'msg_advanced_mailer_api_key_is_empty';
 				}
 				break;
 				
 			case 'sendgrid':
-				if (!$args->username)
+				if (!$args->sendgrid_username)
 				{
 					return 'msg_advanced_mailer_username_is_empty';
 				}
-				if (!$args->password)
+				if (!$args->sendgrid_password)
 				{
 					return 'msg_advanced_mailer_password_is_empty';
 				}
