@@ -14,9 +14,17 @@ class Mail extends Base
 	
 	public function send()
 	{
-		$transport = \Swift_MailTransport::newInstance();
-		$mailer = \Swift_Mailer::newInstance($transport);
-		$result = $mailer->send($this->message, $this->errors);
-		return (bool)$result;
+		try
+		{
+			$transport = \Swift_MailTransport::newInstance();
+			$mailer = \Swift_Mailer::newInstance($transport);
+			$result = $mailer->send($this->message, $this->errors);
+			return (bool)$result;
+		}
+		catch(\Exception $e)		
+		{
+			$this->errors = array('Mail: ' . $e->getMessage());
+			return false;
+		}
 	}
 }

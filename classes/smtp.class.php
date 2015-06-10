@@ -22,8 +22,16 @@ class Smtp extends Base
 		$transport->setUsername(self::$config->smtp_username);
 		$transport->setPassword(self::$config->smtp_password);
 		
-		$mailer = \Swift_Mailer::newInstance($transport);
-		$result = $mailer->send($this->message, $this->errors);
-		return (bool)$result;
+		try
+		{
+			$mailer = \Swift_Mailer::newInstance($transport);
+			$result = $mailer->send($this->message, $this->errors);
+			return (bool)$result;
+		}
+		catch(\Exception $e)		
+		{
+			$this->errors = array('SMTP: ' . $e->getMessage());
+			return false;
+		}
 	}
 }
