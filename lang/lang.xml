@@ -312,4 +312,8 @@
 		<value xml:lang="ko"><![CDATA[테스트에 성공하였습니다. 메일을 확인해 보시고, 설정을 저장하는 것을 잊지 마시기 바랍니다.]]></value>
 		<value xml:lang="en"><![CDATA[The test was successful. Please check your email, and don't forget to save the current configuration.]]></value>
 	</item>
+	<item name="msg_advanced_mailer_update_failure">
+		<value xml:lang="ko"><![CDATA[업데이트에 실패하였습니다.]]></value>
+		<value xml:lang="en"><![CDATA[Update failed.]]></value>
+	</item>
 </lang>
