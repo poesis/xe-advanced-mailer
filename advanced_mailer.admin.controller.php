@@ -152,13 +152,27 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 				}
 				else
 				{
-					$this->add('test_result', 'An unknown error occurred.');
+					$this->add('test_result', Context::getLang('msg_advanced_mailer_unknown_error'));
 					return;
 				}
 			}
 		}
 		catch (Exception $e)
 		{
+			if ($test_config->sending_method === 'smtp')
+			{
+				if (strpos($test_config->smtp_host, 'gmail.com') !== false && strpos($e->getMessage(), 'code "535"') !== false)
+				{
+					$this->add('test_result', Context::getLang('msg_advanced_mailer_google_account_security'));
+					return;
+				}
+				if (strpos($test_config->smtp_host, 'naver.com') !== false && strpos($e->getMessage(), 'Failed to authenticate') !== false)
+				{
+					$this->add('test_result', Context::getLang('msg_advanced_mailer_naver_smtp_disabled'));
+					return;
+				}
+			}
+			
 			Mail::$config = $previous_config;
 			$this->add('test_result', nl2br(htmlspecialchars($e->getMessage())));
 			return;
