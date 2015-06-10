@@ -152,22 +152,54 @@ class Advanced_Mailer extends ModuleObject
 	}
 	
 	/**
+	 * Check triggers.
+	 */
+	public function checkTriggers()
+	{
+		$oModuleModel = getModel('module');
+		if($oModuleModel->getTrigger('moduleHandler.init', 'advanced_mailer', 'model', 'triggerReplaceMailClass', 'before'))
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	/**
 	 * Register triggers.
 	 */
+	public function registerTriggers()
+	{
+		$oModuleModel = getModel('module');
+		if(!$this->checkTriggers())
+		{
+			$oModuleController = getController('module');
+			$oModuleController->insertTrigger('moduleHandler.init', 'advanced_mailer', 'model', 'triggerReplaceMailClass', 'before');
+			return true;
+		}
+		return false;
+	}
+	
 	public function moduleInstall()
 	{
-		$oModuleController = getController('module');
-		$oModuleController->insertTrigger('moduleHandler.init', 'advanced_mailer', 'model', 'triggerReplaceMailClass', 'before');
+		$this->registerTriggers();
 		return new Object();
 	}
 	
 	public function checkUpdate()
 	{
-		return false;
+		if (!$this->checkTriggers())
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 	
 	public function moduleUpdate()
 	{
+		$this->registerTriggers();
 		return new Object(0, 'success_updated');
 	}
 	
