@@ -208,11 +208,6 @@ class Advanced_Mailer extends ModuleObject
 	
 	public function moduleUpdate()
 	{
-		if(version_compare(PHP_VERSION, '5.4', '<'))
-		{
-			return new Object(-1, 'msg_advanced_mailer_update_failure');
-		}
-		
 		$this->registerTriggers();
 		return new Object(0, 'success_updated');
 	}
