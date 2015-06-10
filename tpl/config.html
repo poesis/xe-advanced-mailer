@@ -19,7 +19,10 @@
 		<h2 style="padding-top:12px">{$lang->cmd_advanced_mailer_sending_method_config}</h2>
 		
 		<div class="advanced_mailer_description">
-			※ {$lang->cmd_advanced_mailer_about_sending_method_config}
+			<p>※ {$lang->cmd_advanced_mailer_about_sending_method_config}</p>
+			<!--@if(count($available_sending_methods) < count($sending_methods))-->
+			<p>※ {$lang->msg_advanced_mailer_php_version_is_low}</p>
+			<!--@end-->
 		</div>
 		
 		<div class="x_control-group show-always">
