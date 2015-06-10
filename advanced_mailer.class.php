@@ -191,6 +191,10 @@ class Advanced_Mailer extends ModuleObject
 		{
 			return true;
 		}
+		elseif (!class_exists('Mail') || !method_exists('Mail', 'isAdvancedMailer') || !Mail::isAdvancedMailer())
+		{
+			return true;
+		}
 		else
 		{
 			return false;
