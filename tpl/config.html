@@ -26,14 +26,14 @@
 			<label class="x_control-label" for="advanced_mailer_sending_method">{$lang->cmd_advanced_mailer_sending_method}</label>
 			<div class="x_controls">
 				<select name="sending_method" id="advanced_mailer_sending_method">
-					<option value="mail" selected="selected"|cond="$advanced_mailer_config['sending_method'] === 'mail'">{$lang->cmd_advanced_mailer_sending_method_mail}</option>
-					<option value="smtp" selected="selected"|cond="$advanced_mailer_config['sending_method'] === 'smtp'">{$lang->cmd_advanced_mailer_sending_method_smtp}</option>
-					<option value="ses" selected="selected"|cond="$advanced_mailer_config['sending_method'] === 'ses'">{$lang->cmd_advanced_mailer_sending_method_ses}</option>
-					<option value="mailgun" selected="selected"|cond="$advanced_mailer_config['sending_method'] === 'mailgun'">{$lang->cmd_advanced_mailer_sending_method_mailgun}</option>
-					<option value="mandrill" selected="selected"|cond="$advanced_mailer_config['sending_method'] === 'mandrill'">{$lang->cmd_advanced_mailer_sending_method_mandrill}</option>
-					<option value="postmark" selected="selected"|cond="$advanced_mailer_config['sending_method'] === 'postmark'">{$lang->cmd_advanced_mailer_sending_method_postmark}</option>
-					<option value="sendgrid" selected="selected"|cond="$advanced_mailer_config['sending_method'] === 'sendgrid'">{$lang->cmd_advanced_mailer_sending_method_sendgrid}</option>
-					<option value="woorimail" selected="selected"|cond="$advanced_mailer_config['sending_method'] === 'woorimail'">{$lang->cmd_advanced_mailer_sending_method_woorimail}</option>
+					<option value="mail" selected="selected"|cond="$advanced_mailer_config['sending_method'] === 'mail'" cond="in_array('mail', $available_sending_methods)">{$lang->cmd_advanced_mailer_sending_method_mail}</option>
+					<option value="smtp" selected="selected"|cond="$advanced_mailer_config['sending_method'] === 'smtp'" cond="in_array('smtp', $available_sending_methods)">{$lang->cmd_advanced_mailer_sending_method_smtp}</option>
+					<option value="ses" selected="selected"|cond="$advanced_mailer_config['sending_method'] === 'ses'" cond="in_array('ses', $available_sending_methods)">{$lang->cmd_advanced_mailer_sending_method_ses}</option>
+					<option value="mailgun" selected="selected"|cond="$advanced_mailer_config['sending_method'] === 'mailgun'" cond="in_array('mailgun', $available_sending_methods)">{$lang->cmd_advanced_mailer_sending_method_mailgun}</option>
+					<option value="mandrill" selected="selected"|cond="$advanced_mailer_config['sending_method'] === 'mandrill'" cond="in_array('mandrill', $available_sending_methods)">{$lang->cmd_advanced_mailer_sending_method_mandrill}</option>
+					<option value="postmark" selected="selected"|cond="$advanced_mailer_config['sending_method'] === 'postmark'" cond="in_array('postmark', $available_sending_methods)">{$lang->cmd_advanced_mailer_sending_method_postmark}</option>
+					<option value="sendgrid" selected="selected"|cond="$advanced_mailer_config['sending_method'] === 'sendgrid'" cond="in_array('sendgrid', $available_sending_methods)">{$lang->cmd_advanced_mailer_sending_method_sendgrid}</option>
+					<option value="woorimail" selected="selected"|cond="$advanced_mailer_config['sending_method'] === 'woorimail'" cond="in_array('woorimail', $available_sending_methods)">{$lang->cmd_advanced_mailer_sending_method_woorimail}</option>
 				</select>
 			</div>
 		</div>

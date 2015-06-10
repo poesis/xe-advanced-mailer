@@ -32,7 +32,14 @@ class Base
 	public function __construct()
 	{
 		// Load SwiftMailer
-		include_once dirname(__DIR__) . '/vendor/autoload.php';
+		if(version_compare(PHP_VERSION, '5.4', '<'))
+		{
+			include_once dirname(__DIR__) . '/vendor/swiftmailer/swiftmailer/lib/swift_required.php';
+		}
+		else
+		{
+			include_once dirname(__DIR__) . '/vendor/autoload.php';
+		}
 		$this->message = \Swift_Message::newInstance();
 		
 		// Auto-fill the sender info

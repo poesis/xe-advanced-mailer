@@ -55,6 +55,11 @@ class Advanced_Mailer extends ModuleObject
 	);
 	
 	/**
+	 * Definition of sending methods available in PHP 5.3.
+	 */
+	public $sending_methods_php53 = array('mail', 'smtp', 'woorimail');
+	
+	/**
 	 * Get the configuration of the current module.
 	 */
 	public function getConfig()

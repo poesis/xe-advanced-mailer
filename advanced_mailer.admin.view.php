@@ -16,9 +16,19 @@ class Advanced_MailerAdminView extends Advanced_Mailer
 		$config = $this->getConfig();
 		$member_config = getModel('module')->getModuleConfig('member');
 		
+		if(version_compare(PHP_VERSION, '5.4', '<'))
+		{
+			$available_sending_methods = $this->sending_methods_php53;
+		}
+		else
+		{
+			$available_sending_methods = array_keys($this->sending_methods);
+		}
+		
 		Context::set('advanced_mailer_config', (array)$config);
 		Context::set('advanced_mailer_server_ip', $this->getServerIP());
 		Context::set('sending_methods', $this->sending_methods);
+		Context::set('available_sending_methods', $available_sending_methods);
 		Context::set('webmaster_name', $member_config->webmaster_name ? $member_config->webmaster_name : 'webmaster');
 		Context::set('webmaster_email', $member_config->webmaster_email);
 		
