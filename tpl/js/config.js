@@ -77,6 +77,14 @@
 		
 		$("#advanced_mailer_sender_email").on("change keyup blur", update_spf_dkim);
 		
+		$("#advanced_mailer_is_enabled").on("change", function() {
+			if ($(this).val() === 'Y') {
+				$("#advanced_mailer section").not(".show-when-disabled").show();
+			} else {
+				$("#advanced_mailer section").not(".show-when-disabled").hide();
+			}
+		}).triggerHandler("change");
+		
 		$("#advanced_mailer_sending_method").on("change", function() {
 			var sending_method = $(this).val();
 			$("div.x_control-group.hidden-by-default").not(".show-always").each(function() {

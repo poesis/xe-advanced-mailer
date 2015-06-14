@@ -68,6 +68,7 @@ class Advanced_Mailer extends ModuleObject
 		if(!is_object($config))
 		{
 			$config = new stdClass();
+			$config->is_enabled = 'N';
 			$config->sending_method = 'mail';
 		}
 		

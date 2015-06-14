@@ -4,6 +4,22 @@
 		<value xml:lang="ko"><![CDATA[고급 메일 발송 모듈]]></value>
 		<value xml:lang="en"><![CDATA[Advanced Mailer]]></value>
 	</item>
+	<item name="cmd_advanced_mailer_general_config">
+		<value xml:lang="ko"><![CDATA[일반 설정]]></value>
+		<value xml:lang="en"><![CDATA[General settings]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_is_enabled">
+		<value xml:lang="ko"><![CDATA[모듈 사용]]></value>
+		<value xml:lang="en"><![CDATA[Enable module]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_is_enabled_yes">
+		<value xml:lang="ko"><![CDATA[사용]]></value>
+		<value xml:lang="en"><![CDATA[Enabled]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_is_enabled_no">
+		<value xml:lang="ko"><![CDATA[사용하지 않음]]></value>
+		<value xml:lang="en"><![CDATA[Disabled]]></value>
+	</item>
 	<item name="cmd_advanced_mailer_sending_method_config">
 		<value xml:lang="ko"><![CDATA[발송 방법 설정]]></value>
 		<value xml:lang="en"><![CDATA[Sending Method]]></value>
