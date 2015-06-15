@@ -23,6 +23,7 @@ class Base
 	 */
 	public static $config = array();
 	public $errors = array();
+	public $caller = NULL;
 	public $message = NULL;
 	public $assembleMessage = true;
 	
@@ -45,14 +46,28 @@ class Base
 		// Auto-fill the sender info
 		if(self::$config->sender_email)
 		{
-			$sender_name = self::$config->sender_name ?: 'webmaster';
-			$this->message->setFrom(array(self::$config->sender_email => $sender_name));
+			try
+			{
+				$sender_name = self::$config->sender_name ?: 'webmaster';
+				$this->message->setFrom(array(self::$config->sender_email => $sender_name));
+			}
+			catch (\Exception $e)
+			{
+				$this->errors[] = array($e->getMessage());
+			}
 		}
 		
 		// Auto-fill the Reply-To address
 		if(self::$config->reply_to)
 		{
-			$this->message->setReplyTo(array(self::$config->reply_to));
+			try
+			{
+				$this->message->setReplyTo(array(self::$config->reply_to));
+			}
+			catch (\Exception $e)
+			{
+				$this->errors[] = array($e->getMessage());
+			}
 		}
 	}
 	
@@ -97,7 +112,14 @@ class Base
 	 */
 	public function setSender($name, $email)
 	{
-		$this->message->setFrom(array($email => $name));
+		try
+		{
+			$this->message->setFrom(array($email => $name));
+		}
+		catch (\Exception $e)
+		{
+			$this->errors[] = array($e->getMessage());
+		}
 	}
 	
 	/**
@@ -131,7 +153,14 @@ class Base
 	 */
 	public function setReceiptor($name, $email)
 	{
-		$this->message->setTo(array($email => $name));
+		try
+		{
+			$this->message->setTo(array($email => $name));
+		}
+		catch (\Exception $e)
+		{
+			$this->errors[] = array($e->getMessage());
+		}
 	}
 	
 	/**
@@ -164,7 +193,7 @@ class Base
 	 */
 	public function setTitle($subject)
 	{
-		$this->message->setSubject($subject);
+		$this->message->setSubject(strval($subject));
 	}
 	
 	/**
@@ -185,7 +214,14 @@ class Base
 	 */
 	public function setBCC($bcc)
 	{
-		$this->message->setBcc(array($bcc));
+		try
+		{
+			$this->message->setBcc(array($bcc));
+		}
+		catch (\Exception $e)
+		{
+			$this->errors[] = array($e->getMessage());
+		}
 	}
 	
 	/**
@@ -196,7 +232,14 @@ class Base
 	 */
 	public function setReplyTo($replyTo)
 	{
-		$this->message->setReplyTo(array($replyTo));
+		try
+		{
+			$this->message->setReplyTo(array($replyTo));
+		}
+		catch (\Exception $e)
+		{
+			$this->errors[] = array($e->getMessage());
+		}
 	}
 	
 	/**
@@ -207,7 +250,14 @@ class Base
 	 */
 	public function setReturnPath($returnPath)
 	{
-		$this->message->setReturnPath($returnPath);
+		try
+		{
+			$this->message->setReturnPath($returnPath);
+		}
+		catch (\Exception $e)
+		{
+			$this->errors[] = array($e->getMessage());
+		}
 	}
 	
 	/**
@@ -367,6 +417,13 @@ class Base
 	 */
 	public function send()
 	{
+		// Get caller information
+		$backtrace = debug_backtrace(0);
+		if(count($backtrace) && isset($backtrace[0]['file']))
+		{
+			$this->caller = $backtrace[0]['file'] . ($backtrace[0]['line'] ? (' line ' . $backtrace[0]['line']) : '');
+		}
+		
 		// Get the currently configured sending method
 		$sending_method = self::$config->sending_method;
 		
@@ -384,15 +441,26 @@ class Base
 		$output = \ModuleHandler::triggerCall('advanced_mailer.send', 'before', $subclass);
 		if(!$output->toBool()) return $output;
 		
-		// Assemble all attachments
-		if($subclass->assembleMessage)
+		try
 		{
-			$subclass->procAssembleMessage();
+			// Assemble all attachments
+			if($subclass->assembleMessage)
+			{
+				$subclass->procAssembleMessage();
+			}
+			
+			// Send the email and retrieve any errors
+			$result = $subclass->send();
+			foreach ($subclass->errors as $error)
+			{
+				$this->errors[] = $error;
+			}
 		}
-		
-		// Send the email and retrieve any errors
-		$result = $subclass->send();
-		$this->errors = $subclass->errors;
+		catch (\Exception $e)
+		{
+			$result = false;
+			$this->errors[] = array($e->getMessage());
+		}
 		
 		// Call the 'after' trigger
 		$output = \ModuleHandler::triggerCall('advanced_mailer.send', 'after', $subclass);
@@ -400,6 +468,26 @@ class Base
 		
 		// Return the result (bool)
 		return $result;
+	}
+	
+	/**
+	 * Get caller info
+	 * 
+	 * @return string
+	 */
+	public function getCaller()
+	{
+		return $this->caller;
+	}
+	
+	/**
+	 * Get errors
+	 * 
+	 * @return array
+	 */
+	public function getErrors()
+	{
+		return $this->errors;
 	}
 	
 	/**
