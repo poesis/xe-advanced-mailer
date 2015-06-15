@@ -9,7 +9,7 @@
 class Advanced_MailerAdminView extends Advanced_Mailer
 {
 	/**
-	 * Display the configuration form.
+	 * Display the general configuration form.
 	 */
 	public function dispAdvanced_MailerAdminConfig()
 	{
@@ -26,13 +26,39 @@ class Advanced_MailerAdminView extends Advanced_Mailer
 		}
 		
 		Context::set('advanced_mailer_config', (array)$config);
-		Context::set('sending_methods', $this->sending_methods);
 		Context::set('available_sending_methods', $available_sending_methods);
+		Context::set('sending_methods', $this->sending_methods);
+		Context::set('sending_method', $config->sending_method);
 		Context::set('webmaster_name', $member_config->webmaster_name ? $member_config->webmaster_name : 'webmaster');
 		Context::set('webmaster_email', $member_config->webmaster_email);
 		
 		$this->setTemplatePath($this->module_path.'tpl');
 		$this->setTemplateFile('config');
+	}
+	
+	/**
+	 * Display the exception domains configuration form.
+	 */
+	public function dispAdvanced_MailerAdminExceptions()
+	{
+		$config = $this->getConfig();
+		Context::set('advanced_mailer_config', (array)$config);
+		
+		if(version_compare(PHP_VERSION, '5.4', '<'))
+		{
+			$available_sending_methods = $this->sending_methods_php53;
+		}
+		else
+		{
+			$available_sending_methods = array_keys($this->sending_methods);
+		}
+		
+		Context::set('available_sending_methods', $available_sending_methods);
+		Context::set('sending_methods', $this->sending_methods);
+		Context::set('sending_method', $config->sending_method);
+		
+		$this->setTemplatePath($this->module_path.'tpl');
+		$this->setTemplateFile('exceptions');
 	}
 	
 	/**

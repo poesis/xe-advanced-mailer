@@ -9,11 +9,11 @@
 	data-check-result="{$lang->cmd_advanced_mailer_check_result}">
 	
 	<div class="advanced_mailer_description">
-		{$lang->cmd_advanced_mailer_about_spf_dkim_setting}
+		※ {$lang->cmd_advanced_mailer_about_spf_dkim_setting}
 	</div>
 	
 	<div class="x_control-group">
-		<label class="x_control-label">{$lang->cmd_advanced_mailer_sending_method}</label>
+		<label class="x_control-label">{$lang->cmd_advanced_mailer_sending_method_default}</label>
 		<div class="x_controls margin-top">
 			{Context::getLang('cmd_advanced_mailer_sending_method_' . $sending_method)}
 			<!--@if($sending_method === 'woorimail')-->
@@ -29,9 +29,7 @@
 	
 	<div class="x_control-group">
 		<label class="x_control-label">{$lang->cmd_advanced_mailer_sender_email}</label>
-		<div class="x_controls margin-top">
-			<span class="value">{$advanced_mailer_config['sender_email']}</span>
-		</div>
+		<div class="x_controls margin-top">{$advanced_mailer_config['sender_email']}</div>
 	</div>
 	
 	{@ $ignore_domains = '/^(g(oogle)?mail\.com|(daum|hanmail2?)\.net|(naver|outlook|hotmail|yahoo)\.com|(hotmail|yahoo)\.co\.kr)$/i'}

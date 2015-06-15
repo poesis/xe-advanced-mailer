@@ -54,7 +54,7 @@
 		</div>
 		
 		<div class="x_control-group show-always">
-			<label class="x_control-label" for="advanced_mailer_sending_method">{$lang->cmd_advanced_mailer_sending_method}</label>
+			<label class="x_control-label" for="advanced_mailer_sending_method">{$lang->cmd_advanced_mailer_sending_method_default}</label>
 			<div class="x_controls">
 				<select name="sending_method" id="advanced_mailer_sending_method">
 					<option value="mail" selected="selected"|cond="$advanced_mailer_config['sending_method'] === 'mail'" cond="in_array('mail', $available_sending_methods)">{$lang->cmd_advanced_mailer_sending_method_mail}</option>

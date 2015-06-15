@@ -9,7 +9,7 @@
 class Advanced_MailerAdminController extends Advanced_Mailer
 {
 	/**
-	 * Save the configuration.
+	 * Save the basic configuration.
 	 */
 	public function procAdvanced_MailerAdminInsertConfig()
 	{
@@ -47,6 +47,71 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 		else
 		{
 			$this->setRedirectUrl(getNotEncodedUrl('', 'module', 'admin', 'act', 'dispAdvanced_mailerAdminConfig'));
+		}
+	}
+	
+	/**
+	 * Save the exception configuration.
+	 */
+	public function procAdvanced_MailerAdminInsertExceptions()
+	{
+		// Get the current configuration.
+		$config = $this->getConfig();
+		
+		// Get and validate the list of exceptions.
+		$exceptions = array();
+		for ($i = 1; $i <= 3; $i++)
+		{
+			$method = strval(Context::get('exception_' . $i . '_method'));
+			$domains = trim(Context::get('exception_' . $i . '_domains'));
+			if ($method !== '' && $domains !== '')
+			{
+				if ($method !== 'default' && !isset($this->sending_methods[$method]))
+				{
+					return new Object(-1, 'msg_advanced_mailer_sending_method_is_invalid');
+				}
+				if ($method !== 'default')
+				{
+					foreach ($this->sending_methods[$method]['conf'] as $conf_name)
+					{
+						if (!isset($config->{$sending_method . '_' . $conf_name}) || strval($config->{$sending_method . '_' . $conf_name}) === '')
+						{
+							return new Object(-1, sprintf(
+								Context::getLang('msg_advanced_mailer_sending_method_is_not_configured'),
+								Context::getLang('cmd_advanced_mailer_sending_method_' . $method)));
+						}
+					}
+				}
+				$exceptions[$i]['method'] = $method;
+				$exceptions[$i]['domains'] = array();
+				
+				$domains = array_map('trim', preg_split('/[,\n]/', $domains, null, PREG_SPLIT_NO_EMPTY));
+				foreach ($domains as $domain)
+				{
+					$exceptions[$i]['domains'][] = $domain;
+				}
+			}
+		}
+		
+		// Save the new configuration.
+		$config->exceptions = $exceptions;
+		$output = getController('module')->insertModuleConfig('advanced_mailer', $config);
+		if ($output->toBool())
+		{
+			$this->setMessage('success_registed');
+		}
+		else
+		{
+			return $output;
+		}
+		
+		if (Context::get('success_return_url'))
+		{
+			$this->setRedirectUrl(Context::get('success_return_url'));
+		}
+		else
+		{
+			$this->setRedirectUrl(getNotEncodedUrl('', 'module', 'admin', 'act', 'dispAdvanced_mailerAdminExceptions'));
 		}
 	}
 	
@@ -219,7 +284,7 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 	protected function getRequestVars()
 	{
 		$request_args = Context::getRequestVars();
-		$args = new stdClass();
+		$args = $this->getConfig();
 		$args->is_enabled = $request_args->is_enabled === 'N' ? 'N' : 'Y';
 		$args->log_sent_mail = $request_args->log_sent_mail === 'Y' ? 'Y' : 'N';
 		$args->log_errors = $request_args->log_errors === 'Y' ? 'Y' : 'N';

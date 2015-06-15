@@ -32,7 +32,11 @@ div.hidden-by-default {
 }
 
 div.full-width input {
-	width: 90%;
+	width: 90% !important;
+}
+
+div.margin-top {
+	margin-top: 5px;
 }
 
 span.sender_info {
@@ -40,4 +44,9 @@ span.sender_info {
 	margin-top: 12px;
 	margin-left: 24px;
 	font-family: Consolas, monospace;
+}
+
+textarea.exception-domains {
+	width: 90% !important;
+	height: 80px !important;
 }
