@@ -78,6 +78,8 @@
 		<input type="hidden" name="act" value="procAdvanced_mailerAdminClearSentMail" />
 		<input type="hidden" name="status" value="{$advanced_mailer_status}" />
 		<select name="clear_before_days" style="width:120px">
+			<option value="0">{$lang->cmd_advanced_mailer_clear_log_condition_all}</option>
+			<option value="1">{sprintf($lang->cmd_advanced_mailer_clear_log_condition, 1)}</option>
 			<option value="3">{sprintf($lang->cmd_advanced_mailer_clear_log_condition, 3)}</option>
 			<option value="7" selected="selected">{sprintf($lang->cmd_advanced_mailer_clear_log_condition, 7)}</option>
 			<option value="14">{sprintf($lang->cmd_advanced_mailer_clear_log_condition, 14)}</option>

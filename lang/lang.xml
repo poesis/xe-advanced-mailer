@@ -404,6 +404,10 @@
 		<value xml:lang="ko"><![CDATA[호출 위치]]></value>
 		<value xml:lang="en"><![CDATA[Called from]]></value>
 	</item>
+	<item name="cmd_advanced_mailer_clear_log_condition_all">
+		<value xml:lang="ko"><![CDATA[모두]]></value>
+		<value xml:lang="en"><![CDATA[Everything]]></value>
+	</item>
 	<item name="cmd_advanced_mailer_clear_log_condition">
 		<value xml:lang="ko"><![CDATA[%d일 이상]]></value>
 		<value xml:lang="en"><![CDATA[Over %d days]]></value>

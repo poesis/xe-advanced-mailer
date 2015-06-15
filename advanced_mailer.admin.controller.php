@@ -91,14 +91,29 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 	 */
 	public function procAdvanced_mailerAdminClearSentMail()
 	{
-		
-		if (Context::get('success_return_url'))
+		$status = Context::get('status');
+		$clear_before_days = intval(Context::get('clear_before_days'));
+		if (!in_array($status, array('success', 'error')))
 		{
-			$this->setRedirectUrl(Context::get('success_return_url'));
+			return new Object(-1, 'msg_invalid_request');
+		}
+		if ($clear_before_days < 0)
+		{
+			return new Object(-1, 'msg_invalid_request');
+		}
+		
+		$obj = new stdClass();
+		$obj->status = $status;
+		$obj->regdate = date('YmdHis', time() - ($clear_before_days * 86400) + zgap());
+		$output = executeQuery('advanced_mailer.deleteLogs', $obj);
+		
+		if ($status === 'success')
+		{
+			$this->setRedirectUrl(getNotEncodedUrl('', 'module', 'admin', 'act', 'dispAdvanced_mailerAdminSentMail'));
 		}
 		else
 		{
-			$this->setRedirectUrl(getNotEncodedUrl('', 'module', 'admin', 'act', 'dispAdvanced_mailerAdminConfig'));
+			$this->setRedirectUrl(getNotEncodedUrl('', 'module', 'admin', 'act', 'dispAdvanced_mailerAdminErrors'));
 		}
 	}
 	
