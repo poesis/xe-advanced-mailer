@@ -34,18 +34,22 @@
 		</div>
 		
 		<div class="x_control-group">
-			<label class="x_control-label">{$lang->cmd_advanced_mailer_log_sent_mail}</label>
+			<label class="x_control-label" for="advanced_mailer_log_sent_mail">{$lang->cmd_advanced_mailer_log_sent_mail}</label>
 			<div class="x_controls">
-				<label class="x_inline" for="advanced_mailer_log_sent_mail_yes"><input type="radio" name="log_sent_mail" id="advanced_mailer_log_sent_mail_yes" value="Y" checked="checked"|cond="$advanced_mailer_config['log_sent_mail'] === 'Y'" /> {$lang->cmd_advanced_mailer_log_yes}</label>
-				<label class="x_inline" for="advanced_mailer_log_sent_mail_no"><input type="radio" name="log_sent_mail" id="advanced_mailer_log_sent_mail_no" value="N" checked="checked"|cond="$advanced_mailer_config['log_sent_mail'] !== 'Y'" /> {$lang->cmd_advanced_mailer_log_no}</label>
+				<select name="log_sent_mail" id="advanced_mailer_log_sent_mail">
+					<option value="Y" selected="selected"|cond="$advanced_mailer_config['log_sent_mail'] === 'Y'" />{$lang->cmd_advanced_mailer_log_yes}</option>
+					<option value="N" selected="selected"|cond="$advanced_mailer_config['log_sent_mail'] !== 'Y'" />{$lang->cmd_advanced_mailer_log_no}</option>
+				</select>
 			</div>
 		</div>
 		
 		<div class="x_control-group">
 			<label class="x_control-label">{$lang->cmd_advanced_mailer_log_errors}</label>
 			<div class="x_controls">
-				<label class="x_inline" for="advanced_mailer_log_errors_yes"><input type="radio" name="log_errors" id="advanced_mailer_log_errors_yes" value="Y" checked="checked"|cond="$advanced_mailer_config['log_errors'] === 'Y'" /> {$lang->cmd_advanced_mailer_log_yes}</label>
-				<label class="x_inline" for="advanced_mailer_log_errors_no"><input type="radio" name="log_errors" id="advanced_mailer_log_errors_no" value="N" checked="checked"|cond="$advanced_mailer_config['log_errors'] !== 'Y'" /> {$lang->cmd_advanced_mailer_log_no}</label>
+				<select name="log_errors" id="advanced_mailer_log_errors">
+					<option value="Y" selected="selected"|cond="$advanced_mailer_config['log_errors'] === 'Y'" />{$lang->cmd_advanced_mailer_log_yes}</option>
+					<option value="N" selected="selected"|cond="$advanced_mailer_config['log_errors'] !== 'Y'" />{$lang->cmd_advanced_mailer_log_no}</option>
+				</select>
 			</div>
 		</div>
 		

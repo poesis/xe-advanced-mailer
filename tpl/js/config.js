@@ -83,8 +83,8 @@
 			$("#advanced_mailer_test_result").text("");
 			$(this).attr("disabled", "disabled");
 			var ajax_data = {
-				log_sent_mail: $("input[type='radio'][name='log_sent_mail']:checked").val(),
-				log_errors: $("input[type='radio'][name='log_errors']:checked").val(),
+				log_sent_mail: $("#advanced_mailer_log_sent_mail").val(),
+				log_errors: $("#advanced_mailer_log_errors").val(),
 				sending_method: $("#advanced_mailer_sending_method").val(),
 				sender_name: $("#advanced_mailer_sender_name").val(),
 				sender_email: $("#advanced_mailer_sender_email").val(),

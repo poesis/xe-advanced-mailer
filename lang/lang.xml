@@ -169,8 +169,8 @@
 		<value xml:lang="en"><![CDATA[Reply-To email]]></value>
 	</item>
 	<item name="cmd_advanced_mailer_spf_dkim_setting">
-		<value xml:lang="ko"><![CDATA[SPF, DKIM 설정 안내]]></value>
-		<value xml:lang="en"><![CDATA[SPF, DKIM Setting Guide]]></value>
+		<value xml:lang="ko"><![CDATA[SPF/DKIM 설정 안내]]></value>
+		<value xml:lang="en"><![CDATA[SPF/DKIM Setting Guide]]></value>
 	</item>
 	<item name="cmd_advanced_mailer_about_spf_dkim_setting">
 		<value xml:lang="ko"><![CDATA[자신의 도메인에서 메일을 보내는 경우에만 해당됩니다. 일부 API는 지원하지 않거나 별도의 매뉴얼을 참고하셔야 합니다.]]></value>
