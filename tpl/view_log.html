@@ -41,7 +41,9 @@
 				<!--@end-->
 			</td>
 			<td class="nowr">{htmlspecialchars($val->subject)}</td>
-			<td class="nowr">{htmlspecialchars($val->sending_method)}</td>
+			<td class="nowr">
+				{Context::getLang('cmd_advanced_mailer_sending_method_' . $val->sending_method)}
+			</td>
 			<td class="nowr">{(zdate($val->regdate, "Y-m-d\nH:i:s"))}</td>
 			<td class="nowr">
 				<!--@if($val->status === 'success')-->
