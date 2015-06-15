@@ -74,6 +74,33 @@ class Advanced_MailerAdminView extends Advanced_Mailer
 		Context::set('sending_method', $config->sending_method);
 		Context::set('sending_domain', strpos($config->sender_email, '@') !== false ? substr(strrchr($config->sender_email, '@'), 1) : null);
 		
+		$used_methods = array($config->sending_method);
+		foreach ($config->exceptions as $exception)
+		{
+			if ($exception['method'] !== 'default' && $exception['method'] !== $config->sending_method && count($exception['domains']))
+			{
+				$used_methods[] = $exception['method'];
+			}
+		}
+		Context::set('used_methods', $used_methods);
+		
+		$used_methods_with_usable_spf = array();
+		$used_methods_with_usable_dkim = array();
+		foreach ($used_methods as $method)
+		{
+			if ($method === 'woorimail' && $advanced_mailer_config['woorimail_account_type'] === 'free') continue;
+			if ($this->sending_methods[$method]['spf'])
+			{
+				$used_methods_with_usable_spf[$method] = $this->sending_methods[$method]['spf'];
+			}
+			if ($this->sending_methods[$method]['dkim'])
+			{
+				$used_methods_with_usable_dkim[$method] = $this->sending_methods[$method]['dkim'];
+			}
+		}
+		Context::set('used_methods_with_usable_spf', $used_methods_with_usable_spf);
+		Context::set('used_methods_with_usable_dkim', $used_methods_with_usable_dkim);
+		
 		$this->setTemplatePath($this->module_path.'tpl');
 		$this->setTemplateFile('spf_dkim');
 	}

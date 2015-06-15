@@ -25,7 +25,7 @@ class Advanced_Mailer extends ModuleObject
 		'ses' => array(
 			'conf' => array('region', 'access_key', 'secret_key'),
 			'spf' => '',
-			'dkim' => '',
+			'dkim' => '********._domainkey',
 		),
 		'mailgun' => array(
 			'conf' => array('domain', 'api_key'),

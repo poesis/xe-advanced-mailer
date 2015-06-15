@@ -52,6 +52,10 @@
 		<value xml:lang="ko"><![CDATA[기본 발송 방법]]></value>
 		<value xml:lang="en"><![CDATA[Default sending method]]></value>
 	</item>
+	<item name="cmd_advanced_mailer_sending_method_exceptions">
+		<value xml:lang="ko"><![CDATA[예외 발송 방법]]></value>
+		<value xml:lang="en"><![CDATA[Exceptions]]></value>
+	</item>
 	<item name="cmd_advanced_mailer_sending_method_mail">
 		<value xml:lang="ko"><![CDATA[PHP mail() 함수]]></value>
 		<value xml:lang="en"><![CDATA[PHP mail() function]]></value>
@@ -188,13 +192,17 @@
 		<value xml:lang="ko"><![CDATA[선택하신 발송 방법에는 해당되지 않습니다.]]></value>
 		<value xml:lang="en"><![CDATA[Not applicable to the selected sending method.]]></value>
 	</item>
+	<item name="cmd_advanced_mailer_domain_count">
+		<value xml:lang="ko"><![CDATA[도메인 %d개]]></value>
+		<value xml:lang="en"><![CDATA[%d domains]]></value>
+	</item>
 	<item name="cmd_advanced_mailer_dns_hostname">
-		<value xml:lang="ko"><![CDATA[DNS 호스트명:]]></value>
-		<value xml:lang="en"><![CDATA[DNS hostname:]]></value>
+		<value xml:lang="ko"><![CDATA[DNS 호스트명]]></value>
+		<value xml:lang="en"><![CDATA[DNS hostname]]></value>
 	</item>
 	<item name="cmd_advanced_mailer_txt_record">
-		<value xml:lang="ko"><![CDATA[TXT 레코드 값:]]></value>
-		<value xml:lang="en"><![CDATA[TXT record value:]]></value>
+		<value xml:lang="ko"><![CDATA[TXT 레코드 값]]></value>
+		<value xml:lang="en"><![CDATA[TXT record value]]></value>
 	</item>
 	<item name="cmd_advanced_mailer_check">
 		<value xml:lang="ko"><![CDATA[체크]]></value>
@@ -217,8 +225,8 @@
 		<value xml:lang="en"><![CDATA[has the following TXT records.]]></value>
 	</item>
 	<item name="cmd_advanced_mailer_other_info">
-		<value xml:lang="ko"><![CDATA[참고:]]></value>
-		<value xml:lang="en"><![CDATA[Note:]]></value>
+		<value xml:lang="ko"><![CDATA[참고]]></value>
+		<value xml:lang="en"><![CDATA[Note]]></value>
 	</item>
 	<item name="cmd_advanced_mailer_other_info_mail_spf">
 		<value xml:lang="ko"><![CDATA[mail() 함수를 사용하려면 반드시 인터넷진흥원에 <a href="https://www.kisarbl.or.kr/" target="_blank">화이트 도메인</a> 등록을 하시기 바랍니다.]]></value>

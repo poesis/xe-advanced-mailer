@@ -6,7 +6,7 @@
 		$("#advanced_mailer_check_spf,#advanced_mailer_check_dkim").click(function(event) {
 			event.preventDefault();
 			var check_type = $(this).attr("id").match(/_spf$/) ? "spf" : "dkim";
-			var check_hostname = $("#spf_dkim_setting div." + check_type + ".config_description span.value").text();
+			var check_hostname = $(this).siblings("span.monospace").text();
 			if (!check_hostname) {
 				alert($("#spf_dkim_setting").data("nothing-to-check"));
 			}

@@ -28,6 +28,28 @@
 	</div>
 	
 	<div class="x_control-group">
+		<label class="x_control-label">{$lang->cmd_advanced_mailer_sending_method_exceptions}</label>
+		<div class="x_controls">
+			<!--@foreach($advanced_mailer_config['exceptions'] as $exception)-->
+			<!--@if(in_array($exception['method'], $used_methods))-->
+			<div class="spf_dkim_item">
+				{Context::getLang('cmd_advanced_mailer_sending_method_' . $exception['method'])}
+				<!--@if($exception['method'] === 'woorimail')-->
+					&mdash;
+					<!--@if($advanced_mailer_config['woorimail_account_type'] === 'free')-->
+						{$lang->cmd_advanced_mailer_free_account}
+					<!--@else-->
+						{$lang->cmd_advanced_mailer_paid_account}
+					<!--@end-->
+				<!--@end-->
+				&nbsp; ({sprintf($lang->cmd_advanced_mailer_domain_count, count($exception['domains']))})
+			</div>
+			<!--@end-->
+			<!--@end-->
+		</div>
+	</div>
+	
+	<div class="x_control-group">
 		<label class="x_control-label">{$lang->cmd_advanced_mailer_sender_email}</label>
 		<div class="x_controls margin-top">{$advanced_mailer_config['sender_email']}</div>
 	</div>
@@ -37,30 +59,35 @@
 	<div class="x_control-group">
 		<label class="x_control-label">SPF</label>
 		<div class="x_controls">
-			{@ $other_info = Context::getLang('cmd_advanced_mailer_other_info_' . $sending_method . '_spf')}
-			{@ $other_info = strncmp('cmd_', $other_info, 4) ? $other_info : ''}
 			<!--@if(preg_match($ignore_domains, $sending_domain))-->
-			<div class="not_applicable spf">
+			<div class="spf_dkim_item">
 				{$lang->cmd_advanced_mailer_not_applicable_because_sender_domain}
 			</div>
-			<!--@elseif($sending_methods[$sending_method]['spf'] === '' || ($sending_method === 'woorimail' && $advanced_mailer_config['woorimail_account_type'] === 'free'))-->
-			<div class="not_applicable spf" cond="!$other_info">
+			<!--@elseif(!count($used_methods_with_usable_spf))-->
+			<div class="spf_dkim_item" cond="!$other_info">
 				{$lang->cmd_advanced_mailer_not_applicable_because_sending_method}
 			</div>
 			<!--@else-->
-			<div class="config_description spf">
-				{$lang->cmd_advanced_mailer_dns_hostname} &nbsp;
-				<span class="value">{$sending_domain}</span> &nbsp;
+			<div class="spf_dkim_item">
+				<span class="label">{$lang->cmd_advanced_mailer_dns_hostname}</span>
+				<span class="monospace">{$sending_domain}</span> &nbsp;
 				<a href="#" id="advanced_mailer_check_spf">{$lang->cmd_advanced_mailer_check}</a>
 			</div>
-			<div class="config_value spf">
-				{$lang->cmd_advanced_mailer_txt_record} &nbsp;
-				<span class="value">v=spf1 a mx {$sending_methods[$sending_method]['spf']} ~all</span>
+			<div class="spf_dkim_item">
+				<span class="label">{$lang->cmd_advanced_mailer_txt_record}</span>
+				<span class="monospace">v=spf1 a mx {implode(' ', $used_methods_with_usable_spf)} ~all</span>
 			</div>
 			<!--@end-->
-			<div class="config_other spf" cond="$other_info">
-				{$lang->cmd_advanced_mailer_other_info}
-				<span class="other">{$other_info}</span>
+			{@ $other_infos = array()}
+			<!--@foreach($used_methods_with_usable_spf as $method => $spf)-->
+			{@ $other_info = Context::getLang('cmd_advanced_mailer_other_info_' . $method . '_spf')}
+			{@ if(strncmp('cmd_', $other_info, 4)) $other_infos[] = $other_info}
+			<!--@end-->
+			<div class="spf_dkim_item" cond="count($other_infos)">
+				<!--@foreach($other_infos as $other_info)-->
+				<span class="label">{$lang->cmd_advanced_mailer_other_info}</span>
+				<span>{$other_info}</span><br />
+				<!--@end-->
 			</div>
 		</div>
 	</div>
@@ -68,31 +95,34 @@
 	<div class="x_control-group">
 		<label class="x_control-label">DKIM</label>
 		<div class="x_controls">
-			{@ $other_info = Context::getLang('cmd_advanced_mailer_other_info_' . $sending_method . '_dkim')}
-			{@ $other_info = strncmp('cmd_', $other_info, 4) ? $other_info : ''}
 			<!--@if(preg_match($ignore_domains, $sending_domain))-->
-			<div class="not_applicable dkim">
+			<div class="spf_dkim_item">
 				{$lang->cmd_advanced_mailer_not_applicable_because_sender_domain}
 			</div>
-			<!--@elseif($sending_methods[$sending_method]['dkim'] === '' || ($sending_method === 'woorimail' && $advanced_mailer_config['woorimail_account_type'] === 'free'))-->
-			<div class="not_applicable dkim" cond="!$other_info">
+			<!--@elseif(!count($used_methods_with_usable_dkim))-->
+			<div class="spf_dkim_item" cond="!$other_info">
 				{$lang->cmd_advanced_mailer_not_applicable_because_sending_method}
 			</div>
 			<!--@else-->
-			<div class="config_description dkim">
-				{$lang->cmd_advanced_mailer_dns_hostname} &nbsp;
-				<span class="value">{$sending_methods[$sending_method]['dkim']}.{$sending_domain}</span> &nbsp;
-				<a href="#" id="advanced_mailer_check_dkim">{$lang->cmd_advanced_mailer_check}</a>
-			</div>
-			<div class="config_value dkim">
-				{$lang->cmd_advanced_mailer_txt_record} &nbsp;
-				<span class="value">v=DKIM1; k=rsa; p=MIGfMA ...{$lang->cmd_advanced_mailer_ellipsis}... QAB;</span>
-			</div>
+				<!--@foreach($used_methods_with_usable_dkim as $method => $dkim)-->
+				<div class="spf_dkim_item">
+					<span class="label">{$lang->cmd_advanced_mailer_dns_hostname}</span>
+					<span class="monospace">{$dkim}.{$sending_domain}</span> &nbsp;
+					<a href="#" id="advanced_mailer_check_spf">{$lang->cmd_advanced_mailer_check}</a>
+				</div>
+				<div class="spf_dkim_item">
+					<span class="label">{$lang->cmd_advanced_mailer_txt_record}</span>
+					<span class="monospace">v=DKIM1; k=rsa; p=MIGfMA ...{$lang->cmd_advanced_mailer_ellipsis}... QAB;</span>
+				</div>
+				{@ $other_info = Context::getLang('cmd_advanced_mailer_other_info_' . $method . '_dkim')}
+				{@ if(!strncmp('cmd_', $other_info, 4)) $other_info = false}
+				<div class="spf_dkim_item" cond="$other_info">
+					<span class="label">{$lang->cmd_advanced_mailer_other_info}</span>
+					<span>{$other_info}</span><br />
+				</div>
+				<div class="spf_dkim_separator"></div>
+				<!--@end-->
 			<!--@end-->
-			<div class="config_other spf" cond="$other_info">
-				{$lang->cmd_advanced_mailer_other_info}
-				<span class="other">{$other_info}</span>
-			</div>
 		</div>
 	</div>
 
