@@ -466,6 +466,49 @@ class Base
 		$output = \ModuleHandler::triggerCall('advanced_mailer.send', 'after', $subclass);
 		if(!$output->toBool()) return $output;
 		
+		// Log this mail
+		if(self::$config->log_sent_mail === 'Y' || (self::$config->log_errors === 'Y' && count($this->errors)))
+		{
+			$obj = new \stdClass();
+			$obj->mail_srl = getNextSequence();
+			$obj->mail_from = '';
+			$obj->mail_to = '';
+			
+			$real_sender = $subclass->message->getFrom();
+			foreach($real_sender as $email => $name)
+			{
+				$obj->mail_from .= (strval($name) !== '' ? "$name <$email>" : $email) . "\n";
+			}
+			
+			$real_to = $subclass->message->getTo();
+			foreach($real_to as $email => $name)
+			{
+				$obj->mail_to .= (strval($name) !== '' ? "$name <$email>" : $email) . "\n";
+			}
+			
+			$real_cc = $subclass->message->getCc();
+			foreach($real_cc as $email => $name)
+			{
+				$obj->mail_to .= (strval($name) !== '' ? "$name <$email>" : $email) . "\n";
+			}
+			
+			$real_bcc = $subclass->message->getBcc();
+			foreach($real_bcc as $email => $name)
+			{
+				$obj->mail_to .= (strval($name) !== '' ? "$name <$email>" : $email) . "\n";
+			}
+			
+			$obj->mail_from = trim($obj->mail_from);
+			$obj->mail_to = trim($obj->mail_to);
+			$obj->subject = $subclass->message->getSubject();
+			$obj->calling_script = $this->caller;
+			$obj->sending_method = $sending_method;
+			$obj->status = $result ? 'success' : 'error';
+			$obj->errors = count($this->errors) ? implode("\n", $this->errors) : null;
+			$output = executeQuery('advanced_mailer.insertLog', $obj);
+			if(!$output->toBool()) return $output;
+		}
+		
 		// Return the result (bool)
 		return $result;
 	}

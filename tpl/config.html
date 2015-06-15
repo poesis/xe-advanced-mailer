@@ -5,6 +5,12 @@
 	<h1>{$lang->cmd_advanced_mailer}</h1>
 </div>
 
+<ul class="x_nav x_nav-tabs">
+	<li class="x_active"|cond="$act == 'dispAdvanced_mailerAdminConfig'"><a href="{getUrl('', 'module', 'admin', 'act', 'dispAdvanced_mailerAdminConfig')}">{$lang->cmd_advanced_mailer_general_config}</a></li>
+	<li class="x_active"|cond="$act == 'dispAdvanced_mailerAdminSentMail'"><a href="{getUrl('', 'module', 'admin', 'act', 'dispAdvanced_mailerAdminSentMail')}">{$lang->cmd_advanced_mailer_log_sent_mail}</a></li>
+	<li class="x_active"|cond="$act == 'dispAdvanced_mailerAdminErrors'"><a href="{getUrl('', 'module', 'admin', 'act', 'dispAdvanced_mailerAdminErrors')}">{$lang->cmd_advanced_mailer_log_errors}</a></li>
+</ul>
+
 <form class="x_form-horizontal" action="./" method="post" id="advanced_mailer">
 	<input type="hidden" name="module" value="advanced_mailer" />
 	<input type="hidden" name="act" value="procAdvanced_mailerAdminInsertConfig" />
@@ -15,8 +21,6 @@
 	</div>
 	
 	<section class="section show-when-disabled">
-		
-		<h2 style="padding-top:12px">{$lang->cmd_advanced_mailer_general_config}</h2>
 		
 		<div class="x_control-group show-when-disabled">
 			<label class="x_control-label" for="advanced_mailer_is_enabled">{$lang->cmd_advanced_mailer_is_enabled}</label>
@@ -29,18 +33,18 @@
 		</div>
 		
 		<div class="x_control-group">
-			<label class="x_control-label">{$lang->cmd_advanced_mailer_record_sent_mail}</label>
+			<label class="x_control-label">{$lang->cmd_advanced_mailer_log_sent_mail}</label>
 			<div class="x_controls">
-				<label class="x_inline" for="advanced_mailer_record_sent_mail_yes"><input type="radio" name="record_sent_mail" id="advanced_mailer_record_sent_mail_yes" value="Y" checked="checked"|cond="$advanced_mailer_config['record_sent_mail'] === 'Y'" /> {$lang->cmd_advanced_mailer_record_yes}</label>
-				<label class="x_inline" for="advanced_mailer_record_sent_mail_no"><input type="radio" name="record_sent_mail" id="advanced_mailer_record_sent_mail_no" value="N" checked="checked"|cond="$advanced_mailer_config['record_sent_mail'] !== 'Y'" /> {$lang->cmd_advanced_mailer_record_no}</label>
+				<label class="x_inline" for="advanced_mailer_log_sent_mail_yes"><input type="radio" name="log_sent_mail" id="advanced_mailer_log_sent_mail_yes" value="Y" checked="checked"|cond="$advanced_mailer_config['log_sent_mail'] === 'Y'" /> {$lang->cmd_advanced_mailer_log_yes}</label>
+				<label class="x_inline" for="advanced_mailer_log_sent_mail_no"><input type="radio" name="log_sent_mail" id="advanced_mailer_log_sent_mail_no" value="N" checked="checked"|cond="$advanced_mailer_config['log_sent_mail'] !== 'Y'" /> {$lang->cmd_advanced_mailer_log_no}</label>
 			</div>
 		</div>
 		
 		<div class="x_control-group">
-			<label class="x_control-label">{$lang->cmd_advanced_mailer_record_errors}</label>
+			<label class="x_control-label">{$lang->cmd_advanced_mailer_log_errors}</label>
 			<div class="x_controls">
-				<label class="x_inline" for="advanced_mailer_record_errors_yes"><input type="radio" name="record_errors" id="advanced_mailer_record_errors_yes" value="Y" checked="checked"|cond="$advanced_mailer_config['record_errors'] === 'Y'" /> {$lang->cmd_advanced_mailer_record_yes}</label>
-				<label class="x_inline" for="advanced_mailer_record_errors_no"><input type="radio" name="record_errors" id="advanced_mailer_record_errors_no" value="N" checked="checked"|cond="$advanced_mailer_config['record_errors'] !== 'Y'" /> {$lang->cmd_advanced_mailer_record_no}</label>
+				<label class="x_inline" for="advanced_mailer_log_errors_yes"><input type="radio" name="log_errors" id="advanced_mailer_log_errors_yes" value="Y" checked="checked"|cond="$advanced_mailer_config['log_errors'] === 'Y'" /> {$lang->cmd_advanced_mailer_log_yes}</label>
+				<label class="x_inline" for="advanced_mailer_log_errors_no"><input type="radio" name="log_errors" id="advanced_mailer_log_errors_no" value="N" checked="checked"|cond="$advanced_mailer_config['log_errors'] !== 'Y'" /> {$lang->cmd_advanced_mailer_log_no}</label>
 			</div>
 		</div>
 		

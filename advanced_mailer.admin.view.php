@@ -37,6 +37,26 @@ class Advanced_MailerAdminView extends Advanced_Mailer
 	}
 	
 	/**
+	 * Display the sent mail log.
+	 */
+	public function dispAdvanced_MailerAdminSentMail()
+	{
+		
+		$this->setTemplatePath($this->module_path.'tpl');
+		$this->setTemplateFile('view_log');
+	}
+	
+	/**
+	 * Display the error log.
+	 */
+	public function dispAdvanced_MailerAdminErrors()
+	{
+		
+		$this->setTemplatePath($this->module_path.'tpl');
+		$this->setTemplateFile('view_log');
+	}
+	
+	/**
 	 * Get the public IPv4 address of the current server.
 	 */
 	public function getServerIP()

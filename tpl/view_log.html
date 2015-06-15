@@ -1,0 +1,12 @@
+<load target="css/view_log.css" />
+<load target="js/view_log.js" />
+
+<div class="x_page-header">
+	<h1>{$lang->cmd_advanced_mailer}</h1>
+</div>
+
+<ul class="x_nav x_nav-tabs">
+	<li class="x_active"|cond="$act == 'dispAdvanced_mailerAdminConfig'"><a href="{getUrl('', 'module', 'admin', 'act', 'dispAdvanced_mailerAdminConfig')}">{$lang->cmd_advanced_mailer_general_config}</a></li>
+	<li class="x_active"|cond="$act == 'dispAdvanced_mailerAdminSentMail'"><a href="{getUrl('', 'module', 'admin', 'act', 'dispAdvanced_mailerAdminSentMail')}">{$lang->cmd_advanced_mailer_log_sent_mail}</a></li>
+	<li class="x_active"|cond="$act == 'dispAdvanced_mailerAdminErrors'"><a href="{getUrl('', 'module', 'admin', 'act', 'dispAdvanced_mailerAdminErrors')}">{$lang->cmd_advanced_mailer_log_errors}</a></li>
+</ul>
