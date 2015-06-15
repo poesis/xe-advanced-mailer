@@ -1,16 +1,6 @@
+<include target="./common.html" />
 <load target="css/spf_dkim.css" />
 <load target="js/spf_dkim.js" />
-
-<div class="x_page-header">
-	<h1>{$lang->cmd_advanced_mailer}</h1>
-</div>
-
-<ul class="x_nav x_nav-tabs">
-	<li class="x_active"|cond="$act == 'dispAdvanced_mailerAdminConfig'"><a href="{getUrl('', 'module', 'admin', 'act', 'dispAdvanced_mailerAdminConfig')}">{$lang->cmd_advanced_mailer_general_config}</a></li>
-	<li class="x_active"|cond="$act == 'dispAdvanced_mailerAdminSpfDkim'"><a href="{getUrl('', 'module', 'admin', 'act', 'dispAdvanced_mailerAdminSpfDkim')}">{$lang->cmd_advanced_mailer_spf_dkim_setting}</a></li>
-	<li class="x_active"|cond="$act == 'dispAdvanced_mailerAdminSentMail'"><a href="{getUrl('', 'module', 'admin', 'act', 'dispAdvanced_mailerAdminSentMail')}">{$lang->cmd_advanced_mailer_log_sent_mail}</a></li>
-	<li class="x_active"|cond="$act == 'dispAdvanced_mailerAdminErrors'"><a href="{getUrl('', 'module', 'admin', 'act', 'dispAdvanced_mailerAdminErrors')}">{$lang->cmd_advanced_mailer_log_errors}</a></li>
-</ul>
 
 <div id="spf_dkim_setting" class="x_form-horizontal"
 	data-nothing-to-check="{$lang->cmd_advanced_mailer_nothing_to_check}"
@@ -18,18 +8,6 @@
 	data-check-failure="{$lang->cmd_advanced_mailer_check_failure}"
 	data-check-result="{$lang->cmd_advanced_mailer_check_result}">
 	
-<!--
-	data-sending-method="{$advanced_mailer_config['sending_method']}"
-	data-woorimail-account_type="{$advanced_mailer_config['woorimail_account_type']}"
-	data-sender-email="{$advanced_mailer_config['sender_email']}"
-	data-server-ip="{$advanced_mailer_server_ip}"
-	data-ellipsis="{$lang->cmd_advanced_mailer_ellipsis}"
-	data-other-mail-spf="{htmlspecialchars($lang->cmd_advanced_mailer_other_info_mail_spf)}"
-	data-other-ses-dkim="{htmlspecialchars($lang->cmd_advanced_mailer_other_info_ses_dkim)}"
-	data-other-mailgun-dkim="{htmlspecialchars($lang->cmd_advanced_mailer_other_info_mailgun_dkim)}"
-	data-other-postmark-dkim="{htmlspecialchars($lang->cmd_advanced_mailer_other_info_postmark_dkim)}"
-	data-other-woorimail-dkim="{htmlspecialchars($lang->cmd_advanced_mailer_other_info_woorimail_dkim)}">
--->	
 	<div class="advanced_mailer_description">
 		{$lang->cmd_advanced_mailer_about_spf_dkim_setting}
 	</div>
