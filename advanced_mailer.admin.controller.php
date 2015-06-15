@@ -46,7 +46,7 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 		}
 		else
 		{
-			$this->setRedirectUrl(getNotEncodedUrl('', 'module', 'advanced_mailer', 'act', 'dispAdvanced_mailerAdminConfig'));
+			$this->setRedirectUrl(getNotEncodedUrl('', 'module', 'admin', 'act', 'dispAdvanced_mailerAdminConfig'));
 		}
 	}
 	
@@ -84,6 +84,22 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 		}
 		$this->add('record_content', implode("\n\n", $return_values));
 		return;
+	}
+	
+	/**
+	 * Clear old sending log.
+	 */
+	public function procAdvanced_mailerAdminClearSentMail()
+	{
+		
+		if (Context::get('success_return_url'))
+		{
+			$this->setRedirectUrl(Context::get('success_return_url'));
+		}
+		else
+		{
+			$this->setRedirectUrl(getNotEncodedUrl('', 'module', 'admin', 'act', 'dispAdvanced_mailerAdminConfig'));
+		}
 	}
 	
 	/**

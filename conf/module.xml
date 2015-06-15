@@ -8,6 +8,7 @@
 		<action name="dispAdvanced_mailerAdminErrors" type="view" />
 		<action name="procAdvanced_mailerAdminInsertConfig" type="controller" />
 		<action name="procAdvanced_mailerAdminCheckDNSRecord" type="controller" />
+		<action name="procAdvanced_mailerAdminClearSentMail" type="controller" />
 		<action name="procAdvanced_mailerAdminTestSend" type="controller" />
 	</actions>
 	<menus>

@@ -360,4 +360,56 @@
 		<value xml:lang="ko"><![CDATA[알 수 없는 오류가 발생하였습니다.]]></value>
 		<value xml:lang="en"><![CDATA[An unknown error occurred.]]></value>
 	</item>
+	<item name="msg_advanced_mailer_log_is_empty">
+		<value xml:lang="ko"><![CDATA[표시할 항목이 없습니다.]]></value>
+		<value xml:lang="en"><![CDATA[There are no entries to display.]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_status_sender">
+		<value xml:lang="ko"><![CDATA[보낸이]]></value>
+		<value xml:lang="en"><![CDATA[Sender]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_status_recipient">
+		<value xml:lang="ko"><![CDATA[받는이]]></value>
+		<value xml:lang="en"><![CDATA[Recipient]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_status_subject">
+		<value xml:lang="ko"><![CDATA[제목]]></value>
+		<value xml:lang="en"><![CDATA[Subject]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_status_sending_method">
+		<value xml:lang="ko"><![CDATA[발송 방법]]></value>
+		<value xml:lang="en"><![CDATA[Method]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_status_time">
+		<value xml:lang="ko"><![CDATA[발송 시간]]></value>
+		<value xml:lang="en"><![CDATA[Time]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_status">
+		<value xml:lang="ko"><![CDATA[상태]]></value>
+		<value xml:lang="en"><![CDATA[Status]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_status_success">
+		<value xml:lang="ko"><![CDATA[성공]]></value>
+		<value xml:lang="en"><![CDATA[Success]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_status_error">
+		<value xml:lang="ko"><![CDATA[에러]]></value>
+		<value xml:lang="en"><![CDATA[Error]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_status_error_msg">
+		<value xml:lang="ko"><![CDATA[에러 메시지]]></value>
+		<value xml:lang="en"><![CDATA[Error message]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_status_calling_script">
+		<value xml:lang="ko"><![CDATA[호출 위치]]></value>
+		<value xml:lang="en"><![CDATA[Called from]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_clear_log_condition">
+		<value xml:lang="ko"><![CDATA[%d일 이상]]></value>
+		<value xml:lang="en"><![CDATA[Over %d days]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_clear_log_button">
+		<value xml:lang="ko"><![CDATA[오래된 기록 삭제]]></value>
+		<value xml:lang="en"><![CDATA[Clear old logs]]></value>
+	</item>
 </lang>

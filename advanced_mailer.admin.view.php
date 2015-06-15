@@ -41,6 +41,19 @@ class Advanced_MailerAdminView extends Advanced_Mailer
 	 */
 	public function dispAdvanced_MailerAdminSentMail()
 	{
+		$obj = new stdClass();
+		$obj->status = 'success';
+		$obj->page = $page = Context::get('page') ?: 1;
+		$maillog = executeQuery('advanced_mailer.getLogByType', $obj);
+		$maillog = $maillog->toBool() ? $this->procMailLog($maillog->data) : array();
+		Context::set('advanced_mailer_log', $maillog);
+		Context::set('advanced_mailer_status', 'success');
+		
+		$paging = $this->procPaging('success', $page);
+		Context::set('total_count', $paging->total_count);
+		Context::set('total_page', $paging->total_page);
+		Context::set('page', $paging->page);
+		Context::set('page_navigation', $paging->page_navigation);
 		
 		$this->setTemplatePath($this->module_path.'tpl');
 		$this->setTemplateFile('view_log');
@@ -51,9 +64,80 @@ class Advanced_MailerAdminView extends Advanced_Mailer
 	 */
 	public function dispAdvanced_MailerAdminErrors()
 	{
+		$obj = new stdClass();
+		$obj->status = 'error';
+		$obj->page = $page = Context::get('page') ?: 1;
+		$maillog = executeQuery('advanced_mailer.getLogByType', $obj);
+		$maillog = $maillog->toBool() ? $this->procMailLog($maillog->data) : array();
+		Context::set('advanced_mailer_log', $maillog);
+		Context::set('advanced_mailer_status', 'error');
+		
+		$paging = $this->procPaging('error', $page);
+		Context::set('total_count', $paging->total_count);
+		Context::set('total_page', $paging->total_page);
+		Context::set('page', $paging->page);
+		Context::set('page_navigation', $paging->page_navigation);
 		
 		$this->setTemplatePath($this->module_path.'tpl');
 		$this->setTemplateFile('view_log');
+	}
+	
+	/**
+	 * Process mail log for display.
+	 */
+	public function procMailLog($log)
+	{
+		foreach($log as $item)
+		{
+			$from = explode("\n", $item->mail_from);
+			foreach($from as &$fromitem)
+			{
+				if(preg_match('/^(.+) <([^>]+)>$/', $fromitem, $matches))
+				{
+					$fromitem = array($matches[2], $matches[1]);
+				}
+				else
+				{
+					$fromitem = array($fromitem, '');
+				}
+			}
+			$item->mail_from = $from;
+			
+			$to = explode("\n", $item->mail_to);
+			foreach($to as &$toitem)
+			{
+				if(preg_match('/^(.+?) <([^>]+)>$/', $toitem, $matches))
+				{
+					$toitem = array($matches[2], $matches[1]);
+				}
+				else
+				{
+					$toitem = array($toitem, '');
+				}
+			}
+			$item->mail_to = $to;
+		}
+		
+		return $log;
+	}
+	
+	/**
+	 * Process paging.
+	 */
+	public function procPaging($status, $page = 1)
+	{
+		$args = new stdClass;
+		$args->status = $status;
+		$count = executeQuery('advanced_mailer.countLogByType', $args);
+		$total_count = $count->data->count;
+		$total_page = max(1, ceil($total_count / 20));
+		
+		$output = new Object();
+		$output->total_count = $total_count;
+		$output->total_page = $total_page;
+		$output->page = $page;
+		$output->page_navigation = new PageHandler($total_count, $total_page, $page, 10);
+		return $output;
 	}
 	
 	/**
