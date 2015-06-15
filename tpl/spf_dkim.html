@@ -1,0 +1,123 @@
+<load target="css/spf_dkim.css" />
+<load target="js/spf_dkim.js" />
+
+<div class="x_page-header">
+	<h1>{$lang->cmd_advanced_mailer}</h1>
+</div>
+
+<ul class="x_nav x_nav-tabs">
+	<li class="x_active"|cond="$act == 'dispAdvanced_mailerAdminConfig'"><a href="{getUrl('', 'module', 'admin', 'act', 'dispAdvanced_mailerAdminConfig')}">{$lang->cmd_advanced_mailer_general_config}</a></li>
+	<li class="x_active"|cond="$act == 'dispAdvanced_mailerAdminSpfDkim'"><a href="{getUrl('', 'module', 'admin', 'act', 'dispAdvanced_mailerAdminSpfDkim')}">{$lang->cmd_advanced_mailer_spf_dkim_setting}</a></li>
+	<li class="x_active"|cond="$act == 'dispAdvanced_mailerAdminSentMail'"><a href="{getUrl('', 'module', 'admin', 'act', 'dispAdvanced_mailerAdminSentMail')}">{$lang->cmd_advanced_mailer_log_sent_mail}</a></li>
+	<li class="x_active"|cond="$act == 'dispAdvanced_mailerAdminErrors'"><a href="{getUrl('', 'module', 'admin', 'act', 'dispAdvanced_mailerAdminErrors')}">{$lang->cmd_advanced_mailer_log_errors}</a></li>
+</ul>
+
+<div id="spf_dkim_setting" class="x_form-horizontal"
+	data-nothing-to-check="{$lang->cmd_advanced_mailer_nothing_to_check}"
+	data-check-no-records="{$lang->cmd_advanced_mailer_check_no_records}"
+	data-check-failure="{$lang->cmd_advanced_mailer_check_failure}"
+	data-check-result="{$lang->cmd_advanced_mailer_check_result}">
+	
+<!--
+	data-sending-method="{$advanced_mailer_config['sending_method']}"
+	data-woorimail-account_type="{$advanced_mailer_config['woorimail_account_type']}"
+	data-sender-email="{$advanced_mailer_config['sender_email']}"
+	data-server-ip="{$advanced_mailer_server_ip}"
+	data-ellipsis="{$lang->cmd_advanced_mailer_ellipsis}"
+	data-other-mail-spf="{htmlspecialchars($lang->cmd_advanced_mailer_other_info_mail_spf)}"
+	data-other-ses-dkim="{htmlspecialchars($lang->cmd_advanced_mailer_other_info_ses_dkim)}"
+	data-other-mailgun-dkim="{htmlspecialchars($lang->cmd_advanced_mailer_other_info_mailgun_dkim)}"
+	data-other-postmark-dkim="{htmlspecialchars($lang->cmd_advanced_mailer_other_info_postmark_dkim)}"
+	data-other-woorimail-dkim="{htmlspecialchars($lang->cmd_advanced_mailer_other_info_woorimail_dkim)}">
+-->	
+	<div class="advanced_mailer_description">
+		{$lang->cmd_advanced_mailer_about_spf_dkim_setting}
+	</div>
+	
+	<div class="x_control-group">
+		<label class="x_control-label">{$lang->cmd_advanced_mailer_sending_method}</label>
+		<div class="x_controls margin-top">
+			{Context::getLang('cmd_advanced_mailer_sending_method_' . $advanced_mailer_config['sending_method'])}
+			<!--@if($sending_method === 'woorimail')-->
+				&mdash;
+				<!--@if($advanced_mailer_config['woorimail_account_type'] === 'free')-->
+					{$lang->cmd_advanced_mailer_free_account}
+				<!--@else-->
+					{$lang->cmd_advanced_mailer_paid_account}
+				<!--@end-->
+			<!--@end-->
+		</div>
+	</div>
+	
+	<div class="x_control-group">
+		<label class="x_control-label">{$lang->cmd_advanced_mailer_sender_email}</label>
+		<div class="x_controls margin-top">
+			<span class="value">{$advanced_mailer_config['sender_email']}</span>
+		</div>
+	</div>
+	
+	{@ $ignore_domains = '/^(g(oogle)?mail\.com|(daum|hanmail2?)\.net|(naver|outlook|hotmail|yahoo)\.com|(hotmail|yahoo)\.co\.kr)$/i'}
+	
+	<div class="x_control-group">
+		<label class="x_control-label">SPF</label>
+		<div class="x_controls">
+			{@ $other_info = Context::getLang('cmd_advanced_mailer_other_info_' . $sending_method . '_spf')}
+			{@ $other_info = strncmp('cmd_', $other_info, 4) ? $other_info : ''}
+			<!--@if(preg_match($ignore_domains, $sending_domain))-->
+			<div class="not_applicable spf">
+				{$lang->cmd_advanced_mailer_not_applicable_because_sender_domain}
+			</div>
+			<!--@elseif($sending_methods[$sending_method]['spf'] === '' || ($sending_method === 'woorimail' && $advanced_mailer_config['woorimail_account_type'] === 'free'))-->
+			<div class="not_applicable spf" cond="!$other_info">
+				{$lang->cmd_advanced_mailer_not_applicable_because_sending_method}
+			</div>
+			<!--@else-->
+			<div class="config_description spf">
+				{$lang->cmd_advanced_mailer_dns_hostname} &nbsp;
+				<span class="value">{$sending_domain}</span> &nbsp;
+				<a href="#" id="advanced_mailer_check_spf">{$lang->cmd_advanced_mailer_check}</a>
+			</div>
+			<div class="config_value spf">
+				{$lang->cmd_advanced_mailer_txt_record} &nbsp;
+				<span class="value">v=spf1 a mx {$sending_methods[$sending_method]['spf']} ~all</span>
+			</div>
+			<!--@end-->
+			<div class="config_other spf" cond="$other_info">
+				{$lang->cmd_advanced_mailer_other_info}
+				<span class="other">{$other_info}</span>
+			</div>
+		</div>
+	</div>
+	
+	<div class="x_control-group">
+		<label class="x_control-label">DKIM</label>
+		<div class="x_controls">
+			{@ $other_info = Context::getLang('cmd_advanced_mailer_other_info_' . $sending_method . '_dkim')}
+			{@ $other_info = strncmp('cmd_', $other_info, 4) ? $other_info : ''}
+			<!--@if(preg_match($ignore_domains, $sending_domain))-->
+			<div class="not_applicable dkim">
+				{$lang->cmd_advanced_mailer_not_applicable_because_sender_domain}
+			</div>
+			<!--@elseif($sending_methods[$sending_method]['dkim'] === '' || ($sending_method === 'woorimail' && $advanced_mailer_config['woorimail_account_type'] === 'free'))-->
+			<div class="not_applicable dkim" cond="!$other_info">
+				{$lang->cmd_advanced_mailer_not_applicable_because_sending_method}
+			</div>
+			<!--@else-->
+			<div class="config_description dkim">
+				{$lang->cmd_advanced_mailer_dns_hostname} &nbsp;
+				<span class="value">{$sending_methods[$sending_method]['dkim']}.{$sending_domain}</span> &nbsp;
+				<a href="#" id="advanced_mailer_check_dkim">{$lang->cmd_advanced_mailer_check}</a>
+			</div>
+			<div class="config_value dkim">
+				{$lang->cmd_advanced_mailer_txt_record} &nbsp;
+				<span class="value">v=DKIM1; k=rsa; p=MIGfMA ...{$lang->cmd_advanced_mailer_ellipsis}... QAB;</span>
+			</div>
+			<!--@end-->
+			<div class="config_other spf" cond="$other_info">
+				{$lang->cmd_advanced_mailer_other_info}
+				<span class="other">{$other_info}</span>
+			</div>
+		</div>
+	</div>
+
+</div>

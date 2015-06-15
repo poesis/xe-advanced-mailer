@@ -4,6 +4,7 @@
 	<permissions />
 	<actions>
 		<action name="dispAdvanced_mailerAdminConfig" type="view" admin_index="true" menu_name="advanced_mailer" />
+		<action name="dispAdvanced_mailerAdminSpfDkim" type="view" />
 		<action name="dispAdvanced_mailerAdminSentMail" type="view" />
 		<action name="dispAdvanced_mailerAdminErrors" type="view" />
 		<action name="procAdvanced_mailerAdminInsertConfig" type="controller" />

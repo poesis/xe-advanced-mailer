@@ -26,7 +26,6 @@ class Advanced_MailerAdminView extends Advanced_Mailer
 		}
 		
 		Context::set('advanced_mailer_config', (array)$config);
-		Context::set('advanced_mailer_server_ip', $this->getServerIP());
 		Context::set('sending_methods', $this->sending_methods);
 		Context::set('available_sending_methods', $available_sending_methods);
 		Context::set('webmaster_name', $member_config->webmaster_name ? $member_config->webmaster_name : 'webmaster');
@@ -34,6 +33,23 @@ class Advanced_MailerAdminView extends Advanced_Mailer
 		
 		$this->setTemplatePath($this->module_path.'tpl');
 		$this->setTemplateFile('config');
+	}
+	
+	/**
+	 * Display the SPF/DKIM setting guide.
+	 */
+	public function dispAdvanced_MailerAdminSpfDkim()
+	{
+		$config = $this->getConfig();
+		Context::set('advanced_mailer_config', (array)$config);
+		
+		$this->sending_methods['mail']['spf'] = 'ip4:' . $this->getServerIP();
+		Context::set('sending_methods', $this->sending_methods);
+		Context::set('sending_method', $config->sending_method);
+		Context::set('sending_domain', strpos($config->sender_email, '@') !== false ? substr(strrchr($config->sender_email, '@'), 1) : null);
+		
+		$this->setTemplatePath($this->module_path.'tpl');
+		$this->setTemplateFile('spf_dkim');
 	}
 	
 	/**

@@ -169,16 +169,20 @@
 		<value xml:lang="en"><![CDATA[Reply-To email]]></value>
 	</item>
 	<item name="cmd_advanced_mailer_spf_dkim_setting">
-		<value xml:lang="ko"><![CDATA[SPF, DKIM 설정 가이드]]></value>
+		<value xml:lang="ko"><![CDATA[SPF, DKIM 설정 안내]]></value>
 		<value xml:lang="en"><![CDATA[SPF, DKIM Setting Guide]]></value>
 	</item>
 	<item name="cmd_advanced_mailer_about_spf_dkim_setting">
 		<value xml:lang="ko"><![CDATA[자신의 도메인에서 메일을 보내는 경우에만 해당됩니다. 일부 API는 지원하지 않거나 별도의 매뉴얼을 참고하셔야 합니다.]]></value>
 		<value xml:lang="en"><![CDATA[This is only applicable when sending emails from your own domain. Some APIs are not supported.]]></value>
 	</item>
-	<item name="cmd_advanced_mailer_not_applicable">
-		<value xml:lang="ko"><![CDATA[해당되지 않습니다.]]></value>
-		<value xml:lang="en"><![CDATA[해당되지 않습니다.]]></value>
+	<item name="cmd_advanced_mailer_not_applicable_because_sender_domain">
+		<value xml:lang="ko"><![CDATA[보내는 주소가 자신의 도메인이 아니므로 해당되지 않습니다.]]></value>
+		<value xml:lang="en"><![CDATA[Not applicable to the sender's domain.]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_not_applicable_because_sending_method">
+		<value xml:lang="ko"><![CDATA[선택하신 발송 방법에는 해당되지 않습니다.]]></value>
+		<value xml:lang="en"><![CDATA[Not applicable to the selected sending method.]]></value>
 	</item>
 	<item name="cmd_advanced_mailer_dns_hostname">
 		<value xml:lang="ko"><![CDATA[DNS 호스트명:]]></value>

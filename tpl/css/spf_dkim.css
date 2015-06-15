@@ -1,0 +1,24 @@
+
+div.advanced_mailer_description {
+	margin-bottom: 10px;
+	margin-left: 10px;
+}
+
+div.margin-top {
+	margin-top: 5px;
+}
+
+div.x_modal-body .monospace {
+	font-family: Consolas, monospace;
+}
+
+#spf_dkim_setting div.not_applicable {
+	padding: 5px 0;
+}
+#spf_dkim_setting div.config_description, #spf_dkim_setting div.config_value, #spf_dkim_setting div.config_other {
+	padding: 5px 0;
+}
+#spf_dkim_setting span.value {
+	font-family: Consolas, monospace;
+	display: inline-block;
+}
