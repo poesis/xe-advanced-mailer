@@ -20,6 +20,22 @@
 		<value xml:lang="ko"><![CDATA[사용하지 않음]]></value>
 		<value xml:lang="en"><![CDATA[Disabled]]></value>
 	</item>
+	<item name="cmd_advanced_mailer_record_sent_mail">
+		<value xml:lang="ko"><![CDATA[발송내역 기록]]></value>
+		<value xml:lang="en"><![CDATA[Record sent mail]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_record_errors">
+		<value xml:lang="ko"><![CDATA[에러내역 기록]]></value>
+		<value xml:lang="en"><![CDATA[Record errors]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_record_yes">
+		<value xml:lang="ko"><![CDATA[기록]]></value>
+		<value xml:lang="en"><![CDATA[Yes]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_record_no">
+		<value xml:lang="ko"><![CDATA[기록하지 않음]]></value>
+		<value xml:lang="en"><![CDATA[No]]></value>
+	</item>
 	<item name="cmd_advanced_mailer_sending_method_config">
 		<value xml:lang="ko"><![CDATA[발송 방법 설정]]></value>
 		<value xml:lang="en"><![CDATA[Sending Method]]></value>

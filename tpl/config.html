@@ -18,13 +18,29 @@
 		
 		<h2 style="padding-top:12px">{$lang->cmd_advanced_mailer_general_config}</h2>
 		
-		<div class="x_control-group show-always">
+		<div class="x_control-group show-when-disabled">
 			<label class="x_control-label" for="advanced_mailer_is_enabled">{$lang->cmd_advanced_mailer_is_enabled}</label>
 			<div class="x_controls">
 				<select name="is_enabled" id="advanced_mailer_is_enabled">
 					<option value="Y" selected="selected"|cond="$advanced_mailer_config['is_enabled'] !== 'N'">{$lang->cmd_advanced_mailer_is_enabled_yes}</option>
 					<option value="N" selected="selected"|cond="$advanced_mailer_config['is_enabled'] === 'N'">{$lang->cmd_advanced_mailer_is_enabled_no}</option>
 				</select>
+			</div>
+		</div>
+		
+		<div class="x_control-group">
+			<label class="x_control-label">{$lang->cmd_advanced_mailer_record_sent_mail}</label>
+			<div class="x_controls">
+				<label class="x_inline" for="advanced_mailer_record_sent_mail_yes"><input type="radio" name="record_sent_mail" id="advanced_mailer_record_sent_mail_yes" value="Y" checked="checked"|cond="$advanced_mailer_config['record_sent_mail'] === 'Y'" /> {$lang->cmd_advanced_mailer_record_yes}</label>
+				<label class="x_inline" for="advanced_mailer_record_sent_mail_no"><input type="radio" name="record_sent_mail" id="advanced_mailer_record_sent_mail_no" value="N" checked="checked"|cond="$advanced_mailer_config['record_sent_mail'] !== 'Y'" /> {$lang->cmd_advanced_mailer_record_no}</label>
+			</div>
+		</div>
+		
+		<div class="x_control-group">
+			<label class="x_control-label">{$lang->cmd_advanced_mailer_record_errors}</label>
+			<div class="x_controls">
+				<label class="x_inline" for="advanced_mailer_record_errors_yes"><input type="radio" name="record_errors" id="advanced_mailer_record_errors_yes" value="Y" checked="checked"|cond="$advanced_mailer_config['record_errors'] === 'Y'" /> {$lang->cmd_advanced_mailer_record_yes}</label>
+				<label class="x_inline" for="advanced_mailer_record_errors_no"><input type="radio" name="record_errors" id="advanced_mailer_record_errors_no" value="N" checked="checked"|cond="$advanced_mailer_config['record_errors'] !== 'Y'" /> {$lang->cmd_advanced_mailer_record_no}</label>
 			</div>
 		</div>
 		

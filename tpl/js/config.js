@@ -80,8 +80,10 @@
 		$("#advanced_mailer_is_enabled").on("change", function() {
 			if ($(this).val() === 'Y') {
 				$("#advanced_mailer section").not(".show-when-disabled").show();
+				$("#advanced_mailer section.show-when-disabled div.x_control-group").not(".show-when-disabled").show();
 			} else {
 				$("#advanced_mailer section").not(".show-when-disabled").hide();
+				$("#advanced_mailer section.show-when-disabled div.x_control-group").not(".show-when-disabled").hide();
 			}
 		}).triggerHandler("change");
 		

@@ -190,6 +190,8 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 		$request_args = Context::getRequestVars();
 		$args = new stdClass();
 		$args->is_enabled = $request_args->is_enabled === 'N' ? 'N' : 'Y';
+		$args->record_sent_mail = $request_args->record_sent_mail === 'Y' ? 'Y' : 'N';
+		$args->record_errors = $request_args->record_errors === 'Y' ? 'Y' : 'N';
 		$args->sending_method = trim($request_args->sending_method ?: 'mail');
 		$args->sending_method = preg_replace('/\W/', '', $args->sending_method);
 		foreach ($this->sending_methods as $sending_method => $sending_conf)
