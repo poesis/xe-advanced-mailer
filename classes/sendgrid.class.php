@@ -2,11 +2,19 @@
 
 namespace Advanced_Mailer;
 
+/**
+ * @file sendgrid.class.php
+ * @author Kijin Sung <kijin@kijinsung.com>
+ * @license LGPL v2.1 <http://www.gnu.org/licenses/lgpl-2.1.html>
+ * @brief Advanced Mailer Transport: SendGrid
+ */
 class Sendgrid extends Base
 {
+	public $assembleMessage = false;
+	
 	public function send()
 	{
-		$sendgrid = new \SendGrid(self::$config->username, self::$config->password);
+		$sendgrid = new \SendGrid(self::$config->sendgrid_username, self::$config->sendgrid_password);
 		$email = new \SendGrid\Email();
 		$email->setSubject($this->message->getSubject());
 		

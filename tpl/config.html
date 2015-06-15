@@ -1,11 +1,8 @@
+<include target="./common.html" />
 <load target="css/config.css" />
 <load target="js/config.js" />
 
-<div class="x_page-header">
-	<h1>{$lang->cmd_advanced_mailer}</h1>
-</div>
-
-<form class="x_form-horizontal" action="./" method="post">
+<form class="x_form-horizontal" action="./" method="post" id="advanced_mailer">
 	<input type="hidden" name="module" value="advanced_mailer" />
 	<input type="hidden" name="act" value="procAdvanced_mailerAdminInsertConfig" />
 	<input type="hidden" name="success_return_url" value="{getRequestUriByServerEnviroment()}" />
@@ -14,35 +11,78 @@
 		<p>{$XE_VALIDATOR_MESSAGE}</p>
 	</div>
 	
-	<section class="section">
+	<section class="section show-when-disabled">
 		
-		<h2 style="padding-top:12px">{$lang->cmd_advanced_mailer_sending_method}</h2>
-		
-		<div class="advanced_mailer_description">
-			※ {$lang->cmd_advanced_mailer_about_sending_method}
-		</div>
-		
-		<div class="x_control-group">
-			<label class="x_control-label" for="advanced_mailer_send_type">{$lang->cmd_advanced_mailer_send_type}</label>
+		<div class="x_control-group show-when-disabled">
+			<label class="x_control-label" for="advanced_mailer_is_enabled">{$lang->cmd_advanced_mailer_is_enabled}</label>
 			<div class="x_controls">
-				<select name="send_type" id="advanced_mailer_send_type">
-					<option value="mail" selected="selected"|cond="$advanced_mailer_config->send_type === 'mail'">{$lang->cmd_advanced_mailer_send_type_mail}</option>
-					<option value="smtp" selected="selected"|cond="$advanced_mailer_config->send_type === 'smtp'">{$lang->cmd_advanced_mailer_send_type_smtp}</option>
-					<option value="ses" selected="selected"|cond="$advanced_mailer_config->send_type === 'ses'">{$lang->cmd_advanced_mailer_send_type_ses}</option>
-					<option value="mailgun" selected="selected"|cond="$advanced_mailer_config->send_type === 'mailgun'">{$lang->cmd_advanced_mailer_send_type_mailgun}</option>
-					<option value="mandrill" selected="selected"|cond="$advanced_mailer_config->send_type === 'mandrill'">{$lang->cmd_advanced_mailer_send_type_mandrill}</option>
-					<option value="postmark" selected="selected"|cond="$advanced_mailer_config->send_type === 'postmark'">{$lang->cmd_advanced_mailer_send_type_postmark}</option>
-					<option value="sendgrid" selected="selected"|cond="$advanced_mailer_config->send_type === 'sendgrid'">{$lang->cmd_advanced_mailer_send_type_sendgrid}</option>
-					<option value="woorimail" selected="selected"|cond="$advanced_mailer_config->send_type === 'woorimail'">{$lang->cmd_advanced_mailer_send_type_woorimail}</option>
+				<select name="is_enabled" id="advanced_mailer_is_enabled">
+					<option value="Y" selected="selected"|cond="$advanced_mailer_config['is_enabled'] !== 'N'">{$lang->cmd_advanced_mailer_is_enabled_yes}</option>
+					<option value="N" selected="selected"|cond="$advanced_mailer_config['is_enabled'] === 'N'">{$lang->cmd_advanced_mailer_is_enabled_no}</option>
 				</select>
 			</div>
 		</div>
 		
-		<div class="x_control-group hidden-by-default" data-visible-types="smtp">
-			<label class="x_control-label" for="advanced_mailer_smtp_host">{$lang->cmd_advanced_mailer_smtp_host}</label>
+		<div class="x_control-group">
+			<label class="x_control-label" for="advanced_mailer_log_sent_mail">{$lang->cmd_advanced_mailer_log_sent_mail}</label>
 			<div class="x_controls">
-				<input type="text" name="smtp_host" id="advanced_mailer_smtp_host" value="{$advanced_mailer_config->smtp_host}" />
-				<select id="advanced_mailer_smtp_manual_entry">
+				<select name="log_sent_mail" id="advanced_mailer_log_sent_mail">
+					<option value="Y" selected="selected"|cond="$advanced_mailer_config['log_sent_mail'] === 'Y'" />{$lang->cmd_advanced_mailer_log_yes}</option>
+					<option value="N" selected="selected"|cond="$advanced_mailer_config['log_sent_mail'] !== 'Y'" />{$lang->cmd_advanced_mailer_log_no}</option>
+				</select>
+			</div>
+		</div>
+		
+		<div class="x_control-group">
+			<label class="x_control-label">{$lang->cmd_advanced_mailer_log_errors}</label>
+			<div class="x_controls">
+				<select name="log_errors" id="advanced_mailer_log_errors">
+					<option value="Y" selected="selected"|cond="$advanced_mailer_config['log_errors'] === 'Y'" />{$lang->cmd_advanced_mailer_log_yes}</option>
+					<option value="N" selected="selected"|cond="$advanced_mailer_config['log_errors'] !== 'Y'" />{$lang->cmd_advanced_mailer_log_no}</option>
+				</select>
+			</div>
+		</div>
+		
+	</section>
+	
+	<section class="section">
+		
+		<h2 style="padding-top:12px">{$lang->cmd_advanced_mailer_sending_method_config}</h2>
+		
+		<div class="advanced_mailer_description" cond="count($available_sending_methods) < count($sending_methods)">
+			※ {$lang->msg_advanced_mailer_php_version_is_low}
+		</div>
+		
+		<div class="x_control-group show-always">
+			<label class="x_control-label" for="advanced_mailer_sending_method">{$lang->cmd_advanced_mailer_sending_method_default}</label>
+			<div class="x_controls">
+				<select name="sending_method" id="advanced_mailer_sending_method">
+					<option value="mail" selected="selected"|cond="$advanced_mailer_config['sending_method'] === 'mail'" cond="in_array('mail', $available_sending_methods)">{$lang->cmd_advanced_mailer_sending_method_mail}</option>
+					<option value="smtp" selected="selected"|cond="$advanced_mailer_config['sending_method'] === 'smtp'" cond="in_array('smtp', $available_sending_methods)">{$lang->cmd_advanced_mailer_sending_method_smtp}</option>
+					<option value="ses" selected="selected"|cond="$advanced_mailer_config['sending_method'] === 'ses'" cond="in_array('ses', $available_sending_methods)">{$lang->cmd_advanced_mailer_sending_method_ses}</option>
+					<option value="mailgun" selected="selected"|cond="$advanced_mailer_config['sending_method'] === 'mailgun'" cond="in_array('mailgun', $available_sending_methods)">{$lang->cmd_advanced_mailer_sending_method_mailgun}</option>
+					<option value="mandrill" selected="selected"|cond="$advanced_mailer_config['sending_method'] === 'mandrill'" cond="in_array('mandrill', $available_sending_methods)">{$lang->cmd_advanced_mailer_sending_method_mandrill}</option>
+					<option value="postmark" selected="selected"|cond="$advanced_mailer_config['sending_method'] === 'postmark'" cond="in_array('postmark', $available_sending_methods)">{$lang->cmd_advanced_mailer_sending_method_postmark}</option>
+					<option value="sendgrid" selected="selected"|cond="$advanced_mailer_config['sending_method'] === 'sendgrid'" cond="in_array('sendgrid', $available_sending_methods)">{$lang->cmd_advanced_mailer_sending_method_sendgrid}</option>
+					<option value="woorimail" selected="selected"|cond="$advanced_mailer_config['sending_method'] === 'woorimail'" cond="in_array('woorimail', $available_sending_methods)">{$lang->cmd_advanced_mailer_sending_method_woorimail}</option>
+				</select>
+			</div>
+		</div>
+		
+		<script type="text/javascript">
+			var advanced_mailer_sending_methods = {json_encode($sending_methods)};
+		</script>
+		
+		<!--@foreach($sending_methods as $sending_method => $sending_conf)-->
+		<!--@foreach($sending_conf['conf'] as $conf_name)-->
+		{@ $conf_value = $advanced_mailer_config[$sending_method . '_' . $conf_name]}
+		
+		<!--@if($conf_name === 'host')-->
+		<div class="x_control-group hidden-by-default show-for-{$sending_method}">
+			<label class="x_control-label" for="advanced_mailer_{$sending_method}_host">{$lang->cmd_advanced_mailer_smtp_host}</label>
+			<div class="x_controls">
+				<input type="text" name="{$sending_method}_host" id="advanced_mailer_{$sending_method}_host" value="{$conf_value}" />
+				<select id="advanced_mailer_{$sending_method}_manual_entry">
 					<option value="">{$lang->cmd_advanced_mailer_smtp_manual_entry}</option>
 					<option value="gmail">Gmail</option>
 					<option value="hanmail">Hanmail</option>
@@ -53,75 +93,107 @@
 				</select>
 			</div>
 		</div>
+		<!--@end-->
 		
-		<div class="x_control-group hidden-by-default" data-visible-types="smtp">
-			<label class="x_control-label" for="advanced_mailer_smtp_port">{$lang->cmd_advanced_mailer_smtp_port}</label>
+		<!--@if($conf_name === 'port')-->
+		<div class="x_control-group hidden-by-default show-for-{$sending_method}">
+			<label class="x_control-label" for="advanced_mailer_{$sending_method}_port">{$lang->cmd_advanced_mailer_smtp_port}</label>
 			<div class="x_controls">
-				<input type="text" name="smtp_port" id="advanced_mailer_smtp_port" value="{$advanced_mailer_config->smtp_port}" />
+				<input type="text" name="{$sending_method}_port" id="advanced_mailer_{$sending_method}_port" value="{$conf_value}" />
 			</div>
 		</div>
+		<!--@end-->
 		
-		<div class="x_control-group hidden-by-default" data-visible-types="smtp">
+		<!--@if($conf_name === 'security')-->
+		<div class="x_control-group hidden-by-default show-for-{$sending_method}">
 			<label class="x_control-label">{$lang->cmd_advanced_mailer_smtp_security}</label>
 			<div class="x_controls">
-				<label class="x_inline" for="advanced_mailer_smtp_security_none"><input type="radio" name="smtp_security" id="advanced_mailer_smtp_security_none" value="none" checked="checked"|cond="!in_array($advanced_mailer_config->smtp_security, array('ssl', 'tls'))" /> {$lang->cmd_advanced_mailer_smtp_security_none}</label>
-				<label class="x_inline" for="advanced_mailer_smtp_security_ssl"><input type="radio" name="smtp_security" id="advanced_mailer_smtp_security_ssl" value="ssl" checked="checked"|cond="$advanced_mailer_config->smtp_security === 'ssl'" /> {$lang->cmd_advanced_mailer_smtp_security_ssl}</label>
-				<label class="x_inline" for="advanced_mailer_smtp_security_tls"><input type="radio" name="smtp_security" id="advanced_mailer_smtp_security_tls" value="tls" checked="checked"|cond="$advanced_mailer_config->smtp_security === 'tls'" /> {$lang->cmd_advanced_mailer_smtp_security_tls}</label>
+				<label class="x_inline" for="advanced_mailer_{$sending_method}_security_none"><input type="radio" name="{$sending_method}_security" id="advanced_mailer_{$sending_method}_security_none" value="none" checked="checked"|cond="!in_array($conf_value, array('ssl', 'tls'))" /> {$lang->cmd_advanced_mailer_smtp_security_none}</label>
+				<label class="x_inline" for="advanced_mailer_{$sending_method}_security_ssl"><input type="radio" name="{$sending_method}_security" id="advanced_mailer_{$sending_method}_security_ssl" value="ssl" checked="checked"|cond="$conf_value === 'ssl'" /> {$lang->cmd_advanced_mailer_smtp_security_ssl}</label>
+				<label class="x_inline" for="advanced_mailer_{$sending_method}_security_tls"><input type="radio" name="{$sending_method}_security" id="advanced_mailer_{$sending_method}_security_tls" value="tls" checked="checked"|cond="$conf_value === 'tls'" /> {$lang->cmd_advanced_mailer_smtp_security_tls}</label>
 			</div>
 		</div>
+		<!--@end-->
 		
-		<div class="x_control-group hidden-by-default" data-visible-types="smtp sendgrid">
-			<label class="x_control-label" for="advanced_mailer_username">{$lang->cmd_advanced_mailer_username}</label>
+		<!--@if($conf_name === 'username')-->
+		<div class="x_control-group hidden-by-default show-for-{$sending_method}">
+			<label class="x_control-label" for="advanced_mailer_{$sending_method}_username">{$lang->cmd_advanced_mailer_username}</label>
 			<div class="x_controls">
-				<input type="text" name="username" id="advanced_mailer_username" value="{$advanced_mailer_config->username}" />
+				<input type="text" name="{$sending_method}_username" id="advanced_mailer_{$sending_method}_username" value="{$conf_value}" />
 			</div>
 		</div>
+		<!--@end-->
 		
-		<div class="x_control-group hidden-by-default" data-visible-types="smtp sendgrid">
+		<!--@if($conf_name === 'password')-->
+		<div class="x_control-group hidden-by-default show-for-{$sending_method}">
 			<label class="x_control-label" for="advanced_mailer_password">{$lang->cmd_advanced_mailer_password}</label>
 			<div class="x_controls">
-				<input type="text" name="password" id="advanced_mailer_password" value="{$advanced_mailer_config->password}" />
+				<input type="password" name="{$sending_method}_password" id="advanced_mailer_{$sending_method}_password" value="{$conf_value}" />
 			</div>
 		</div>
+		<!--@end-->
 		
-		<div class="x_control-group hidden-by-default" data-visible-types="mailgun woorimail">
-			<label class="x_control-label" for="advanced_mailer_domain">{$lang->cmd_advanced_mailer_domain}</label>
+		<!--@if($conf_name === 'domain')-->
+		<div class="x_control-group hidden-by-default show-for-{$sending_method}">
+			<label class="x_control-label" for="advanced_mailer_{$sending_method}_domain">{$lang->cmd_advanced_mailer_domain}</label>
 			<div class="x_controls">
-				<input type="text" name="domain" id="advanced_mailer_domain" value="{$advanced_mailer_config->domain}" />
+				<input type="text" name="{$sending_method}_domain" id="advanced_mailer_{$sending_method}_domain" value="{$conf_value}" />
 			</div>
 		</div>
+		<!--@end-->
 		
-		<div class="x_control-group hidden-by-default" data-visible-types="mailgun mandrill postmark woorimail">
-			<label class="x_control-label" for="advanced_mailer_api_key">{$lang->cmd_advanced_mailer_api_key}</label>
+		<!--@if($conf_name === 'api_key')-->
+		<div class="x_control-group hidden-by-default show-for-{$sending_method}">
+			<label class="x_control-label" for="advanced_mailer_{$sending_method}_api_key">{$lang->cmd_advanced_mailer_api_key}</label>
 			<div class="x_controls full-width">
-				<input type="text" name="api_key" id="advanced_mailer_api_key" value="{$advanced_mailer_config->api_key}" />
+				<input type="text" name="{$sending_method}_api_key" id="advanced_mailer_{$sending_method}_api_key" value="{$conf_value}" />
 			</div>
 		</div>
+		<!--@end-->
 		
-		<div class="x_control-group hidden-by-default" data-visible-types="ses">
-			<label class="x_control-label" for="advanced_mailer_aws_region">{$lang->cmd_advanced_mailer_aws_region}</label>
-			<div class="x_controls full-width">
-				<select name="aws_region" id="advanced_mailer_aws_region">
-					<option value="us-east-1" selected="selected"|cond="$advanced_mailer_config->aws_region === 'us-east-1'">us-east-1 (N. Virginia)</option>
-					<option value="us-west-2" selected="selected"|cond="$advanced_mailer_config->aws_region === 'us-west-2'">us-west-2 (Oregon)</option>
-					<option value="eu-west-1" selected="selected"|cond="$advanced_mailer_config->aws_region === 'eu-west-1'">eu-west-1 (Ireland)</option>
+		<!--@if($conf_name === 'account_type')-->
+		<div class="x_control-group hidden-by-default show-for-{$sending_method}">
+			<label class="x_control-label">{$lang->cmd_advanced_mailer_account_type}</label>
+			<div class="x_controls">
+				<label class="x_inline" for="advanced_mailer_{$sending_method}_account_type_free"><input type="radio" name="{$sending_method}_account_type" id="advanced_mailer_{$sending_method}_account_type_free" value="free" checked="checked"|cond="$conf_value !== 'paid'" /> {$lang->cmd_advanced_mailer_free_account}</label>
+				<label class="x_inline" for="advanced_mailer_{$sending_method}_account_type_paid"><input type="radio" name="{$sending_method}_account_type" id="advanced_mailer_{$sending_method}_account_type_paid" value="paid" checked="checked"|cond="$conf_value === 'paid'" /> {$lang->cmd_advanced_mailer_paid_account}</label>
+			</div>
+		</div>
+		<!--@end-->
+		
+		<!--@if($conf_name === 'region')-->
+		<div class="x_control-group hidden-by-default show-for-{$sending_method}">
+			<label class="x_control-label" for="advanced_mailer_{$sending_method}_region">{$lang->cmd_advanced_mailer_aws_region}</label>
+			<div class="x_controls">
+				<select name="{$sending_method}_region" id="advanced_mailer_{$sending_method}_region">
+					<option value="us-east-1" selected="selected"|cond="$conf_value === 'us-east-1'">us-east-1 (N. Virginia)</option>
+					<option value="us-west-2" selected="selected"|cond="$conf_value === 'us-west-2'">us-west-2 (Oregon)</option>
+					<option value="eu-west-1" selected="selected"|cond="$conf_value === 'eu-west-1'">eu-west-1 (Ireland)</option>
 				</select>
 			</div>
 		</div>
+		<!--@end-->
 		
-		<div class="x_control-group hidden-by-default" data-visible-types="ses">
-			<label class="x_control-label" for="advanced_mailer_aws_access_key">{$lang->cmd_advanced_mailer_aws_access_key}</label>
-			<div class="x_controls full-width">
-				<input type="text" name="aws_access_key" id="advanced_mailer_aws_access_key" value="{$advanced_mailer_config->aws_access_key}" />
+		<!--@if($conf_name === 'access_key')-->
+		<div class="x_control-group hidden-by-default show-for-{$sending_method}">
+			<label class="x_control-label" for="advanced_mailer_{$sending_method}_access_key">{$lang->cmd_advanced_mailer_aws_access_key}</label>
+			<div class="x_controls">
+				<input type="text" name="{$sending_method}_access_key" id="advanced_mailer_{$sending_method}_access_key" value="{$conf_value}" />
 			</div>
 		</div>
+		<!--@end-->
 		
-		<div class="x_control-group hidden-by-default" data-visible-types="ses">
-			<label class="x_control-label" for="advanced_mailer_aws_secret_key">{$lang->cmd_advanced_mailer_aws_secret_key}</label>
+		<!--@if($conf_name === 'secret_key')-->
+		<div class="x_control-group hidden-by-default show-for-{$sending_method}">
+			<label class="x_control-label" for="advanced_mailer_{$sending_method}_secret_key">{$lang->cmd_advanced_mailer_aws_secret_key}</label>
 			<div class="x_controls full-width">
-				<input type="text" name="aws_secret_key" id="advanced_mailer_aws_secret_key" value="{$advanced_mailer_config->aws_secret_key}" />
+				<input type="password" name="{$sending_method}_secret_key" id="advanced_mailer_{$sending_method}_secret_key" value="{$conf_value}" />
 			</div>
 		</div>
+		<!--@end-->
+		
+		<!--@end-->
+		<!--@end-->
 		
 	</section>
 	
@@ -150,7 +222,7 @@
 		<div class="x_control-group">
 			<label class="x_control-label" for="advanced_mailer_reply_to">{$lang->cmd_advanced_mailer_reply_to}</label>
 			<div class="x_controls">
-				<input type="text" name="reply_to" id="advanced_mailer_reply_to" value="{$advanced_mailer_config->reply_to}" />
+				<input type="text" name="reply_to" id="advanced_mailer_reply_to" value="{$advanced_mailer_config['reply_to']}" />
 			</div>
 		</div>
 	
@@ -160,44 +232,6 @@
 		<button type="submit" class="x_btn x_btn-primary x_pull-right">{$lang->cmd_registration}</button>
 	</div>
 	
-	<section class="section" id="spf_dkim_setting"
-		data-server-ip="{$advanced_mailer_server_ip}"
-		data-ellipsis="{$lang->cmd_advanced_mailer_ellipsis}"
-		data-nothing-to-check="{$lang->cmd_advanced_mailer_nothing_to_check}"
-		data-check-failure="{$lang->cmd_advanced_mailer_check_failure}"
-		data-check-no-records="{$lang->cmd_advanced_mailer_check_no_records}"
-		data-check-result="{$lang->cmd_advanced_mailer_check_result}"
-		data-other-mail-spf="{htmlspecialchars($lang->cmd_advanced_mailer_other_info_mail_spf)}"
-		data-other-ses-dkim="{htmlspecialchars($lang->cmd_advanced_mailer_other_info_ses_dkim)}"
-		data-other-mailgun-dkim="{htmlspecialchars($lang->cmd_advanced_mailer_other_info_mailgun_dkim)}"
-		data-other-postmark-dkim="{htmlspecialchars($lang->cmd_advanced_mailer_other_info_postmark_dkim)}">
-		
-		<h2 style="padding-top:12px">{$lang->cmd_advanced_mailer_spf_dkim_setting}</h2>
-		
-		<div class="advanced_mailer_description">
-			※ {$lang->cmd_advanced_mailer_about_spf_dkim_setting}
-		</div>
-		
-		<div class="x_control-group">
-			<label class="x_control-label">SPF</label>
-			<div class="x_controls">
-				<div class="not_applicable spf">{$lang->cmd_advanced_mailer_not_applicable}</div>
-				<div class="config_description spf">{$lang->cmd_advanced_mailer_dns_hostname} <span class="hostname"></span> &nbsp; <a href="#" id="advanced_mailer_check_spf">{$lang->cmd_advanced_mailer_check}</a></div>
-				<div class="config_value spf">{$lang->cmd_advanced_mailer_txt_record} <span class="value"></span></div>
-				<div class="config_other spf">{$lang->cmd_advanced_mailer_other_info} <span class="other"></span></div>
-			</div>
-		</div>
-		
-		<div class="x_control-group">
-			<label class="x_control-label">DKIM</label>
-			<div class="x_controls">
-				<div class="not_applicable dkim">{$lang->cmd_advanced_mailer_not_applicable}</div>
-				<div class="config_description dkim">{$lang->cmd_advanced_mailer_dns_hostname} <span class="hostname"></span> &nbsp; <a href="#" id="advanced_mailer_check_dkim">{$lang->cmd_advanced_mailer_check}</a></div>
-				<div class="config_value dkim">{$lang->cmd_advanced_mailer_txt_record} <span class="value"></span></div>
-				<div class="config_other dkim">{$lang->cmd_advanced_mailer_other_info} <span class="other"></span></div>
-			</div>
-		</div>
-		
 	<section class="section">
 		
 		<h2>{$lang->cmd_advanced_mailer_test}</h2>
@@ -209,14 +243,14 @@
 		<div class="x_control-group">
 			<label class="x_control-label" for="advanced_mailer_recipient_name">{$lang->cmd_advanced_mailer_recipient_name}</label>
 			<div class="x_controls">
-				<input type="text" id="advanced_mailer_recipient_name" value="" />
+				<input type="text" id="advanced_mailer_recipient_name" value="{Context::get('logged_info')->nick_name}" />
 			</div>
 		</div>
 		
 		<div class="x_control-group">
 			<label class="x_control-label" for="advanced_mailer_recipient_email">{$lang->cmd_advanced_mailer_recipient_email}</label>
 			<div class="x_controls">
-				<input type="text" id="advanced_mailer_recipient_email" value="" />
+				<input type="text" id="advanced_mailer_recipient_email" value="{Context::get('logged_info')->email_address}" />
 				<button id="advanced_mailer_test_send" type="button">{$lang->cmd_advanced_mailer_send}</button>
 			</div>
 		</div>

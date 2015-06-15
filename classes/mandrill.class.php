@@ -2,12 +2,18 @@
 
 namespace Advanced_Mailer;
 
+/**
+ * @file mandrill.class.php
+ * @author Kijin Sung <kijin@kijinsung.com>
+ * @license LGPL v2.1 <http://www.gnu.org/licenses/lgpl-2.1.html>
+ * @brief Advanced Mailer Transport: Mandrill
+ */
 class Mandrill extends Base
 {
+	public $assembleMessage = true;
+	
 	public function send()
 	{
-		$this->procAssembleMessage();
-		
 		$recipients = array();
 		$to = $this->message->getTo();
 		foreach($to as $address => $name)
@@ -27,7 +33,7 @@ class Mandrill extends Base
 		
 		try
 		{
-			$mandrill = new \Mandrill(self::$config->api_key);
+			$mandrill = new \Mandrill(self::$config->mandrill_api_key);
 			$result = $mandrill->messages->sendRaw($this->message->toString(), null, null, $recipients);
 		}
 		catch(\Mandrill_Error $e)

@@ -1,0 +1,99 @@
+<include target="./common.html" />
+<load target="css/spf_dkim.css" />
+<load target="js/spf_dkim.js" />
+
+<div id="spf_dkim_setting" class="x_form-horizontal"
+	data-nothing-to-check="{$lang->cmd_advanced_mailer_nothing_to_check}"
+	data-check-no-records="{$lang->cmd_advanced_mailer_check_no_records}"
+	data-check-failure="{$lang->cmd_advanced_mailer_check_failure}"
+	data-check-result="{$lang->cmd_advanced_mailer_check_result}">
+	
+	<div class="advanced_mailer_description">
+		※ {$lang->cmd_advanced_mailer_about_spf_dkim_setting}
+	</div>
+	
+	<div class="x_control-group">
+		<label class="x_control-label">{$lang->cmd_advanced_mailer_sending_method_default}</label>
+		<div class="x_controls margin-top">
+			{Context::getLang('cmd_advanced_mailer_sending_method_' . $sending_method)}
+			<!--@if($sending_method === 'woorimail')-->
+				&mdash;
+				<!--@if($advanced_mailer_config['woorimail_account_type'] === 'free')-->
+					{$lang->cmd_advanced_mailer_free_account}
+				<!--@else-->
+					{$lang->cmd_advanced_mailer_paid_account}
+				<!--@end-->
+			<!--@end-->
+		</div>
+	</div>
+	
+	<div class="x_control-group">
+		<label class="x_control-label">{$lang->cmd_advanced_mailer_sender_email}</label>
+		<div class="x_controls margin-top">{$advanced_mailer_config['sender_email']}</div>
+	</div>
+	
+	{@ $ignore_domains = '/^(g(oogle)?mail\.com|(daum|hanmail2?)\.net|(naver|outlook|hotmail|yahoo)\.com|(hotmail|yahoo)\.co\.kr)$/i'}
+	
+	<div class="x_control-group">
+		<label class="x_control-label">SPF</label>
+		<div class="x_controls">
+			{@ $other_info = Context::getLang('cmd_advanced_mailer_other_info_' . $sending_method . '_spf')}
+			{@ $other_info = strncmp('cmd_', $other_info, 4) ? $other_info : ''}
+			<!--@if(preg_match($ignore_domains, $sending_domain))-->
+			<div class="not_applicable spf">
+				{$lang->cmd_advanced_mailer_not_applicable_because_sender_domain}
+			</div>
+			<!--@elseif($sending_methods[$sending_method]['spf'] === '' || ($sending_method === 'woorimail' && $advanced_mailer_config['woorimail_account_type'] === 'free'))-->
+			<div class="not_applicable spf" cond="!$other_info">
+				{$lang->cmd_advanced_mailer_not_applicable_because_sending_method}
+			</div>
+			<!--@else-->
+			<div class="config_description spf">
+				{$lang->cmd_advanced_mailer_dns_hostname} &nbsp;
+				<span class="value">{$sending_domain}</span> &nbsp;
+				<a href="#" id="advanced_mailer_check_spf">{$lang->cmd_advanced_mailer_check}</a>
+			</div>
+			<div class="config_value spf">
+				{$lang->cmd_advanced_mailer_txt_record} &nbsp;
+				<span class="value">v=spf1 a mx {$sending_methods[$sending_method]['spf']} ~all</span>
+			</div>
+			<!--@end-->
+			<div class="config_other spf" cond="$other_info">
+				{$lang->cmd_advanced_mailer_other_info}
+				<span class="other">{$other_info}</span>
+			</div>
+		</div>
+	</div>
+	
+	<div class="x_control-group">
+		<label class="x_control-label">DKIM</label>
+		<div class="x_controls">
+			{@ $other_info = Context::getLang('cmd_advanced_mailer_other_info_' . $sending_method . '_dkim')}
+			{@ $other_info = strncmp('cmd_', $other_info, 4) ? $other_info : ''}
+			<!--@if(preg_match($ignore_domains, $sending_domain))-->
+			<div class="not_applicable dkim">
+				{$lang->cmd_advanced_mailer_not_applicable_because_sender_domain}
+			</div>
+			<!--@elseif($sending_methods[$sending_method]['dkim'] === '' || ($sending_method === 'woorimail' && $advanced_mailer_config['woorimail_account_type'] === 'free'))-->
+			<div class="not_applicable dkim" cond="!$other_info">
+				{$lang->cmd_advanced_mailer_not_applicable_because_sending_method}
+			</div>
+			<!--@else-->
+			<div class="config_description dkim">
+				{$lang->cmd_advanced_mailer_dns_hostname} &nbsp;
+				<span class="value">{$sending_methods[$sending_method]['dkim']}.{$sending_domain}</span> &nbsp;
+				<a href="#" id="advanced_mailer_check_dkim">{$lang->cmd_advanced_mailer_check}</a>
+			</div>
+			<div class="config_value dkim">
+				{$lang->cmd_advanced_mailer_txt_record} &nbsp;
+				<span class="value">v=DKIM1; k=rsa; p=MIGfMA ...{$lang->cmd_advanced_mailer_ellipsis}... QAB;</span>
+			</div>
+			<!--@end-->
+			<div class="config_other spf" cond="$other_info">
+				{$lang->cmd_advanced_mailer_other_info}
+				<span class="other">{$other_info}</span>
+			</div>
+		</div>
+	</div>
+
+</div>

@@ -2,6 +2,12 @@
 
 namespace Advanced_Mailer;
 
+/**
+ * @file woorimail.class.php
+ * @author Kijin Sung <kijin@kijinsung.com>
+ * @license LGPL v2.1 <http://www.gnu.org/licenses/lgpl-2.1.html>
+ * @brief Advanced Mailer Transport: Woorimail
+ */
 class Woorimail extends Base
 {
 	public static $_error_codes = array(
@@ -19,6 +25,8 @@ class Woorimail extends Base
 		'me_012' => '포인트가 부족합니다.',
 	);
 	
+	public $assembleMessage = false;
+	
 	public function send()
 	{
 		$data = array(
@@ -29,8 +37,8 @@ class Woorimail extends Base
 			'receiver_email' => array(),
 			'receiver_nickname' => array(),
 			'member_regdate' => date('YmdHis'),
-			'domain' => self::$config->domain,
-			'authkey' => self::$config->api_key,
+			'domain' => self::$config->woorimail_domain,
+			'authkey' => self::$config->woorimail_api_key,
 			'wms_domain' => 'woorimail.com',
 			'wms_nick' => 'NOREPLY',
 			'type' => 'api',
@@ -46,11 +54,24 @@ class Woorimail extends Base
 			$data['sender_email'] = $email;
 			$data['sender_nickname'] = $name;
 		}
-		$replyTo = $this->message->getReplyTo();
-		if(count($replyTo))
+		
+		if(self::$config->woorimail_account_type === 'paid')
 		{
-			reset($replyTo);
-			$data['sender_email'] = key($replyTo);
+			$sender_email = explode('@', $data['sender_email']);
+			if(count($sender_email) === 2)
+			{
+				$data['wms_nick'] = $sender_email[0];
+				$data['wms_domain'] = $sender_email[1];
+			}
+		}
+		else
+		{
+			$replyTo = $this->message->getReplyTo();
+			if(count($replyTo))
+			{
+				reset($replyTo);
+				$data['sender_email'] = key($replyTo);
+			}
 		}
 		$to = $this->message->getTo();
 		foreach($to as $email => $name)

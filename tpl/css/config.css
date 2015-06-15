@@ -8,22 +8,18 @@
 	padding: 5px 0;
 }
 
-#spf_dkim_setting div.not_applicable {
-	padding: 5px 0;
-}
-#spf_dkim_setting div.config_description, #spf_dkim_setting div.config_value, #spf_dkim_setting div.config_other {
-	padding: 5px 0;
-	display: none;
-}
-#spf_dkim_setting span.hostname, #spf_dkim_setting span.value {
-	color: #666;
-	font-family: Consolas, monospace;
-	margin-left: 8px;
-	display: inline-block;
-}
-
 section {
 	margin-bottom: 10px !important;
+}
+
+input[type=password] {
+	font-family: "Segoe UI", Arial, sans-serif !important;
+}
+
+h2 {
+	padding-left: 10px;
+	padding-bottom: 2px;
+	font-size: 16px !important;
 }
 
 div.advanced_mailer_description {
@@ -36,11 +32,11 @@ div.hidden-by-default {
 }
 
 div.full-width input {
-	width: 90%;
+	width: 90% !important;
 }
 
-div.x_modal-body .monospace {
-	font-family: Consolas, monospace;
+div.margin-top {
+	margin-top: 5px;
 }
 
 span.sender_info {
@@ -48,4 +44,9 @@ span.sender_info {
 	margin-top: 12px;
 	margin-left: 24px;
 	font-family: Consolas, monospace;
+}
+
+textarea.exception-domains {
+	width: 90% !important;
+	height: 80px !important;
 }

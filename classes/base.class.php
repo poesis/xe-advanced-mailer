@@ -2,6 +2,12 @@
 
 namespace Advanced_Mailer;
 
+/**
+ * @file base.class.php
+ * @author Kijin Sung <kijin@kijinsung.com>
+ * @license LGPL v2.1 <http://www.gnu.org/licenses/lgpl-2.1.html>
+ * @brief Advanced Mailer Base Class
+ */
 class Base
 {
 	/**
@@ -17,23 +23,51 @@ class Base
 	 */
 	public static $config = array();
 	public $errors = array();
+	public $caller = NULL;
 	public $message = NULL;
+	public $assembleMessage = true;
 	
 	/**
 	 * Constructor
 	 */
 	public function __construct()
 	{
-		include_once dirname(__DIR__) . '/vendor/autoload.php';
+		// Load SwiftMailer
+		if(version_compare(PHP_VERSION, '5.4', '<'))
+		{
+			include_once dirname(__DIR__) . '/vendor/swiftmailer/swiftmailer/lib/swift_required.php';
+		}
+		else
+		{
+			include_once dirname(__DIR__) . '/vendor/autoload.php';
+		}
 		$this->message = \Swift_Message::newInstance();
+		
+		// Auto-fill the sender info
 		if(self::$config->sender_email)
 		{
-			$sender_name = self::$config->sender_name ?: 'webmaster';
-			$this->message->setFrom(array(self::$config->sender_email => $sender_name));
+			try
+			{
+				$sender_name = self::$config->sender_name ?: 'webmaster';
+				$this->message->setFrom(array(self::$config->sender_email => $sender_name));
+			}
+			catch (\Exception $e)
+			{
+				$this->errors[] = array($e->getMessage());
+			}
 		}
+		
+		// Auto-fill the Reply-To address
 		if(self::$config->reply_to)
 		{
-			$this->message->setReplyTo(array(self::$config->reply_to));
+			try
+			{
+				$this->message->setReplyTo(array(self::$config->reply_to));
+			}
+			catch (\Exception $e)
+			{
+				$this->errors[] = array($e->getMessage());
+			}
 		}
 	}
 	
@@ -78,7 +112,14 @@ class Base
 	 */
 	public function setSender($name, $email)
 	{
-		$this->message->setFrom(array($email => $name));
+		try
+		{
+			$this->message->setFrom(array($email => $name));
+		}
+		catch (\Exception $e)
+		{
+			$this->errors[] = array($e->getMessage());
+		}
 	}
 	
 	/**
@@ -112,7 +153,14 @@ class Base
 	 */
 	public function setReceiptor($name, $email)
 	{
-		$this->message->setTo(array($email => $name));
+		try
+		{
+			$this->message->setTo(array($email => $name));
+		}
+		catch (\Exception $e)
+		{
+			$this->errors[] = array($e->getMessage());
+		}
 	}
 	
 	/**
@@ -145,7 +193,7 @@ class Base
 	 */
 	public function setTitle($subject)
 	{
-		$this->message->setSubject($subject);
+		$this->message->setSubject(strval($subject));
 	}
 	
 	/**
@@ -166,7 +214,14 @@ class Base
 	 */
 	public function setBCC($bcc)
 	{
-		$this->message->setBcc(array($bcc));
+		try
+		{
+			$this->message->setBcc(array($bcc));
+		}
+		catch (\Exception $e)
+		{
+			$this->errors[] = array($e->getMessage());
+		}
 	}
 	
 	/**
@@ -177,7 +232,32 @@ class Base
 	 */
 	public function setReplyTo($replyTo)
 	{
-		$this->message->setReplyTo(array($replyTo));
+		try
+		{
+			$this->message->setReplyTo(array($replyTo));
+		}
+		catch (\Exception $e)
+		{
+			$this->errors[] = array($e->getMessage());
+		}
+	}
+	
+	/**
+	 * Set Return Path
+	 *
+	 * @param string $returnPath
+	 * @return void
+	 */
+	public function setReturnPath($returnPath)
+	{
+		try
+		{
+			$this->message->setReturnPath($returnPath);
+		}
+		catch (\Exception $e)
+		{
+			$this->errors[] = array($e->getMessage());
+		}
 	}
 	
 	/**
@@ -279,7 +359,7 @@ class Base
 	 */
 	public function replaceResourceRealPath($matches)
 	{
-		return preg_replace('/src=(["\']?)files/i', 'src=$1' . Context::getRequestUri() . 'files', $matches[0]);
+		return preg_replace('/src=(["\']?)files/i', 'src=$1' . \Context::getRequestUri() . 'files', $matches[0]);
 	}
 	
 	/**
@@ -309,18 +389,23 @@ class Base
 	 */
 	public function procAssembleMessage()
 	{
+		// Add all attachments
 		foreach($this->attachments as $original_filename => $filename)
 		{
 			$attachment = \Swift_Attachment::fromPath($original_filename);
 			$attachment->setFilename($filename);
 			$this->message->attach($attachment);
 		}
+		
+		// Add all CID attachments
 		foreach($this->cidAttachments as $cid => $original_filename)
 		{
 			$embedded = \Swift_EmbeddedFile::fromPath($original_filename);
 			$newcid = $this->message->embed($embedded);
 			$this->content = str_replace(array("cid:$cid", $cid), $newcid, $this->content);
 		}
+		
+		// Set content type
 		$content_type = $this->content_type === 'html' ? 'text/html' : 'text/plain';
 		$this->message->setBody($this->content, $content_type);
 	}
@@ -332,12 +417,159 @@ class Base
 	 */
 	public function send()
 	{
-		$this->procAssembleMessage();
+		// Get caller information
+		$backtrace = debug_backtrace(0);
+		if(count($backtrace) && isset($backtrace[0]['file']))
+		{
+			$this->caller = $backtrace[0]['file'] . ($backtrace[0]['line'] ? (' line ' . $backtrace[0]['line']) : '');
+		}
 		
-		$transport = \Swift_NullTransport::newInstance();
-		$mailer = \Swift_Mailer::newInstance($transport);
-		$result = $mailer->send($this->message, $this->errors);
-		return (bool)$result;
+		// Get the currently configured sending method
+		$sending_method = self::$config->sending_method;
+		
+		// Check whether an exception should be used
+		$to = $this->message->getTo();
+		reset($to); $to_email = key($to);
+		if($to_email !== null && $to_email !== false)
+		{
+			$sending_method = $this->getSendingMethod($to_email);
+		}
+		
+		// Create an a copy of the email using the sending method
+		include_once __DIR__ . '/' . strtolower($sending_method) . '.class.php';
+		$subclass_name = __NAMESPACE__ . '\\' . ucfirst($sending_method);
+		$subclass = new $subclass_name();
+		$data = get_object_vars($this);
+		foreach($data as $key => $value)
+		{
+			$subclass->$key = $value;
+		}
+		
+		// Call the 'before' trigger
+		$output = \ModuleHandler::triggerCall('advanced_mailer.send', 'before', $subclass);
+		if(!$output->toBool()) return $output;
+		
+		try
+		{
+			// Assemble all attachments
+			if($subclass->assembleMessage)
+			{
+				$subclass->procAssembleMessage();
+			}
+			
+			// Send the email and retrieve any errors
+			$result = $subclass->send();
+			foreach ($subclass->errors as $error)
+			{
+				$this->errors[] = $error;
+			}
+		}
+		catch (\Exception $e)
+		{
+			$result = false;
+			$this->errors[] = array($e->getMessage());
+		}
+		
+		// Call the 'after' trigger
+		$output = \ModuleHandler::triggerCall('advanced_mailer.send', 'after', $subclass);
+		if(!$output->toBool()) return $output;
+		
+		// Log this mail
+		if(self::$config->log_sent_mail === 'Y' || (self::$config->log_errors === 'Y' && count($this->errors)))
+		{
+			$obj = new \stdClass();
+			$obj->mail_srl = getNextSequence();
+			$obj->mail_from = '';
+			$obj->mail_to = '';
+			
+			$real_sender = $subclass->message->getFrom();
+			foreach($real_sender as $email => $name)
+			{
+				$obj->mail_from .= (strval($name) !== '' ? "$name <$email>" : $email) . "\n";
+			}
+			
+			$real_to = $subclass->message->getTo();
+			foreach($real_to as $email => $name)
+			{
+				$obj->mail_to .= (strval($name) !== '' ? "$name <$email>" : $email) . "\n";
+			}
+			
+			$real_cc = $subclass->message->getCc();
+			foreach($real_cc as $email => $name)
+			{
+				$obj->mail_to .= (strval($name) !== '' ? "$name <$email>" : $email) . "\n";
+			}
+			
+			$real_bcc = $subclass->message->getBcc();
+			foreach($real_bcc as $email => $name)
+			{
+				$obj->mail_to .= (strval($name) !== '' ? "$name <$email>" : $email) . "\n";
+			}
+			
+			$obj->mail_from = trim($obj->mail_from);
+			$obj->mail_to = trim($obj->mail_to);
+			$obj->subject = $subclass->message->getSubject();
+			$obj->calling_script = $this->caller;
+			$obj->sending_method = $sending_method;
+			$obj->status = $result ? 'success' : 'error';
+			$obj->errors = count($this->errors) ? implode("\n", $this->errors) : null;
+			$output = executeQuery('advanced_mailer.insertLog', $obj);
+			if(!$output->toBool()) return $output;
+		}
+		
+		// Return the result (bool)
+		return $result;
+	}
+	
+	/**
+	 * Get sending method for email address
+	 */
+	public function getSendingMethod($email = null)
+	{
+		if($email === null)
+		{
+			return self::$config->sending_method;
+		}
+		
+		$domain = strpos($email, '@') !== false ? strtolower(substr(strrchr($email, '@'), 1)) : null;
+		if($domain === null)
+		{
+			return self::$config->sending_method;
+		}
+		
+		if(is_array(self::$config->exceptions))
+		{
+			foreach(self::$config->exceptions as $exception)
+			{
+				if($exception['method'] === 'default') continue;
+				if(in_array($domain, $exception['domains']))
+				{
+					return $exception['method'];
+				}
+			}
+		}
+		
+		return self::$config->sending_method;
+	}
+	
+	/**
+	 * Get caller info
+	 * 
+	 * @return string
+	 */
+	public function getCaller()
+	{
+		return $this->caller;
+	}
+	
+	/**
+	 * Get errors
+	 * 
+	 * @return array
+	 */
+	public function getErrors()
+	{
+		return $this->errors;
 	}
 	
 	/**

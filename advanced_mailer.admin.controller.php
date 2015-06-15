@@ -1,9 +1,19 @@
 <?php
 
+/**
+ * @file advanced_mailer.admin.controller.php
+ * @author Kijin Sung <kijin@kijinsung.com>
+ * @license LGPL v2.1 <http://www.gnu.org/licenses/lgpl-2.1.html>
+ * @brief Advanced Mailer Admin Controller
+ */
 class Advanced_MailerAdminController extends Advanced_Mailer
 {
+	/**
+	 * Save the basic configuration.
+	 */
 	public function procAdvanced_MailerAdminInsertConfig()
 	{
+		// Get and validate the new configuration.
 		$config = $this->getRequestVars();
 		$validation = $this->validateConfiguration($config);
 		if ($validation !== true)
@@ -12,7 +22,6 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 		}
 		
 		// Update the webmaster's name and email in the member module.
-		
 		$args = (object)array(
 			'webmaster_name' => $config->sender_name,
 			'webmaster_email' => $config->sender_email,
@@ -21,7 +30,6 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 		$output = $oModuleController->updateModuleConfig('member', $args);
 		
 		// Save the new configuration.
-		
 		$output = getController('module')->insertModuleConfig('advanced_mailer', $config);
 		if ($output->toBool())
 		{
@@ -38,10 +46,78 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 		}
 		else
 		{
-			$this->setRedirectUrl(getNotEncodedUrl('', 'module', 'advanced_mailer', 'act', 'dispAdvanced_mailerAdminConfig'));
+			$this->setRedirectUrl(getNotEncodedUrl('', 'module', 'admin', 'act', 'dispAdvanced_mailerAdminConfig'));
 		}
 	}
 	
+	/**
+	 * Save the exception configuration.
+	 */
+	public function procAdvanced_MailerAdminInsertExceptions()
+	{
+		// Get the current configuration.
+		$config = $this->getConfig();
+		
+		// Get and validate the list of exceptions.
+		$exceptions = array();
+		for ($i = 1; $i <= 3; $i++)
+		{
+			$method = strval(Context::get('exception_' . $i . '_method'));
+			$domains = trim(Context::get('exception_' . $i . '_domains'));
+			if ($method !== '' && $domains !== '')
+			{
+				if ($method !== 'default' && !isset($this->sending_methods[$method]))
+				{
+					return new Object(-1, 'msg_advanced_mailer_sending_method_is_invalid');
+				}
+				if ($method !== 'default')
+				{
+					foreach ($this->sending_methods[$method]['conf'] as $conf_name)
+					{
+						if (!isset($config->{$method . '_' . $conf_name}) || strval($config->{$method . '_' . $conf_name}) === '')
+						{
+							return new Object(-1, sprintf(
+								Context::getLang('msg_advanced_mailer_sending_method_is_not_configured'),
+								Context::getLang('cmd_advanced_mailer_sending_method_' . $method)));
+						}
+					}
+				}
+				$exceptions[$i]['method'] = $method;
+				$exceptions[$i]['domains'] = array();
+				
+				$domains = array_map('trim', preg_split('/[,\n]/', $domains, null, PREG_SPLIT_NO_EMPTY));
+				foreach ($domains as $domain)
+				{
+					$exceptions[$i]['domains'][] = $domain;
+				}
+			}
+		}
+		
+		// Save the new configuration.
+		$config->exceptions = $exceptions;
+		$output = getController('module')->insertModuleConfig('advanced_mailer', $config);
+		if ($output->toBool())
+		{
+			$this->setMessage('success_registed');
+		}
+		else
+		{
+			return $output;
+		}
+		
+		if (Context::get('success_return_url'))
+		{
+			$this->setRedirectUrl(Context::get('success_return_url'));
+		}
+		else
+		{
+			$this->setRedirectUrl(getNotEncodedUrl('', 'module', 'admin', 'act', 'dispAdvanced_mailerAdminExceptions'));
+		}
+	}
+	
+	/**
+	 * Check the DNS record of a domain.
+	 */
 	public function procAdvanced_MailerAdminCheckDNSRecord()
 	{
 		$check_config = Context::gets('hostname', 'record_type');
@@ -75,11 +151,43 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 		return;
 	}
 	
+	/**
+	 * Clear old sending log.
+	 */
+	public function procAdvanced_mailerAdminClearSentMail()
+	{
+		$status = Context::get('status');
+		$clear_before_days = intval(Context::get('clear_before_days'));
+		if (!in_array($status, array('success', 'error')))
+		{
+			return new Object(-1, 'msg_invalid_request');
+		}
+		if ($clear_before_days < 0)
+		{
+			return new Object(-1, 'msg_invalid_request');
+		}
+		
+		$obj = new stdClass();
+		$obj->status = $status;
+		$obj->regdate = date('YmdHis', time() - ($clear_before_days * 86400) + zgap());
+		$output = executeQuery('advanced_mailer.deleteLogs', $obj);
+		
+		if ($status === 'success')
+		{
+			$this->setRedirectUrl(getNotEncodedUrl('', 'module', 'admin', 'act', 'dispAdvanced_mailerAdminSentMail'));
+		}
+		else
+		{
+			$this->setRedirectUrl(getNotEncodedUrl('', 'module', 'admin', 'act', 'dispAdvanced_mailerAdminErrors'));
+		}
+	}
+	
+	/**
+	 * Send a test email using a temporary configuration.
+	 */
 	public function procAdvanced_MailerAdminTestSend()
 	{
 		$test_config = $this->getRequestVars();
-		$test_config->send_type = preg_replace('/\W/', '', $test_config->send_type);
-		$new_class_name = 'Advanced_Mailer\\' . ucfirst($test_config->send_type);
 		
 		$recipient_config = Context::gets('recipient_name', 'recipient_email');
 		$recipient_name = $recipient_config->recipient_name;
@@ -93,19 +201,6 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 		if (!method_exists('Mail', 'isAdvancedMailer') || !Mail::isAdvancedMailer())
 		{
 			$this->add('test_result', 'Error: ' . Context::getLang('msg_advanced_mailer_cannot_replace_mail_class'));
-			return;
-		}
-		
-		if (!class_exists($new_class_name))
-		{
-			if (file_exists(__DIR__ . '/classes/' . $test_config->send_type . '.class.php'))
-			{
-				include_once __DIR__ . '/classes/' . $test_config->send_type . '.class.php';
-			}
-		}
-		if (!class_exists($new_class_name))
-		{
-			$this->add('test_result', 'Error: ' . Context::getLang('msg_advanced_mailer_send_type_is_invalid'));
 			return;
 		}
 		
@@ -132,35 +227,49 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 			return;
 		}
 		
-		$previous_config = $new_class_name::$config;
-		$new_class_name::$config = $test_config;
+		$previous_config = Mail::$config;
+		Mail::$config = $test_config;
 		
 		try
 		{
-			$oMail = new $new_class_name();
-			$oMail->setTitle('Advanced Mailer Test');
+			$oMail = new Mail();
+			$oMail->setTitle('Advanced Mailer Test : ' . strtoupper($oMail->getSendingMethod($recipient_email)));
 			$oMail->setContent('<p>This is a <b>test email</b> from Advanced Mailer.</p><p>Thank you for trying Advanced Mailer.</p>');
 			$oMail->setReceiptor($recipient_name, $recipient_email);
 			$result = $oMail->send();
 			
-			$new_class_name::$config = $previous_config;
+			Mail::$config = $previous_config;
 			if (!$result)
 			{
 				if (count($oMail->errors))
 				{
+					if ($test_config->sending_method === 'smtp')
+					{
+						if (strpos($test_config->smtp_host, 'gmail.com') !== false && strpos(implode("\n", $oMail->errors), 'code "535"') !== false)
+						{
+							$this->add('test_result', Context::getLang('msg_advanced_mailer_google_account_security'));
+							return;
+						}
+						if (strpos($test_config->smtp_host, 'naver.com') !== false && strpos(implode("\n", $oMail->errors), 'Failed to authenticate') !== false)
+						{
+							$this->add('test_result', Context::getLang('msg_advanced_mailer_naver_smtp_disabled'));
+							return;
+						}
+					}
+					
 					$this->add('test_result', nl2br(htmlspecialchars(implode("\n", $oMail->errors))));
 					return;
 				}
 				else
 				{
-					$this->add('test_result', 'An unknown error occurred.');
+					$this->add('test_result', Context::getLang('msg_advanced_mailer_unknown_error'));
 					return;
 				}
 			}
 		}
 		catch (Exception $e)
 		{
-			$new_class_name::$config = $previous_config;
+			Mail::$config = $previous_config;
 			$this->add('test_result', nl2br(htmlspecialchars($e->getMessage())));
 			return;
 		}
@@ -169,30 +278,42 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 		return;
 	}
 	
+	/**
+	 * Get configuration from the current request.
+	 */
 	protected function getRequestVars()
 	{
 		$request_args = Context::getRequestVars();
-		$args = new stdClass();
-		$args->send_type = trim($request_args->send_type ?: 'mail');
-		$args->smtp_host = trim($request_args->smtp_host ?: '');
-		$args->smtp_port = trim($request_args->smtp_port ?: '');
-		$args->smtp_security = trim($request_args->smtp_security ?: 'none');
-		$args->username = trim($request_args->username ?: '');
-		$args->password = trim($request_args->password ?: '');
-		$args->domain = trim($request_args->domain ?: '');
-		$args->api_key = trim($request_args->api_key ?: '');
-		$args->aws_region = trim($request_args->aws_region ?: '');
-		$args->aws_access_key = trim($request_args->aws_access_key ?: '');
-		$args->aws_secret_key = trim($request_args->aws_secret_key ?: '');
+		$args = $this->getConfig();
+		$args->is_enabled = $request_args->is_enabled === 'N' ? 'N' : 'Y';
+		$args->log_sent_mail = $request_args->log_sent_mail === 'Y' ? 'Y' : 'N';
+		$args->log_errors = $request_args->log_errors === 'Y' ? 'Y' : 'N';
+		$args->sending_method = trim($request_args->sending_method ?: 'mail');
+		$args->sending_method = preg_replace('/\W/', '', $args->sending_method);
+		foreach ($this->sending_methods as $sending_method => $sending_conf)
+		{
+			foreach ($sending_conf['conf'] as $conf_name)
+			{
+				$args->{$sending_method . '_' . $conf_name} = trim($request_args->{$sending_method . '_' . $conf_name} ?: '');
+			}
+		}
 		$args->sender_name = trim($request_args->sender_name ?: '');
 		$args->sender_email = trim($request_args->sender_email ?: '');
 		$args->reply_to = trim($request_args->reply_to ?: '');
 		return $args;
 	}
 	
+	/**
+	 * Validate configuration from the current request.
+	 */
 	protected function validateConfiguration($args)
 	{
-		switch ($args->send_type)
+		if ($args->is_enabled === 'N')
+		{
+			return true;
+		}
+		
+		switch ($args->sending_method)
 		{
 			case 'mail':
 				break;
@@ -210,26 +331,26 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 				{
 					return 'msg_advanced_mailer_smtp_security_is_invalid';
 				}
-				if (!$args->username)
+				if (!$args->smtp_username)
 				{
 					return 'msg_advanced_mailer_username_is_empty';
 				}
-				if (!$args->password)
+				if (!$args->smtp_password)
 				{
 					return 'msg_advanced_mailer_password_is_empty';
 				}
 				break;
 				
 			case 'ses':
-				if (!$args->aws_region || !preg_match('/^[a-z0-9.-]+$/', $args->aws_region))
+				if (!$args->ses_region || !preg_match('/^[a-z0-9.-]+$/', $args->ses_region))
 				{
 					return 'msg_advanced_mailer_aws_region_is_invalid';
 				}
-				if (!$args->aws_access_key)
+				if (!$args->ses_access_key)
 				{
 					return 'msg_advanced_mailer_aws_access_key_is_empty';
 				}
-				if (!$args->aws_secret_key)
+				if (!$args->ses_secret_key)
 				{
 					return 'msg_advanced_mailer_aws_secret_key_is_empty';
 				}
@@ -237,11 +358,11 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 				
 			case 'mailgun':
 			case 'woorimail':
-				if (!$args->domain)
+				if (!$args->{$args->sending_method . '_domain'})
 				{
 					return 'msg_advanced_mailer_domain_is_empty';
 				}
-				if (!$args->api_key)
+				if (!$args->{$args->sending_method . '_api_key'})
 				{
 					return 'msg_advanced_mailer_api_key_is_empty';
 				}
@@ -249,28 +370,26 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 				
 			case 'mandrill':
 			case 'postmark':
-				if (!$args->api_key)
+				if (!$args->{$args->sending_method . '_api_key'})
 				{
 					return 'msg_advanced_mailer_api_key_is_empty';
 				}
 				break;
 				
 			case 'sendgrid':
-				if (!$args->username)
+				if (!$args->sendgrid_username)
 				{
 					return 'msg_advanced_mailer_username_is_empty';
 				}
-				if (!$args->password)
+				if (!$args->sendgrid_password)
 				{
 					return 'msg_advanced_mailer_password_is_empty';
 				}
 				break;
 				
 			default:
-				return 'msg_advanced_mailer_send_type_is_invalid';
+				return 'msg_advanced_mailer_sending_method_is_invalid';
 		}
-		
-		// Validate the sender identity.
 		
 		if (!$args->sender_name)
 		{

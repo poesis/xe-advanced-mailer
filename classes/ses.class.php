@@ -2,16 +2,22 @@
 
 namespace Advanced_Mailer;
 
+/**
+ * @file ses.class.php
+ * @author Kijin Sung <kijin@kijinsung.com>
+ * @license LGPL v2.1 <http://www.gnu.org/licenses/lgpl-2.1.html>
+ * @brief Advanced Mailer Transport: Amazon SES
+ */
 class Ses extends Base
 {
+	public $assembleMessage = true;
+	
 	public function send()
 	{
-		$this->procAssembleMessage();
-		
 		$debug = array($this, 'debugCallback');
-		$endpoint = 'https://email.' . strtolower(self::$config->aws_region) . '.amazonaws.com/';
+		$endpoint = 'https://email.' . strtolower(self::$config->ses_region) . '.amazonaws.com/';
 		
-		$transport = \Swift_AWSTransport::newInstance(self::$config->aws_access_key, self::$config->aws_secret_key);
+		$transport = \Swift_AWSTransport::newInstance(self::$config->ses_access_key, self::$config->ses_secret_key);
 		$transport->setDebug($debug);
 		$transport->setEndpoint($endpoint);
 		

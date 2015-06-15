@@ -2,12 +2,18 @@
 
 namespace Advanced_Mailer;
 
+/**
+ * @file mailgun.class.php
+ * @author Kijin Sung <kijin@kijinsung.com>
+ * @license LGPL v2.1 <http://www.gnu.org/licenses/lgpl-2.1.html>
+ * @brief Advanced Mailer Transport: Mailgun
+ */
 class Mailgun extends Base
 {
+	public $assembleMessage = true;
+	
 	public function send()
 	{
-		$this->procAssembleMessage();
-		
 		$args = array(
 			'subject' => $this->getTitle(),
 			'from' => $this->getSender(),
@@ -42,8 +48,8 @@ class Mailgun extends Base
 		
 		try
 		{
-			$mailgun = new \Mailgun\Mailgun(self::$config->api_key);
-			$result = $mailgun->sendMessage(self::$config->domain, $args, $this->message->toString());
+			$mailgun = new \Mailgun\Mailgun(self::$config->mailgun_api_key);
+			$result = $mailgun->sendMessage(self::$config->mailgun_domain, $args, $this->message->toString());
 		}
 		catch(\Exception $e)
 		{
