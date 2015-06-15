@@ -427,6 +427,14 @@ class Base
 		// Get the currently configured sending method
 		$sending_method = self::$config->sending_method;
 		
+		// Check whether an exception should be used
+		$to = $this->message->getTo();
+		reset($to); $to_email = key($to);
+		if($to_email !== null && $to_email !== false)
+		{
+			$sending_method = $this->getSendingMethod($to_email);
+		}
+		
 		// Create an a copy of the email using the sending method
 		include_once __DIR__ . '/' . strtolower($sending_method) . '.class.php';
 		$subclass_name = __NAMESPACE__ . '\\' . ucfirst($sending_method);
@@ -511,6 +519,37 @@ class Base
 		
 		// Return the result (bool)
 		return $result;
+	}
+	
+	/**
+	 * Get sending method for email address
+	 */
+	public function getSendingMethod($email = null)
+	{
+		if($email === null)
+		{
+			return self::$config->sending_method;
+		}
+		
+		$domain = strpos($email, '@') !== false ? strtolower(substr(strrchr($email, '@'), 1)) : null;
+		if($domain === null)
+		{
+			return self::$config->sending_method;
+		}
+		
+		if(is_array(self::$config->exceptions))
+		{
+			foreach(self::$config->exceptions as $exception)
+			{
+				if($exception['method'] === 'default') continue;
+				if(in_array($domain, $exception['domains']))
+				{
+					return $exception['method'];
+				}
+			}
+		}
+		
+		return self::$config->sending_method;
 	}
 	
 	/**

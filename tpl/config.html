@@ -154,7 +154,7 @@
 		<!--@if($conf_name === 'account_type')-->
 		<div class="x_control-group hidden-by-default show-for-{$sending_method}">
 			<label class="x_control-label">{$lang->cmd_advanced_mailer_account_type}</label>
-			<div class="x_controls full-width">
+			<div class="x_controls">
 				<label class="x_inline" for="advanced_mailer_{$sending_method}_account_type_free"><input type="radio" name="{$sending_method}_account_type" id="advanced_mailer_{$sending_method}_account_type_free" value="free" checked="checked"|cond="$conf_value !== 'paid'" /> {$lang->cmd_advanced_mailer_free_account}</label>
 				<label class="x_inline" for="advanced_mailer_{$sending_method}_account_type_paid"><input type="radio" name="{$sending_method}_account_type" id="advanced_mailer_{$sending_method}_account_type_paid" value="paid" checked="checked"|cond="$conf_value === 'paid'" /> {$lang->cmd_advanced_mailer_paid_account}</label>
 			</div>
@@ -164,7 +164,7 @@
 		<!--@if($conf_name === 'region')-->
 		<div class="x_control-group hidden-by-default show-for-{$sending_method}">
 			<label class="x_control-label" for="advanced_mailer_{$sending_method}_region">{$lang->cmd_advanced_mailer_aws_region}</label>
-			<div class="x_controls full-width">
+			<div class="x_controls">
 				<select name="{$sending_method}_region" id="advanced_mailer_{$sending_method}_region">
 					<option value="us-east-1" selected="selected"|cond="$conf_value === 'us-east-1'">us-east-1 (N. Virginia)</option>
 					<option value="us-west-2" selected="selected"|cond="$conf_value === 'us-west-2'">us-west-2 (Oregon)</option>
@@ -177,7 +177,7 @@
 		<!--@if($conf_name === 'access_key')-->
 		<div class="x_control-group hidden-by-default show-for-{$sending_method}">
 			<label class="x_control-label" for="advanced_mailer_{$sending_method}_access_key">{$lang->cmd_advanced_mailer_aws_access_key}</label>
-			<div class="x_controls full-width">
+			<div class="x_controls">
 				<input type="text" name="{$sending_method}_access_key" id="advanced_mailer_{$sending_method}_access_key" value="{$conf_value}" />
 			</div>
 		</div>
