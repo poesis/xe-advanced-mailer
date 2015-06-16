@@ -49,8 +49,8 @@
 		
 		<h2 style="padding-top:12px">{$lang->cmd_advanced_mailer_sending_method_config}</h2>
 		
-		<div class="advanced_mailer_description" cond="count($available_sending_methods) < count($sending_methods)">
-			※ {$lang->msg_advanced_mailer_php_version_is_low}
+		<div class="advanced_mailer_description">
+			※ {$lang->cmd_advanced_mailer_about_sending_method}
 		</div>
 		
 		<div class="x_control-group show-always">
@@ -66,6 +66,7 @@
 					<option value="sendgrid" selected="selected"|cond="$advanced_mailer_config['sending_method'] === 'sendgrid'" cond="in_array('sendgrid', $available_sending_methods)">{$lang->cmd_advanced_mailer_sending_method_sendgrid}</option>
 					<option value="woorimail" selected="selected"|cond="$advanced_mailer_config['sending_method'] === 'woorimail'" cond="in_array('woorimail', $available_sending_methods)">{$lang->cmd_advanced_mailer_sending_method_woorimail}</option>
 				</select>
+				<p class="x_help-block" cond="count($available_sending_methods) < count($sending_methods)">{$lang->msg_advanced_mailer_php_version_is_low}</p>
 			</div>
 		</div>
 		
@@ -251,6 +252,15 @@
 			<label class="x_control-label" for="advanced_mailer_recipient_email">{$lang->cmd_advanced_mailer_recipient_email}</label>
 			<div class="x_controls">
 				<input type="text" id="advanced_mailer_recipient_email" value="{Context::get('logged_info')->email_address}" />
+			</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label" for="advanced_mailer_use_exceptions">{$lang->cmd_advanced_mailer_use_exceptions}</label>
+			<div class="x_controls">
+				<select id="advanced_mailer_use_exceptions">
+					<option value="Y">{$lang->cmd_advanced_mailer_use_exceptions_yes}</option>
+					<option value="N">{$lang->cmd_advanced_mailer_use_exceptions_no}</option>
+				</select>
 				<button id="advanced_mailer_test_send" type="button">{$lang->cmd_advanced_mailer_send}</button>
 			</div>
 		</div>

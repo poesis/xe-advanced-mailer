@@ -48,6 +48,10 @@
 		<value xml:lang="ko"><![CDATA[발송 방법]]></value>
 		<value xml:lang="en"><![CDATA[Sending method]]></value>
 	</item>
+	<item name="cmd_advanced_mailer_about_sending_method">
+		<value xml:lang="ko"><![CDATA[받는이의 주소가 <a href="./index.php?module=admin&amp;act=dispMemberAdminExceptions" target="_blank">예외 도메인</a>에 해당하지 않을 경우 모두 이 방법으로 발송됩니다.]]></value>
+		<value xml:lang="en"><![CDATA[This method will be used for all emails where the recipient's email address does not belong to an <a href="./index.php?module=admin&amp;act=dispMemberAdminExceptions" target="_blank">exception domain</a>.]]></value>
+	</item>
 	<item name="cmd_advanced_mailer_sending_method_default">
 		<value xml:lang="ko"><![CDATA[기본 발송 방법]]></value>
 		<value xml:lang="en"><![CDATA[Default sending method]]></value>
@@ -94,15 +98,15 @@
 	</item>
 	<item name="cmd_advanced_mailer_smtp_host">
 		<value xml:lang="ko"><![CDATA[SMTP 서버]]></value>
-		<value xml:lang="en"><![CDATA[SMTP 서버]]></value>
+		<value xml:lang="en"><![CDATA[SMTP host]]></value>
 	</item>
 	<item name="cmd_advanced_mailer_smtp_port">
 		<value xml:lang="ko"><![CDATA[SMTP 포트]]></value>
-		<value xml:lang="en"><![CDATA[SMTP 포트]]></value>
+		<value xml:lang="en"><![CDATA[SMTP port]]></value>
 	</item>
 	<item name="cmd_advanced_mailer_smtp_security">
 		<value xml:lang="ko"><![CDATA[SMTP 보안]]></value>
-		<value xml:lang="en"><![CDATA[SMTP 보안]]></value>
+		<value xml:lang="en"><![CDATA[SMTP security]]></value>
 	</item>
 	<item name="cmd_advanced_mailer_smtp_security_ssl">
 		<value xml:lang="ko"><![CDATA[SSL]]></value>
@@ -202,7 +206,7 @@
 	</item>
 	<item name="cmd_advanced_mailer_txt_record">
 		<value xml:lang="ko"><![CDATA[TXT 레코드 값]]></value>
-		<value xml:lang="en"><![CDATA[TXT record value]]></value>
+		<value xml:lang="en"><![CDATA[TXT record]]></value>
 	</item>
 	<item name="cmd_advanced_mailer_check">
 		<value xml:lang="ko"><![CDATA[체크]]></value>
@@ -298,7 +302,19 @@
 	</item>
 	<item name="cmd_advanced_mailer_exception_group">
 		<value xml:lang="ko"><![CDATA[예외 그룹]]></value>
-		<value xml:lang="en"><![CDATA[Exception group]]></value>
+		<value xml:lang="en"><![CDATA[Exception Group]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_use_exceptions">
+		<value xml:lang="ko"><![CDATA[예외 도메인 설정]]></value>
+		<value xml:lang="en"><![CDATA[Exception domains]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_use_exceptions_yes">
+		<value xml:lang="ko"><![CDATA[예외 설정을 적용하여 테스트]]></value>
+		<value xml:lang="en"><![CDATA[Test with exceptions as configured]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_use_exceptions_no">
+		<value xml:lang="ko"><![CDATA[무시하고 기본 발송 방법만 테스트]]></value>
+		<value xml:lang="en"><![CDATA[Ignore exceptions and only test the default sending method]]></value>
 	</item>
 	<item name="msg_advanced_mailer_sending_method_is_invalid">
 		<value xml:lang="ko"><![CDATA[올바른 발송 방법을 선택해 주십시오.]]></value>
@@ -389,8 +405,8 @@
 		<value xml:lang="en"><![CDATA[The test was successful. Please check your email, and don't forget to save the current configuration.]]></value>
 	</item>
 	<item name="msg_advanced_mailer_php_version_is_low">
-		<value xml:lang="ko"><![CDATA[PHP 5.4 미만 버전이므로 일부 발송 방법의 사용이 제한되었습니다.]]></value>
-		<value xml:lang="en"><![CDATA[Some sending methods have disabled because your PHP version is lower than 5.4.]]></value>
+		<value xml:lang="ko"><![CDATA[PHP 5.4 미만 버전이므로 일부 발송 방법의 사용이 제한됩니다.]]></value>
+		<value xml:lang="en"><![CDATA[Some sending methods are not available because your PHP version is lower than 5.4.]]></value>
 	</item>
 	<item name="msg_advanced_mailer_google_account_security">
 		<value xml:lang="ko"><![CDATA[아이디 또는 비밀번호가 틀렸거나, 구글 보안 설정 때문에 SMTP 접속이 차단되었습니다.<br />자세한 정보는 <a href="https://support.google.com/mail/answer/14257?hl=ko" target="_blank">여기</a>를 참고하시기 바랍니다.]]></value>

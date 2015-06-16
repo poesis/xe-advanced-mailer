@@ -26,11 +26,12 @@ class Base
 	public $caller = NULL;
 	public $message = NULL;
 	public $assembleMessage = true;
+	public $forceSendingMethod = false;
 	
 	/**
 	 * Constructor
 	 */
-	public function __construct()
+	public function __construct($force_sending_method = null)
 	{
 		// Load SwiftMailer
 		if(version_compare(PHP_VERSION, '5.4', '<'))
@@ -42,6 +43,12 @@ class Base
 			include_once dirname(__DIR__) . '/vendor/autoload.php';
 		}
 		$this->message = \Swift_Message::newInstance();
+		
+		// Force sending method
+		if($force_sending_method !== null)
+		{
+			$this->forceSendingMethod = $force_sending_method;
+		}
 		
 		// Auto-fill the sender info
 		if(self::$config->sender_email)
@@ -526,6 +533,11 @@ class Base
 	 */
 	public function getSendingMethod($email = null)
 	{
+		if($this->forceSendingMethod)
+		{
+			return $this->forceSendingMethod;
+		}
+		
 		if($email === null)
 		{
 			return self::$config->sending_method;

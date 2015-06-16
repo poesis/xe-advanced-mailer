@@ -90,7 +90,8 @@
 				sender_email: $("#advanced_mailer_sender_email").val(),
 				reply_to: $("#advanced_mailer_reply_to").val(),
 				recipient_name: $("#advanced_mailer_recipient_name").val(),
-				recipient_email: $("#advanced_mailer_recipient_email").val()
+				recipient_email: $("#advanced_mailer_recipient_email").val(),
+				use_exceptions: $("#advanced_mailer_use_exceptions").val()
 			};
 			$.each(advanced_mailer_sending_methods, function(sending_method, sending_conf) {
 				$.each(sending_conf.conf, function(key, conf_name) {

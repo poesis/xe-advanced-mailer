@@ -43,6 +43,7 @@
 						<option value="{$method}" selected="selected"|cond="$advanced_mailer_config['exceptions'][$i]['method'] === $method" cond="in_array($method, $available_sending_methods)">{Context::getLang('cmd_advanced_mailer_sending_method_' . $method)}</option>
 					<!--@end-->
 				</select>
+				<p class="x_help-block" cond="count($available_sending_methods) < count($sending_methods)">{$lang->msg_advanced_mailer_php_version_is_low}</p>
 			</div>
 		</div>
 		

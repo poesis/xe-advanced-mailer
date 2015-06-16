@@ -189,9 +189,10 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 	{
 		$test_config = $this->getRequestVars();
 		
-		$recipient_config = Context::gets('recipient_name', 'recipient_email');
+		$recipient_config = Context::gets('recipient_name', 'recipient_email', 'use_exceptions');
 		$recipient_name = $recipient_config->recipient_name;
 		$recipient_email = $recipient_config->recipient_email;
+		$use_exceptions = $recipient_config->use_exceptions === 'N' ? false : true;
 		
 		if (!class_exists('Mail'))
 		{
@@ -232,7 +233,7 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 		
 		try
 		{
-			$oMail = new Mail();
+			$oMail = new Mail($use_exceptions ? false : $test_config->sending_method);
 			$oMail->setTitle('Advanced Mailer Test : ' . strtoupper($oMail->getSendingMethod($recipient_email)));
 			$oMail->setContent('<p>This is a <b>test email</b> from Advanced Mailer.</p><p>Thank you for trying Advanced Mailer.</p>');
 			$oMail->setReceiptor($recipient_name, $recipient_email);
