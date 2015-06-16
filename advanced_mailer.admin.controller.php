@@ -88,6 +88,7 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 				$domains = array_map('trim', preg_split('/[,\n]/', $domains, null, PREG_SPLIT_NO_EMPTY));
 				foreach ($domains as $domain)
 				{
+					if (strpos($domain, 'xn--') !== false) $domain = idn_to_utf8($domain);
 					$exceptions[$i]['domains'][] = $domain;
 				}
 			}

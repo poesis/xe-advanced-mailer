@@ -549,12 +549,14 @@ class Base
 			return self::$config->sending_method;
 		}
 		
+		if(strpos($domain, 'xn--') !== false) $domain = idn_to_utf8($domain);
+		
 		if(is_array(self::$config->exceptions))
 		{
 			foreach(self::$config->exceptions as $exception)
 			{
 				if($exception['method'] === 'default') continue;
-				if(in_array($domain, $exception['domains']))
+				if(in_array($domain, $exception['domains'], true))
 				{
 					return $exception['method'];
 				}
