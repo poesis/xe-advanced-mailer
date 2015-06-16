@@ -27,7 +27,7 @@
 		</div>
 	</div>
 	
-	<div class="x_control-group">
+	<div class="x_control-group" cond="count($used_methods) > 1">
 		<label class="x_control-label">{$lang->cmd_advanced_mailer_sending_method_exceptions}</label>
 		<div class="x_controls">
 			<!--@foreach($advanced_mailer_config['exceptions'] as $exception)-->
@@ -64,31 +64,31 @@
 				{$lang->cmd_advanced_mailer_not_applicable_because_sender_domain}
 			</div>
 			<!--@elseif(!count($used_methods_with_usable_spf))-->
-			<div class="spf_dkim_item" cond="!$other_info">
+			<div class="spf_dkim_item">
 				{$lang->cmd_advanced_mailer_not_applicable_because_sending_method}
 			</div>
 			<!--@else-->
-			<div class="spf_dkim_item">
-				<span class="label">{$lang->cmd_advanced_mailer_dns_hostname}</span>
-				<span class="monospace">{$sending_domain}</span> &nbsp;
-				<a href="#" id="advanced_mailer_check_spf">{$lang->cmd_advanced_mailer_check}</a>
-			</div>
-			<div class="spf_dkim_item">
-				<span class="label">{$lang->cmd_advanced_mailer_txt_record}</span>
-				<span class="monospace">v=spf1 a mx {implode(' ', $used_methods_with_usable_spf)} ~all</span>
-			</div>
-			<!--@end-->
-			{@ $other_infos = array()}
-			<!--@foreach($used_methods_with_usable_spf as $method => $spf)-->
-			{@ $other_info = Context::getLang('cmd_advanced_mailer_other_info_' . $method . '_spf')}
-			{@ if(strncmp('cmd_', $other_info, 4)) $other_infos[] = $other_info}
-			<!--@end-->
-			<div class="spf_dkim_item" cond="count($other_infos)">
-				<!--@foreach($other_infos as $other_info)-->
-				<span class="label">{$lang->cmd_advanced_mailer_other_info}</span>
-				<span>{$other_info}</span><br />
+				<div class="spf_dkim_item">
+					<span class="label">{$lang->cmd_advanced_mailer_dns_hostname}</span>
+					<span class="monospace">{$sending_domain}</span> &nbsp;
+					<a href="#" id="advanced_mailer_check_spf">{$lang->cmd_advanced_mailer_check}</a>
+				</div>
+				<div class="spf_dkim_item">
+					<span class="label">{$lang->cmd_advanced_mailer_txt_record}</span>
+					<span class="monospace">v=spf1 a mx {implode(' ', $used_methods_with_usable_spf)} ~all</span>
+				</div>
+				{@ $other_infos = array()}
+				<!--@foreach($used_methods_with_usable_spf as $method => $spf)-->
+				{@ $other_info = Context::getLang('cmd_advanced_mailer_other_info_' . $method . '_spf')}
+				{@ if(strncmp('cmd_', $other_info, 4)) $other_infos[] = $other_info}
 				<!--@end-->
-			</div>
+				<div class="spf_dkim_item" cond="count($other_infos)">
+					<!--@foreach($other_infos as $other_info)-->
+					<span class="label">{$lang->cmd_advanced_mailer_other_info}</span>
+					<span>{$other_info}</span><br />
+					<!--@end-->
+				</div>
+			<!--@end-->
 		</div>
 	</div>
 	
@@ -100,7 +100,7 @@
 				{$lang->cmd_advanced_mailer_not_applicable_because_sender_domain}
 			</div>
 			<!--@elseif(!count($used_methods_with_usable_dkim))-->
-			<div class="spf_dkim_item" cond="!$other_info">
+			<div class="spf_dkim_item">
 				{$lang->cmd_advanced_mailer_not_applicable_because_sending_method}
 			</div>
 			<!--@else-->

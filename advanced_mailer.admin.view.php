@@ -88,7 +88,7 @@ class Advanced_MailerAdminView extends Advanced_Mailer
 		$used_methods_with_usable_dkim = array();
 		foreach ($used_methods as $method)
 		{
-			if ($method === 'woorimail' && $advanced_mailer_config['woorimail_account_type'] === 'free') continue;
+			if ($method === 'woorimail' && $config->woorimail_account_type === 'free') continue;
 			if ($this->sending_methods[$method]['spf'])
 			{
 				$used_methods_with_usable_spf[$method] = $this->sending_methods[$method]['spf'];
