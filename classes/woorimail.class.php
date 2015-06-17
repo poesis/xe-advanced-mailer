@@ -23,6 +23,7 @@ class Woorimail extends Base
 		'me_010' => '인증키가 없습니다.',	
 		'me_011' => '인증키가 부정확합니다.',
 		'me_012' => '포인트가 부족합니다.',
+		'me_013' => '전용채널에 도메인이 등록되어 있지 않습니다.'
 	);
 	
 	public $assembleMessage = false;
