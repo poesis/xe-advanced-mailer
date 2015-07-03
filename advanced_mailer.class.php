@@ -193,18 +193,7 @@ class Advanced_Mailer extends ModuleObject
 	
 	public function checkUpdate()
 	{
-		if (!$this->checkTriggers())
-		{
-			return true;
-		}
-		elseif (!class_exists('Mail') || !method_exists('Mail', 'isAdvancedMailer') || !Mail::isAdvancedMailer())
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return !$this->checkTriggers();
 	}
 	
 	public function moduleUpdate()
