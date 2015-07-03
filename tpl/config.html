@@ -17,9 +17,12 @@
 			<label class="x_control-label" for="advanced_mailer_is_enabled">{$lang->cmd_advanced_mailer_is_enabled}</label>
 			<div class="x_controls">
 				<select name="is_enabled" id="advanced_mailer_is_enabled">
-					<option value="Y" selected="selected"|cond="$advanced_mailer_config['is_enabled'] !== 'N'">{$lang->cmd_advanced_mailer_is_enabled_yes}</option>
+					<option value="Y" selected="selected"|cond="$advanced_mailer_config['is_enabled'] !== 'N'" cond="count($available_sending_methods)">{$lang->cmd_advanced_mailer_is_enabled_yes}</option>
 					<option value="N" selected="selected"|cond="$advanced_mailer_config['is_enabled'] === 'N'">{$lang->cmd_advanced_mailer_is_enabled_no}</option>
 				</select>
+				<p class="x_help-block" cond="count($available_sending_methods) == 0">
+					{$lang->msg_advanced_mailer_php_version_is_very_low}
+				</p>
 			</div>
 		</div>
 		

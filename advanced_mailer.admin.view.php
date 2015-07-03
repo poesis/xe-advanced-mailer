@@ -16,7 +16,11 @@ class Advanced_MailerAdminView extends Advanced_Mailer
 		$config = $this->getConfig();
 		$member_config = getModel('module')->getModuleConfig('member');
 		
-		if(version_compare(PHP_VERSION, '5.4', '<'))
+		if(version_compare(PHP_VERSION, '5.3', '<'))
+		{
+			$available_sending_methods = array();
+		}
+		elseif(version_compare(PHP_VERSION, '5.4', '<'))
 		{
 			$available_sending_methods = $this->sending_methods_php53;
 		}
