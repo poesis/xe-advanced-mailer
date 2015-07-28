@@ -324,6 +324,10 @@
 		<value xml:lang="ko"><![CDATA[더미는 실제로 메일을 발송하지 않고 기록만 하는 옵션입니다. 테스트에 사용하십시오.]]></value>
 		<value xml:lang="en"><![CDATA[Dummy does not actually send any email. It only records them. Use this option for testing.]]></value>
 	</item>
+	<item name="msg_advanced_mailer_about_dummy_exceptions">
+		<value xml:lang="ko"><![CDATA[더미를 선택하더라도 예외 도메인을 지정한 경우 메일이 발송될 수 있으니 주의하십시오.]]></value>
+		<value xml:lang="en"><![CDATA[Caution: if you have set up exception domains, email will be sent to those domains.]]></value>
+	</item>
 	<item name="msg_advanced_mailer_sending_method_is_invalid">
 		<value xml:lang="ko"><![CDATA[올바른 발송 방법을 선택해 주십시오.]]></value>
 		<value xml:lang="en"><![CDATA[Please select a valid sending method.]]></value>
