@@ -3,7 +3,7 @@
 /**
  * @file advanced_mailer.admin.view.php
  * @author Kijin Sung <kijin@kijinsung.com>
- * @license LGPL v2.1 <http://www.gnu.org/licenses/lgpl-2.1.html>
+ * @license GPLv2 or Later <https://www.gnu.org/licenses/gpl-2.0.html>
  * @brief Advanced Mailer Admin View
  */
 class Advanced_MailerAdminView extends Advanced_Mailer

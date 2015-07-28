@@ -5,7 +5,7 @@ namespace Advanced_Mailer;
 /**
  * @file postmark.class.php
  * @author Kijin Sung <kijin@kijinsung.com>
- * @license LGPL v2.1 <http://www.gnu.org/licenses/lgpl-2.1.html>
+ * @license GPLv2 or Later <https://www.gnu.org/licenses/gpl-2.0.html>
  * @brief Advanced Mailer Transport: Postmark
  */
 class Postmark extends Base
