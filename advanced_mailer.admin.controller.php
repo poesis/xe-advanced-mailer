@@ -317,6 +317,9 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 		
 		switch ($args->sending_method)
 		{
+			case 'dummy':
+				break;
+			
 			case 'mail':
 				break;
 			

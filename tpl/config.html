@@ -60,6 +60,7 @@
 			<label class="x_control-label" for="advanced_mailer_sending_method">{$lang->cmd_advanced_mailer_sending_method_default}</label>
 			<div class="x_controls">
 				<select name="sending_method" id="advanced_mailer_sending_method">
+					<option value="dummy" selected="selected"|cond="$advanced_mailer_config['sending_method'] === 'dummy'" cond="in_array('dummy', $available_sending_methods)">{$lang->cmd_advanced_mailer_sending_method_dummy}</option>
 					<option value="mail" selected="selected"|cond="$advanced_mailer_config['sending_method'] === 'mail'" cond="in_array('mail', $available_sending_methods)">{$lang->cmd_advanced_mailer_sending_method_mail}</option>
 					<option value="smtp" selected="selected"|cond="$advanced_mailer_config['sending_method'] === 'smtp'" cond="in_array('smtp', $available_sending_methods)">{$lang->cmd_advanced_mailer_sending_method_smtp}</option>
 					<option value="ses" selected="selected"|cond="$advanced_mailer_config['sending_method'] === 'ses'" cond="in_array('ses', $available_sending_methods)">{$lang->cmd_advanced_mailer_sending_method_ses}</option>
@@ -76,6 +77,13 @@
 		<script type="text/javascript">
 			var advanced_mailer_sending_methods = {json_encode($sending_methods)};
 		</script>
+		
+		<div class="x_control-group hidden-by-default show-for-dummy">
+			<label class="x_control-label"></label>
+			<div class="x_controls">
+				<p class="x_help-block">{$lang->msg_advanced_mailer_about_dummy}</p>
+			</div>
+		</div>
 		
 		<!--@foreach($sending_methods as $sending_method => $sending_conf)-->
 		<!--@foreach($sending_conf['conf'] as $conf_name)-->

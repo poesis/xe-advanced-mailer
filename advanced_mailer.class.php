@@ -12,6 +12,11 @@ class Advanced_Mailer extends ModuleObject
 	 * Definition of sending methods and related settings.
 	 */
 	public $sending_methods = array(
+		'dummy' => array(
+			'conf' => array(),
+			'spf' => '',
+			'dkim' => '',
+		),
 		'mail' => array(
 			'conf' => array(),
 			'spf' => '',
@@ -57,7 +62,7 @@ class Advanced_Mailer extends ModuleObject
 	/**
 	 * Definition of sending methods available in PHP 5.3.
 	 */
-	public $sending_methods_php53 = array('mail', 'smtp', 'woorimail');
+	public $sending_methods_php53 = array('dummy', 'mail', 'smtp', 'woorimail');
 	
 	/**
 	 * Get the configuration of the current module.
