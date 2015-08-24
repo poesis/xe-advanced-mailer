@@ -236,7 +236,8 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 		{
 			$oMail = new Mail($use_exceptions ? false : $test_config->sending_method);
 			$oMail->setTitle('Advanced Mailer Test : ' . strtoupper($oMail->getSendingMethod($recipient_email)));
-			$oMail->setContent('<p>This is a <b>test email</b> from Advanced Mailer.</p><p>Thank you for trying Advanced Mailer.</p>');
+			$oMail->setContent('<p>This is a <b>test email</b> from Advanced Mailer.</p><p>Thank you for trying Advanced Mailer.</p>' .
+				'<p>고급 메일 발송 모듈 <b>테스트</b> 메일입니다.</p><p>메일이 정상적으로 발송되고 있습니다.</p>');
 			$oMail->setReceiptor($recipient_name, $recipient_email);
 			$result = $oMail->send();
 			
