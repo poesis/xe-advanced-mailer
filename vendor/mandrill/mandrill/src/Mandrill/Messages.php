@@ -356,7 +356,7 @@ class Mandrill_Messages {
     }
 
     /**
-     * Queries your scheduled emails by sender or recipient, or both.
+     * Queries your scheduled emails.
      * @param string $to an optional recipient address to restrict results to
      * @return array a list of up to 1000 scheduled emails
      *     - return[] struct a scheduled email

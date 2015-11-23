@@ -46,7 +46,15 @@ try {
 }
 ```
 
-## Installation
+## Announcements ##
+
+For users of our [Web API v3 endpoints](https://sendgrid.com/docs/API_Reference/Web_API_v3/API_Keys/index.html), we have begun integrating v3 endpoints into this library. We are also updating and enhancing the core library code.
+
+In no particular order, we have implemented a [few of the v3](#webapiv3) endpoints already and would appreciate your feedback.
+
+Thank you for your continued support! 
+
+## Installation ##
 
 Add SendGrid to your `composer.json` file. If you are not using [Composer](http://getcomposer.org), you should be. It's an excellent way to manage dependencies in your PHP application. 
 
@@ -84,7 +92,7 @@ There is a [sendgrid-php-example app](https://github.com/sendgrid/sendgrid-php-e
 
 ## Usage
 
-To begin using this library, initialize the SendGrid object with your SendGrid credentials OR a SendGrid [API Key](https://sendgrid.com/docs/User_Guide/Account/api_keys.html). API Key is the preferred method. API Keys are in beta. To configure API keys, visit https://sendgrid.com/beta/settings/api_key.
+To begin using this library, initialize the SendGrid object with your SendGrid credentials OR a SendGrid [API Key](https://sendgrid.com/docs/Classroom/Send/api_keys.html). API Key is the preferred method. To configure API keys, visit https://app.sendgrid.com/settings/api_keys.
 
 ```php
 $sendgrid = new SendGrid('username', 'password');
@@ -98,7 +106,7 @@ Create a new SendGrid Email object and add your message details.
 $email = new SendGrid\Email();
 $email
     ->addTo('foo@bar.com')
-    ->addTo('bar@foo.com')
+    //->addTo('bar@foo.com') //One of the most notable changes is how `addTo()` behaves. We are now using our Web API parameters instead of the X-SMTPAPI header. What this means is that if you call `addTo()` multiple times for an email, **ONE** email will be sent with each email address visible to everyone.
     ->setFrom('me@bar.com')
     ->setSubject('Subject goes here')
     ->setText('Hello World!')
@@ -111,6 +119,8 @@ Send it.
 ```php
 $sendgrid->send($email);
 ```
+
+NOTE: The total message size is limited to 20,480,000 bytes, or approximately 19.5MB. This includes all the headers, body, and attachments. [Reference](https://sendgrid.com/docs/Classroom/Build/attachments.html)
 
 ### Exceptions
 
@@ -136,6 +146,8 @@ $options = array(
     'raise_exceptions' => false
 );
 $sendgrid = new SendGrid('username', 'password', $options);
+// OR
+$sendgrid = new SendGrid('sendgrid api key', $options);
 ```
 
 #### Changing URL
@@ -145,6 +157,16 @@ You may change the URL sendgrid-php uses to send email by supplying various para
 $sendgrid = new SendGrid(
     'username', 
     'password', 
+    array(
+        'protocol' => 'http', 
+        'host' => 'sendgrid.org', 
+        'endpoint' => '/send', 
+        'port' => '80' 
+    )
+);
+// OR
+$sendgrid = new SendGrid(
+    'sendgrid_api_key', 
     array(
         'protocol' => 'http', 
         'host' => 'sendgrid.org', 
@@ -162,6 +184,11 @@ $sendgrid = new SendGrid(
     'password', 
     array( 'url' => 'http://sendgrid.org:80/send')
 );
+// OR
+$sendgrid = new SendGrid(
+    'sendgrid_api_key', 
+    array( 'url' => 'http://sendgrid.org:80/send')
+);
 ```
 
 #### Ignoring SSL certificate verification
@@ -170,8 +197,13 @@ You can optionally ignore verification of SSL certificate when using the Web API
 
 ```php
 $sendgrid = new SendGrid(
-    SENDGRID_USERNAME, 
-    SENDGRID_PASSWORD, 
+    'username', 
+    'password', 
+    array("turn_off_ssl_verification" => true)
+);
+// OR
+$sendgrid = new SendGrid(
+    'sendgrid_api_key', 
     array("turn_off_ssl_verification" => true)
 );
 ```
@@ -229,17 +261,38 @@ object(SendGrid\Response)#31 (4) {
 
 Returns the status code of the response.
 
+```php
+$res = $sendgrid->send($email);
+echo $res->getCode()
+```
+
 #### getHeaders ####
 
-Returns the headers of the response as a [Guzzle\Http\Message\Header\HeaderCollection object](http://api.guzzlephp.org/class-Guzzle.Http.Message.Header.HeaderCollection.html).
+Returns the headers of the response as a [Guzzle\Http\Message\Header\HeaderCollection object](https://docs.aws.amazon.com/aws-sdk-php/v2/api/class-Guzzle.Http.Message.Header.HeaderCollection.html).
+
+```php
+$res = $sendgrid->send($email);
+$guzzle = $res->getHeaders();
+echo var_dump($guzzle);
+```
 
 #### getRawBody ####
 
 Returns the unparsed JSON response from SendGrid.
 
+```php
+$res = $sendgrid->send($email);
+echo $res->getRawBody()
+```
+
 #### getBody ####
 
 Returns the parsed JSON from SendGrid.
+
+```php
+$res = $sendgrid->send($email);
+echo var_dump($res->getBody());
+```
 
 ### Exception ###
 
@@ -258,6 +311,76 @@ try {
 // Output
 400
 Permission denied, wrong credentials
+```
+
+### <a name="webapiv3"></a>WEB API v3 ###
+
+[APIKeys](https://sendgrid.com/docs/API_Reference/Web_API_v3/API_Keys/index.html)
+
+List all API Keys belonging to the authenticated user.
+
+```php
+require 'vendor/autoload.php';
+Dotenv::load(__DIR__);
+$sendgrid_apikey = getenv('SG_KEY');
+$sendgrid = new Client($sendgrid_apikey);
+$response = $sendgrid->api_keys->get();
+print("Status Code: " . $response->getStatusCode() . "\n");
+print("Body: " . $response->getBody() . "\n");
+```
+
+[ASMGroups](https://sendgrid.com/docs/API_Reference/Web_API_v3/Suppression_Management/groups.html)
+
+Retrieve all suppression groups associated with the user.
+
+```php
+require 'vendor/autoload.php';
+Dotenv::load(__DIR__);
+$sendgrid_apikey = getenv('SG_KEY');
+$sendgrid = new Client($sendgrid_apikey);
+$response = $sendgrid->asm_groups->get();
+print("Status Code: " . $response->getStatusCode() . "\n");
+print("Body: " . $response->getBody() . "\n");
+```
+
+[ASMSuppressions](https://sendgrid.com/docs/API_Reference/Web_API_v3/Suppression_Management/suppressions.html)
+
+Get suppressed addresses for a given group.
+
+```php
+require 'vendor/autoload.php';
+Dotenv::load(__DIR__);
+$sendgrid_apikey = getenv('SG_KEY');
+$sendgrid = new Client($sendgrid_apikey);
+$group_id = 70;
+$response = $sendgrid->asm_suppressions->get($group_id);
+print("Status Code: " . $response->getStatusCode() . "\n");
+print("Body: " . $response->getBody() . "\n");
+```
+
+Add recipient addresses to the suppressions list for a given group.
+
+```php
+$group_id = 70;
+$email = 'elmer.thomas+test1@gmail.com';
+$response = $sendgrid->asm_suppressions->post($group_id, $email);
+print("Status Code: " . $response->getStatusCode() . "\n");
+print("Body: " . $response->getBody() . "\n");
+
+$email = array('elmer.thomas+test5@gmail.com', 'elmer.thomas+test6@gmail.com');
+$response = $sendgrid->asm_suppressions->post($group_id, $email);
+print("Status Code: " . $response->getStatusCode() . "\n");
+print("Body: " . $response->getBody() . "\n");
+```
+
+Delete a recipient email from the suppressions list for a group.
+
+```php
+$group_id = 70;
+$email = 'elmer.thomas+test1@gmail.com';
+$response = $sendgrid->asm_suppressions->delete($group_id, $email);
+print("Status Code: " . $response->getStatusCode() . "\n");
+print("Body: " . $response->getBody() . "\n");
 ```
 
 ### SMTPAPI ###
@@ -329,7 +452,6 @@ $email->setSmtpapiTos($emails);
 $sendgrid->send($email);
 ```
 
-
 #### setFrom
 
 ```php
@@ -345,8 +467,6 @@ $email = new SendGrid\Email();
 $email
     ->setFrom('foo@bar.com')
     ->setFromName('Foo Bar')
-    ->setFrom('other@example.com')
-    ->setFromName('Other Guy')
 ;
 $sendgrid->send($email);
 ```
@@ -708,7 +828,15 @@ $email
 
 ### Unique Arguments ###
 
-Unique Arguments are used for tracking purposes
+[Unique Arguments](https://sendgrid.com/docs/API_Reference/SMTP_API/unique_arguments.html) are used for tracking purposes.
+
+NOTE: While you can attach an unlimited number of unique arguments to your email, there is an upper bound of 10,000 bytes. Before passing an email into the `send` function, you should do the following:
+
+```
+if (mb_strlen($myEmail->smtpapi->jsonString(), 'UTF-8') > 10000) {
+    // throw Exception
+}
+```
 
 #### addUniqueArg / addUniqueArgument
 
@@ -735,7 +863,7 @@ $email
 
 ### Filter Settings ###
 
-Filter Settings are used to enable and disable apps, and to pass parameters to those apps.
+[Filter Settings](https://sendgrid.com/docs/API_Reference/SMTP_API/apps.html) are used to enable and disable apps, and to pass parameters to those apps.
 
 #### addFilter / addFilterSetting
 
@@ -853,6 +981,8 @@ Sometimes you might want to send 1,000s of emails in one request. You can do tha
 
 ```php
 $sendgrid = new SendGrid(SENDGRID_USERNAME, SENDGRID_PASSWORD);
+// OR
+$sendgrid = new SendGrid(SENDGRID_APIKEY);
 $email = new SendGrid\Email();
 
 $recipients = array(
@@ -888,15 +1018,13 @@ The existing tests in the `test` directory can be run using [PHPUnit](https://gi
 
 ````bash
 composer update --dev
-cd test
-../vendor/bin/phpunit
+./vendor/bin/phpunit --bootstrap test/unit/bootstrap.php --filter test* test/unit
 ```
 
 or if you already have PHPUnit installed globally.
 
 ```bash
-cd test
-phpunit
+phpunit --bootstrap test/unit/bootstrap.php --filter test* test/unit
 ```
 
 ## Releasing

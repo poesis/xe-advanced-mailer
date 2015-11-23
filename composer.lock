@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1dd862f7fe69583050a66acd55eeac1f",
+    "hash": "70ee0a5e83d8f57a5f54f1f076379268",
     "packages": [
         {
             "name": "guzzle/guzzle",
@@ -346,16 +346,16 @@
         },
         {
             "name": "mandrill/mandrill",
-            "version": "1.0.54",
+            "version": "1.0.55",
             "source": {
                 "type": "git",
                 "url": "https://bitbucket.org/mailchimp/mandrill-api-php.git",
-                "reference": "9f336b08ea148c80db3b694f3dc737cd4f414e19"
+                "reference": "da3adc10042eafac2e53de141b358a52b8e53596"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://bitbucket.org/mailchimp/mandrill-api-php/get/9f336b08ea148c80db3b694f3dc737cd4f414e19.zip",
-                "reference": "9f336b08ea148c80db3b694f3dc737cd4f414e19",
+                "url": "https://bitbucket.org/mailchimp/mandrill-api-php/get/da3adc10042eafac2e53de141b358a52b8e53596.zip",
+                "reference": "da3adc10042eafac2e53de141b358a52b8e53596",
                 "shasum": ""
             },
             "require": {
@@ -385,20 +385,20 @@
                 "api",
                 "email"
             ],
-            "time": "2014-10-16 21:08:20"
+            "time": "2015-09-22 13:58:03"
         },
         {
             "name": "openbuildings/postmark",
-            "version": "0.3.2",
+            "version": "0.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/OpenBuildings/postmark.git",
-                "reference": "d423147ed4d6d276b02840b02c7baf67ba07c9a7"
+                "reference": "8909fc0512346e11267c21ce95b4bb0112db31fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OpenBuildings/postmark/zipball/d423147ed4d6d276b02840b02c7baf67ba07c9a7",
-                "reference": "d423147ed4d6d276b02840b02c7baf67ba07c9a7",
+                "url": "https://api.github.com/repos/OpenBuildings/postmark/zipball/8909fc0512346e11267c21ce95b4bb0112db31fd",
+                "reference": "8909fc0512346e11267c21ce95b4bb0112db31fd",
                 "shasum": ""
             },
             "require": {
@@ -407,6 +407,11 @@
             },
             "require-dev": {
                 "swiftmailer/swiftmailer": "~5.0"
+            },
+            "suggest": {
+                "openbuildings/swiftmailer-css-inliner": "Inline the CSS of your HTML emails",
+                "openbuildings/swiftmailer-filter": "Whitelist or blacklist domains or emails from To, Cc and Bcc",
+                "openbuildings/swiftmailer-google-campaign": "Append to all email links Google UTM campaign parameters"
             },
             "type": "library",
             "autoload": {
@@ -426,20 +431,20 @@
                 }
             ],
             "description": "Swiftmailer Transport Class for Postmark",
-            "time": "2015-03-17 09:54:31"
+            "time": "2015-11-09 15:55:13"
         },
         {
             "name": "react/promise",
-            "version": "v2.2.0",
+            "version": "v2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/reactphp/promise.git",
-                "reference": "365fcee430dfa4ace1fbc75737ca60ceea7eeeef"
+                "reference": "3b6fca09c7d56321057fa8867c8dbe1abf648627"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reactphp/promise/zipball/365fcee430dfa4ace1fbc75737ca60ceea7eeeef",
-                "reference": "365fcee430dfa4ace1fbc75737ca60ceea7eeeef",
+                "url": "https://api.github.com/repos/reactphp/promise/zipball/3b6fca09c7d56321057fa8867c8dbe1abf648627",
+                "reference": "3b6fca09c7d56321057fa8867c8dbe1abf648627",
                 "shasum": ""
             },
             "require": {
@@ -466,24 +471,24 @@
             "authors": [
                 {
                     "name": "Jan Sorgalla",
-                    "email": "jsorgalla@googlemail.com"
+                    "email": "jsorgalla@gmail.com"
                 }
             ],
             "description": "A lightweight implementation of CommonJS Promises/A for PHP",
-            "time": "2014-12-30 13:32:42"
+            "time": "2015-07-03 13:48:55"
         },
         {
             "name": "sendgrid/sendgrid",
-            "version": "3.2.0",
+            "version": "4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sendgrid/sendgrid-php.git",
-                "reference": "75970eb82f5629e66db4d6da08ff7ef0c507e9b0"
+                "reference": "f35a35ba5ee3ff7157332d952e908bd42e8db217"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sendgrid/sendgrid-php/zipball/75970eb82f5629e66db4d6da08ff7ef0c507e9b0",
-                "reference": "75970eb82f5629e66db4d6da08ff7ef0c507e9b0",
+                "url": "https://api.github.com/repos/sendgrid/sendgrid-php/zipball/f35a35ba5ee3ff7157332d952e908bd42e8db217",
+                "reference": "f35a35ba5ee3ff7157332d952e908bd42e8db217",
                 "shasum": ""
             },
             "require": {
@@ -517,7 +522,7 @@
                 "send",
                 "sendgrid"
             ],
-            "time": "2015-05-13 16:58:46"
+            "time": "2015-10-16 23:34:21"
         },
         {
             "name": "sendgrid/smtpapi",
@@ -569,23 +574,23 @@
         },
         {
             "name": "swiftmailer/swiftmailer",
-            "version": "v5.4.0",
+            "version": "v5.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "31454f258f10329ae7c48763eb898a75c39e0a9f"
+                "reference": "0697e6aa65c83edf97bb0f23d8763f94e3f11421"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/31454f258f10329ae7c48763eb898a75c39e0a9f",
-                "reference": "31454f258f10329ae7c48763eb898a75c39e0a9f",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/0697e6aa65c83edf97bb0f23d8763f94e3f11421",
+                "reference": "0697e6aa65c83edf97bb0f23d8763f94e3f11421",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
             "require-dev": {
-                "mockery/mockery": "~0.9.1"
+                "mockery/mockery": "~0.9.1,<0.9.4"
             },
             "type": "library",
             "extra": {
@@ -614,35 +619,34 @@
             "description": "Swiftmailer, free feature-rich PHP mailer",
             "homepage": "http://swiftmailer.org",
             "keywords": [
+                "email",
                 "mail",
                 "mailer"
             ],
-            "time": "2015-03-14 06:06:39"
+            "time": "2015-06-06 14:19:39"
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.6.7",
-            "target-dir": "Symfony/Component/EventDispatcher",
+            "version": "v2.7.6",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/EventDispatcher.git",
-                "reference": "672593bc4b0043a0acf91903bb75a1c82d8f2e02"
+                "url": "https://github.com/symfony/event-dispatcher.git",
+                "reference": "87a5db5ea887763fa3a31a5471b512ff1596d9b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/672593bc4b0043a0acf91903bb75a1c82d8f2e02",
-                "reference": "672593bc4b0043a0acf91903bb75a1c82d8f2e02",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/87a5db5ea887763fa3a31a5471b512ff1596d9b8",
+                "reference": "87a5db5ea887763fa3a31a5471b512ff1596d9b8",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3"
+                "php": ">=5.3.9"
             },
             "require-dev": {
                 "psr/log": "~1.0",
                 "symfony/config": "~2.0,>=2.0.5",
                 "symfony/dependency-injection": "~2.6",
                 "symfony/expression-language": "~2.6",
-                "symfony/phpunit-bridge": "~2.7",
                 "symfony/stopwatch": "~2.3"
             },
             "suggest": {
@@ -652,11 +656,11 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.6-dev"
+                    "dev-master": "2.7-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
+                "psr-4": {
                     "Symfony\\Component\\EventDispatcher\\": ""
                 }
             },
@@ -676,7 +680,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2015-05-02 15:18:45"
+            "time": "2015-10-11 09:39:48"
         }
     ],
     "packages-dev": [],

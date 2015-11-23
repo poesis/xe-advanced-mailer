@@ -2,8 +2,8 @@
 	"require": {
 		"mailgun/mailgun-php": "1.8.*",
 		"mandrill/mandrill": "1.0.*",
-		"openbuildings/postmark": "0.3.2",
-		"sendgrid/sendgrid": "3.2.*",
+		"openbuildings/postmark": "0.3.3",
+		"sendgrid/sendgrid": "4.0.*",
 		"swiftmailer/swiftmailer": "5.4.*",
 		"jmhobbs/swiftmailer-transport-aws-ses": "0.9.2"
 	},
