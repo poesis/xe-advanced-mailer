@@ -67,12 +67,14 @@ class Woorimail extends Base
 		}
 		else
 		{
+			/*
 			$replyTo = $this->message->getReplyTo();
 			if(count($replyTo))
 			{
 				reset($replyTo);
 				$data['sender_email'] = key($replyTo);
 			}
+			*/
 		}
 		$to = $this->message->getTo();
 		foreach($to as $email => $name)
