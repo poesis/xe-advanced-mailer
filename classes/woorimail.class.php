@@ -105,7 +105,8 @@ class Woorimail extends Base
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-    	$result = curl_exec($ch);
+		curl_setopt($ch, CURLOPT_CAINFO, dirname(dirname(__FILE__)) . '/tpl/cacert/cacert.pem');
+		$result = curl_exec($ch);
 		curl_close($ch);
 		
 		if($result !== false && ($result = @json_decode($result, true)) && $result['result'] === 'OK')
