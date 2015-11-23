@@ -22,6 +22,12 @@ class Smtp extends Base
 		$transport->setUsername(self::$config->smtp_username);
 		$transport->setPassword(self::$config->smtp_password);
 		
+		$local_domain = $transport->getLocalDomain();
+		if (preg_match('/^\*\.(.+)$/', $local_domain, $matches))
+		{
+			$transport->setLocalDomain($matches[1]);
+		}
+		
 		try
 		{
 			$mailer = \Swift_Mailer::newInstance($transport);
