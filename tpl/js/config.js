@@ -22,6 +22,12 @@
 					$(this).hide();
 				}
 			});
+			var reply_to = $("#advanced_mailer_reply_to").parents("div.x_control-group");
+			if (sending_method === "woorimail") {
+				reply_to.hide();
+			} else {
+				reply_to.show();
+			}
 		}).triggerHandler("change");
 		
 		$("#advanced_mailer_smtp_manual_entry").on("change", function() {
