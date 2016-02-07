@@ -76,6 +76,10 @@ class Advanced_Mailer extends ModuleObject
 			$config->is_enabled = 'N';
 			$config->sending_method = 'mail';
 		}
+		if(!$config->sending_method)
+		{
+			$config->sending_method = 'mail';
+		}
 		
 		if(isset($config->send_type) || isset($config->api_key))
 		{

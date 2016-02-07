@@ -79,6 +79,7 @@ class Advanced_MailerAdminView extends Advanced_Mailer
 		Context::set('sending_domain', strpos($config->sender_email, '@') !== false ? substr(strrchr($config->sender_email, '@'), 1) : null);
 		
 		$used_methods = array($config->sending_method);
+		$config->exceptions = $config->exceptions ?: array();
 		foreach ($config->exceptions as $exception)
 		{
 			if ($exception['method'] !== 'default' && $exception['method'] !== $config->sending_method && count($exception['domains']))
