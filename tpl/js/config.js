@@ -53,8 +53,8 @@
 				$("#advanced_mailer_smtp_security_ssl").parent().removeClass("checked");
 				$("#advanced_mailer_smtp_security_none").parent().removeClass("checked");
 			}
-			if (auto_fill === 'naver_works') {
-				$("#advanced_mailer_smtp_host").val('smtp.works.naver.com');
+			if (auto_fill === 'worksmobile') {
+				$("#advanced_mailer_smtp_host").val('smtp.worksmobile.com');
 				$("#advanced_mailer_smtp_port").val('587');
 				$("#advanced_mailer_smtp_security_tls").prop("checked", true).parent().addClass("checked");
 				$("#advanced_mailer_smtp_security_ssl").parent().removeClass("checked");
