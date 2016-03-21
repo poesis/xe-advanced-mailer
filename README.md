@@ -13,6 +13,7 @@ Advanced Mailer Module for XE
   - [Mandrill](https://www.mandrill.com/)
   - [Postmark](https://postmarkapp.com/)
   - [SendGrid](https://sendgrid.com/)
+  - [SparkPost](https://www.sparkpost.com/)
   - [우리메일](http://woorimail.com/)
 
 외부 SMTP 서버나 메일 발송 전문업체의 API를 사용하면
@@ -111,8 +112,8 @@ SMTP 로그인이 되지 않으니 주의하시기 바랍니다.
 
 ### Mandrill API
 
-대량메일 발송 전문업체인 Mailchimp에서 트랜잭션 메일 발송을 위해 별도로 개발한 상품입니다.
-셋팅이 매우 간단하고, 월 12,000건까지 무료로 발송할 수 있습니다.
+대량메일 발송 전문업체인 Mailchimp에서 트랜잭션 메일 발송을 위해 별도로 개발한 상품으로 월 12,000건까지 무료로 발송할 수 있었으나,
+2016년 4월부터 Mailchimp 유료 회원에게만 제공된다고 하니 주의하시기 바랍니다.
 
   - API Key: Mandrill에서 발급받은 API key 입력
 
@@ -130,6 +131,14 @@ SMTP 로그인이 되지 않으니 주의하시기 바랍니다.
 
   - 아이디: SendGrid 회원 아이디
   - 비밀번호: SendGrid 회원 비밀번호
+
+### SparkPost API
+
+트랜잭션 메일 및 대량메일 발송 전문업체로 셋팅이 비교적 간단하고,
+하루 최대 10,000건, 월 100,000건까지 무료로 발송할 수 있습니다.
+사용하실 도메인의 postmaster@도메인 주소로 메일을 받을 수 있어야 가입 인증이 가능합니다.
+
+  - API Key: SparkPost에서 발급받은 API key 입력
 
 ### 우리메일 API
 
