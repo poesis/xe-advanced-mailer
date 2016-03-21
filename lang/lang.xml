@@ -92,6 +92,10 @@
 		<value xml:lang="ko"><![CDATA[SendGrid API]]></value>
 		<value xml:lang="en"><![CDATA[SendGrid API]]></value>
 	</item>
+	<item name="cmd_advanced_mailer_sending_method_sparkpost">
+		<value xml:lang="ko"><![CDATA[SparkPost API]]></value>
+		<value xml:lang="en"><![CDATA[SparkPost API]]></value>
+	</item>
 	<item name="cmd_advanced_mailer_sending_method_woorimail">
 		<value xml:lang="ko"><![CDATA[Woorimail API]]></value>
 		<value xml:lang="en"><![CDATA[Woorimail API]]></value>

@@ -376,6 +376,7 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 				
 			case 'mandrill':
 			case 'postmark':
+			case 'sparkpost':
 				if (!$args->{$args->sending_method . '_api_key'})
 				{
 					return 'msg_advanced_mailer_api_key_is_empty';

@@ -68,6 +68,7 @@
 					<option value="mandrill" selected="selected"|cond="$advanced_mailer_config['sending_method'] === 'mandrill'" cond="in_array('mandrill', $available_sending_methods)">{$lang->cmd_advanced_mailer_sending_method_mandrill}</option>
 					<option value="postmark" selected="selected"|cond="$advanced_mailer_config['sending_method'] === 'postmark'" cond="in_array('postmark', $available_sending_methods)">{$lang->cmd_advanced_mailer_sending_method_postmark}</option>
 					<option value="sendgrid" selected="selected"|cond="$advanced_mailer_config['sending_method'] === 'sendgrid'" cond="in_array('sendgrid', $available_sending_methods)">{$lang->cmd_advanced_mailer_sending_method_sendgrid}</option>
+					<option value="sparkpost" selected="selected"|cond="$advanced_mailer_config['sending_method'] === 'sparkpost'" cond="in_array('sparkpost', $available_sending_methods)">{$lang->cmd_advanced_mailer_sending_method_sparkpost}</option>
 					<option value="woorimail" selected="selected"|cond="$advanced_mailer_config['sending_method'] === 'woorimail'" cond="in_array('woorimail', $available_sending_methods)">{$lang->cmd_advanced_mailer_sending_method_woorimail}</option>
 				</select>
 				<p class="x_help-block" cond="count($available_sending_methods) < count($sending_methods)">{$lang->msg_advanced_mailer_php_version_is_low}</p>

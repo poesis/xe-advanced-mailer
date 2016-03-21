@@ -52,6 +52,11 @@ class Advanced_Mailer extends ModuleObject
 			'spf' => 'include:sendgrid.net',
 			'dkim' => 'smtpapi._domainkey',
 		),
+		'sparkpost' => array(
+			'conf' => array('api_key'),
+			'spf' => 'include:sparkpostmail.com',
+			'dkim' => '********._domainkey',
+		),
 		'woorimail' => array(
 			'conf' => array('domain', 'api_key', 'account_type'),
 			'spf' => 'include:woorimail.com',
