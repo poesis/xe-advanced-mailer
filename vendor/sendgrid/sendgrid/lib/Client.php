@@ -3,10 +3,11 @@
 require 'resources/api_keys.php';
 require 'resources/asm_groups.php';
 require 'resources/asm_suppressions.php';
+require 'resources/global_stats.php';
 
 class Client
 {
-    const VERSION = '4.0.0';
+    const VERSION = '4.0.4';
 
     protected
         $namespace = 'SendGrid',
@@ -48,6 +49,7 @@ class Client
         $this->api_keys = new APIKeys($this);
         $this->asm_groups = new ASMGroups($this);
         $this->asm_suppressions = new ASMSuppressions($this);
+        $this->global_stats = new GlobalStats($this);
     }
 
     /**
@@ -64,7 +66,7 @@ class Client
             )
         );
 
-        $guzzleOption['request.options']['headers'] = array('Authorization' => 'Bearer ' . $this->apiKey, 'Content-Type' => 'application/json');
+        $guzzleOption['request.options']['headers'] = array('Authorization' => 'Bearer ' . $this->apiKey, 'Content-Type' => 'application/json', 'Accept'=> '*/*');
 
         // Using http proxy
         if (isset($this->options['proxy'])) {
@@ -95,6 +97,13 @@ class Client
     {
         $url = $this->url . $api->getEndpoint();
         $response = $this->client->post($url, null, json_encode($data))->send();
+        return $response;
+    }
+    
+    public function putRequest($api, $data)
+    {
+        $url = $this->url . $api->getEndpoint();
+        $response = $this->client->put($url, null, json_encode($data))->send();
         return $response;
     }
   
