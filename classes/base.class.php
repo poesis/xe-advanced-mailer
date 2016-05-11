@@ -119,6 +119,12 @@ class Base
 	 */
 	public function setSender($name, $email)
 	{
+		if (self::$config->force_sender === 'Y' && self::$config->sender_email)
+		{
+			$this->setReplyTo($email);
+			$email = self::$config->sender_email;
+		}
+		
 		try
 		{
 			$this->message->setFrom(array($email => $name));
