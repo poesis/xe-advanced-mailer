@@ -188,6 +188,22 @@
 		<value xml:lang="ko"><![CDATA[Reply-To 주소]]></value>
 		<value xml:lang="en"><![CDATA[Reply-To email]]></value>
 	</item>
+	<item name="cmd_advanced_mailer_force_sender">
+		<value xml:lang="ko"><![CDATA[이 주소 외 사용 금지]]></value>
+		<value xml:lang="en"><![CDATA[Always Use This Email]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_about_force_sender">
+		<value xml:lang="ko"><![CDATA[위에서 설정한 주소 외의 보낸이 주소를 사용할 경우 위에서 설정한 주소로 강제 변경합니다.]]></value>
+		<value xml:lang="en"><![CDATA[Automatically change to the email address above if another module tries to send from a different address.]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_about_force_sender_caution_line_1">
+		<value xml:lang="ko"><![CDATA[포털 서비스의 SMTP를 사용할 경우 보낸이 메일 주소가 SMTP 로그인 정보와 반드시 일치해야 합니다.]]></value>
+		<value xml:lang="en"><![CDATA[Caution: If you use SMTP with a free e-mail service, the sender's address must correspond to the SMTP login credentials.]]></value>
+	</item>
+	<item name="cmd_advanced_mailer_about_force_sender_caution_line_2">
+		<value xml:lang="ko"><![CDATA[보낸이 주소를 강제 변경하더라도 원래 주소를 Reply-To로 지정하여 답장을 보내는 데는 지장이 없도록 합니다.]]></value>
+		<value xml:lang="en"><![CDATA[The original sender's address will be used as Reply-To for your convenience.]]></value>
+	</item>
 	<item name="cmd_advanced_mailer_spf_dkim_setting">
 		<value xml:lang="ko"><![CDATA[SPF/DKIM 설정 안내]]></value>
 		<value xml:lang="en"><![CDATA[SPF/DKIM Setting Guide]]></value>

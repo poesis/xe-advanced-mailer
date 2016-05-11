@@ -303,6 +303,7 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 		$args->sender_name = trim($request_args->sender_name ?: '');
 		$args->sender_email = trim($request_args->sender_email ?: '');
 		$args->reply_to = trim($request_args->reply_to ?: '');
+		$args->force_sender = $request_args->force_sender === 'Y' ? 'Y' : 'N';
 		return $args;
 	}
 	

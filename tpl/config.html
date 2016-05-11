@@ -239,6 +239,17 @@
 			</div>
 		</div>
 	
+		<div class="x_control-group">
+			<label class="x_control-label">{$lang->cmd_advanced_mailer_force_sender}</label>
+			<div class="x_controls">
+				<label for="advanced_mailer_force_sender">
+					<input type="checkbox" name="force_sender" id="advanced_mailer_force_sender" value="Y" checked="checked"|cond="$advanced_mailer_config['force_sender'] == 'Y'" />
+					{$lang->cmd_advanced_mailer_about_force_sender}
+				</label>
+				<p>※ {$lang->cmd_advanced_mailer_about_force_sender_caution_line_1}<br />※ {$lang->cmd_advanced_mailer_about_force_sender_caution_line_2}</p>
+			</div>
+		</div>
+	
 	</section>
 	
 	<div class="btnArea x_clearfix">
