@@ -15,20 +15,26 @@ class Mandrill extends Base
 	public function send()
 	{
 		$recipients = array();
-		$to = $this->message->getTo();
-		foreach($to as $address => $name)
+		if ($to = $this->message->getTo())
 		{
-			$recipients[] = $address;
+			foreach($to as $address => $name)
+			{
+				$recipients[] = $address;
+			}
 		}
-		$cc = $this->message->getCc();
-		foreach($cc as $address => $name)
+		if ($cc = $this->message->getCc())
 		{
-			$recipients[] = $address;
+			foreach($cc as $address => $name)
+			{
+				$recipients[] = $address;
+			}
 		}
-		$bcc = $this->message->getBcc();
-		foreach($bcc as $address => $name)
+		if ($bcc = $this->message->getBcc())
 		{
-			$recipients[] = $address;
+			foreach($bcc as $address => $name)
+			{
+				$recipients[] = $address;
+			}
 		}
 		
 		try

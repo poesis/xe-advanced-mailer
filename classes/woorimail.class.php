@@ -49,11 +49,13 @@ class Woorimail extends Base
 			'is_sendok' => 'W',
 		);
 		
-		$from = $this->message->getFrom();
-		foreach($from as $email => $name)
+		if ($from = $this->message->getFrom())
 		{
-			$data['sender_email'] = $email;
-			$data['sender_nickname'] = $name;
+			foreach($from as $email => $name)
+			{
+				$data['sender_email'] = $email;
+				$data['sender_nickname'] = $name;
+			}
 		}
 		
 		if(self::$config->woorimail_account_type === 'paid')
@@ -76,23 +78,29 @@ class Woorimail extends Base
 			}
 			*/
 		}
-		$to = $this->message->getTo();
-		foreach($to as $email => $name)
+		if ($to = $this->message->getTo())
 		{
-			$data['receiver_email'][] = $email;
-			$data['receiver_nickname'][] = str_replace(',', '', $name);
+			foreach($to as $email => $name)
+			{
+				$data['receiver_email'][] = $email;
+				$data['receiver_nickname'][] = str_replace(',', '', $name);
+			}
 		}
-		$cc = $this->message->getCc();
-		foreach($cc as $email => $name)
+		if ($cc = $this->message->getCc())
 		{
-			$data['receiver_email'][] = $email;
-			$data['receiver_nickname'][] = str_replace(',', '', $name);
+			foreach($cc as $email => $name)
+			{
+				$data['receiver_email'][] = $email;
+				$data['receiver_nickname'][] = str_replace(',', '', $name);
+			}
 		}
-		$bcc = $this->message->getBcc();
-		foreach($bcc as $email => $name)
+		if ($bcc = $this->message->getBcc())
 		{
-			$data['receiver_email'][] = $email;
-			$data['receiver_nickname'][] = str_replace(',', '', $name);
+			foreach($bcc as $email => $name)
+			{
+				$data['receiver_email'][] = $email;
+				$data['receiver_nickname'][] = str_replace(',', '', $name);
+			}
 		}
 		
 		$data['receiver_email'] = implode(',', $data['receiver_email']);

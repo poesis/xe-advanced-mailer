@@ -18,29 +18,36 @@ class Sendgrid extends Base
 		$email = new \SendGrid\Email();
 		$email->setSubject($this->message->getSubject());
 		
-		$from = $this->message->getFrom();
-		foreach($from as $address => $name)
+		if ($from = $this->message->getFrom())
 		{
-			$email->setFrom($address)->setFromName($name);
+			foreach($from as $address => $name)
+			{
+				$email->setFrom($address)->setFromName($name);
+			}
 		}
-		
-		$to = $this->message->getTo();
-		foreach($to as $address => $name)
+		if ($to = $this->message->getTo())
 		{
-			$email->addTo($address)->addToName($name);
+			foreach($to as $address => $name)
+			{
+				$email->addTo($address)->addToName($name);
+			}
 		}
-		$cc = $this->message->getCc();
-		foreach($cc as $address => $name)
+		if ($cc = $this->message->getCc())
 		{
-			$email->addCc($address);
+			foreach($cc as $address => $name)
+			{
+				$email->addCc($address);
+			}
 		}
-		$bcc = $this->message->getBcc();
-		foreach($bcc as $address => $name)
+		if ($bcc = $this->message->getBcc())
 		{
-			$email->addBcc($address);
+			foreach($bcc as $address => $name)
+			{
+				$email->addBcc($address);
+			}
 		}
 		$replyTo = $this->message->getReplyTo();
-		if(count($replyTo))
+		if($replyTo)
 		{
 			reset($replyTo);
 			$email->setReplyTo(key($replyTo));

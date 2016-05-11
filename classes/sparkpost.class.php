@@ -16,39 +16,45 @@ class SparkPost extends Base
 	{
 		// Compile the list of recipients.
 		$recipients = array();
-		$to = $this->message->getTo();
-		foreach($to as $address => $name)
+		if ($to = $this->message->getTo())
 		{
-			$recipients[] = array('address' => array('name' => $name, 'email' => $address));
+			foreach($to as $address => $name)
+			{
+				$recipients[] = array('address' => array('name' => $name, 'email' => $address));
+			}
 		}
-		$cc = $this->message->getCc();
-		foreach($cc as $address => $name)
+		if ($cc = $this->message->getCc())
 		{
-			$recipients[] = array('address' => array('name' => $name, 'email' => $address));
+			foreach($cc as $address => $name)
+			{
+				$recipients[] = array('address' => array('name' => $name, 'email' => $address));
+			}
 		}
-		$bcc = $this->message->getBcc();
-		foreach($bcc as $address => $name)
+		if ($bcc = $this->message->getBcc())
 		{
-			$recipients[] = array('address' => array('name' => $name, 'email' => $address));
+			foreach($bcc as $address => $name)
+			{
+				$recipients[] = array('address' => array('name' => $name, 'email' => $address));
+			}
 		}
 		
 		// Prepare data and options for Requests.
 		$headers = array(
-		    'Authorization' => self::$config->sparkpost_api_key,
-		    'Content-Type' => 'application/json',
+			'Authorization' => self::$config->sparkpost_api_key,
+			'Content-Type' => 'application/json',
 		);
 		$data = json_encode(array(
-		    'options' => array(
-		        'transactional' => true,
-		    ),
-		    'recipients' => $recipients,
-		    'content' => array(
-		        'email_rfc822' => $this->message->toString(),
-		    ),
+			'options' => array(
+				'transactional' => true,
+			),
+			'recipients' => $recipients,
+			'content' => array(
+				'email_rfc822' => $this->message->toString(),
+			),
 		));
 		$options = array(
-		    'timeout' => 5,
-		    'useragent' => 'PHP',
+			'timeout' => 5,
+			'useragent' => 'PHP',
 		);
 		
 		// Attempt to connect to the API server.
@@ -64,10 +70,10 @@ class SparkPost extends Base
 		
 		if ($result->errors)
 		{
-		    foreach ($result->errors as $error)
-		    {
-		        $this->errors[] = 'SparkPost: ' . $error->message . ': ' . $error->description . ' (code ' . $error->code . ')';
-		    }
+			foreach ($result->errors as $error)
+			{
+				$this->errors[] = 'SparkPost: ' . $error->message . ': ' . $error->description . ' (code ' . $error->code . ')';
+			}
 		}
 		
 		if ($result->results)
@@ -76,7 +82,7 @@ class SparkPost extends Base
 		}
 		else
 		{
-		    return false;
+			return false;
 		}
 	}
 }

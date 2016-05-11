@@ -22,25 +22,31 @@ class Mailgun extends Base
 			'bcc' => array(),
 		);
 		$replyTo = $this->message->getReplyTo();
-		if(count($replyTo))
+		if($replyTo)
 		{
 			reset($replyTo);
 			$args['h:Reply-To'] = key($replyTo);
 		}
-		$to = $this->message->getTo();
-		foreach($to as $address => $name)
+		if ($to = $this->message->getTo())
 		{
-			$args['to'][] = $address;
+			foreach($to as $address => $name)
+			{
+				$args['to'][] = $address;
+			}
 		}
-		$cc = $this->message->getCc();
-		foreach($cc as $address => $name)
+		if ($cc = $this->message->getCc())
 		{
-			$args['cc'][] = $address;
+			foreach($cc as $address => $name)
+			{
+				$args['cc'][] = $address;
+			}
 		}
-		$bcc = $this->message->getBcc();
-		foreach($bcc as $address => $name)
+		if ($bcc = $this->message->getBcc())
 		{
-			$args['to'][] = $address;
+			foreach($bcc as $address => $name)
+			{
+				$args['bcc'][] = $address;
+			}
 		}
 		$args['to'] = implode(', ', $args['to']);
 		$args['cc'] = implode(', ', $args['cc']);
