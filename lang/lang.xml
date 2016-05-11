@@ -49,8 +49,8 @@
 		<value xml:lang="en"><![CDATA[Sending method]]></value>
 	</item>
 	<item name="cmd_advanced_mailer_about_sending_method">
-		<value xml:lang="ko"><![CDATA[받는이의 주소가 <a href="./index.php?module=admin&amp;act=dispMemberAdminExceptions" target="_blank">예외 도메인</a>에 해당하지 않을 경우 모두 이 방법으로 발송됩니다.]]></value>
-		<value xml:lang="en"><![CDATA[This method will be used for all emails where the recipient's email address does not belong to an <a href="./index.php?module=admin&amp;act=dispMemberAdminExceptions" target="_blank">exception domain</a>.]]></value>
+		<value xml:lang="ko"><![CDATA[받는이의 주소가 <a href="./index.php?module=admin&amp;act=dispAdvanced_mailerAdminExceptions" target="_blank">예외 도메인</a>에 해당하지 않을 경우 모두 이 방법으로 발송됩니다.]]></value>
+		<value xml:lang="en"><![CDATA[This method will be used for all emails where the recipient's email address does not belong to an <a href="./index.php?module=admin&amp;act=dispAdvanced_mailerAdminExceptions" target="_blank">exception domain</a>.]]></value>
 	</item>
 	<item name="cmd_advanced_mailer_sending_method_default">
 		<value xml:lang="ko"><![CDATA[기본 발송 방법]]></value>
