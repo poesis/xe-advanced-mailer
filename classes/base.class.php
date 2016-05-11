@@ -342,6 +342,12 @@ class Base
 	 */
 	public function addAttachment($filename, $original_filename)
 	{
+		if (preg_match('/[\\/\\\\]/', $filename))
+		{
+			$basename = basename($original_filename);
+			$original_filename = $filename;
+			$filename = $basename;
+		}
 		$this->attachments[$original_filename] = $filename;
 	}
 	
