@@ -465,6 +465,12 @@ class Base
 			$sending_method = $this->getSendingMethod($to_email);
 		}
 		
+		// Reset Message-ID
+		$random = substr(hash('sha256', mt_rand() . microtime() . getmypid()), 0, 32);
+		$sender = $this->message->getFrom(); reset($sender);
+		$id = $random . '@' . (preg_match('/^(.+)@([^@]+)$/', key($sender), $matches) ? $matches[2] : 'swift.generated');
+		$this->message->getHeaders()->get('Message-ID')->setId($id);
+		
 		// Create a copy of the email using the sending method
 		include_once __DIR__ . '/' . strtolower($sending_method) . '.class.php';
 		$subclass_name = __NAMESPACE__ . '\\' . ucfirst($sending_method);
