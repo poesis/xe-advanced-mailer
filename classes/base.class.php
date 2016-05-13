@@ -350,7 +350,7 @@ class Base
 	{
 		if (preg_match('/[\\/\\\\]/', $filename))
 		{
-			$basename = basename($original_filename);
+			$basename = preg_match('/[\\/\\\\]([^\\/\\\\]+)$/', $original_filename, $matches) ? $matches[1] : $original_filename;
 			$original_filename = $filename;
 			$filename = $basename;
 		}
