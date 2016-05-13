@@ -518,28 +518,36 @@ class Base
 			$obj->mail_from = '';
 			$obj->mail_to = '';
 			
-			$real_sender = $subclass->message->getFrom();
-			foreach($real_sender as $email => $name)
+			if ($real_sender = $subclass->message->getFrom())
 			{
-				$obj->mail_from .= (strval($name) !== '' ? "$name <$email>" : $email) . "\n";
+				foreach($real_sender as $email => $name)
+				{
+					$obj->mail_from .= (strval($name) !== '' ? "$name <$email>" : $email) . "\n";
+				}
 			}
 			
-			$real_to = $subclass->message->getTo();
-			foreach($real_to as $email => $name)
+			if ($real_to = $subclass->message->getTo())
 			{
-				$obj->mail_to .= (strval($name) !== '' ? "$name <$email>" : $email) . "\n";
+				foreach($real_to as $email => $name)
+				{
+					$obj->mail_to .= (strval($name) !== '' ? "$name <$email>" : $email) . "\n";
+				}
 			}
 			
-			$real_cc = $subclass->message->getCc();
-			foreach($real_cc as $email => $name)
+			if ($real_cc = $subclass->message->getCc())
 			{
-				$obj->mail_to .= (strval($name) !== '' ? "$name <$email>" : $email) . "\n";
+				foreach($real_cc as $email => $name)
+				{
+					$obj->mail_to .= (strval($name) !== '' ? "$name <$email>" : $email) . "\n";
+				}
 			}
 			
-			$real_bcc = $subclass->message->getBcc();
-			foreach($real_bcc as $email => $name)
+			if ($real_bcc = $subclass->message->getBcc())
 			{
-				$obj->mail_to .= (strval($name) !== '' ? "$name <$email>" : $email) . "\n";
+				foreach($real_bcc as $email => $name)
+				{
+					$obj->mail_to .= (strval($name) !== '' ? "$name <$email>" : $email) . "\n";
+				}
 			}
 			
 			$obj->mail_from = trim($obj->mail_from);
