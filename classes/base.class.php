@@ -408,6 +408,17 @@ class Base
 	 */
 	public function procAssembleMessage()
 	{
+		// Clear previous attachments
+		$children = $this->message->getChildren();
+		foreach($children as $key => $val)
+		{
+			if($val instanceof \Swift_Mime_Attachment)
+			{
+				unset($children[$key]);
+			}
+		}
+		$this->message->setChildren(array_values($children));
+		
 		// Add all attachments
 		foreach($this->attachments as $original_filename => $filename)
 		{
@@ -454,7 +465,7 @@ class Base
 			$sending_method = $this->getSendingMethod($to_email);
 		}
 		
-		// Create an a copy of the email using the sending method
+		// Create a copy of the email using the sending method
 		include_once __DIR__ . '/' . strtolower($sending_method) . '.class.php';
 		$subclass_name = __NAMESPACE__ . '\\' . ucfirst($sending_method);
 		$subclass = new $subclass_name();
