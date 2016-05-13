@@ -48,36 +48,35 @@ class Woorimail extends Base
 			'callback' => '',
 			'is_sendok' => 'W',
 		);
+
+		$from_name = '';
+		$from_email = '';
+		$wms_email = '';
 		
 		if ($from = $this->message->getFrom())
 		{
-			foreach($from as $email => $name)
+			reset($from);
+			$from_email = $wms_email = key($from);
+			$from_name = current($from);
+		}
+		if (self::$config->force_sender === 'Y' && $from_email === self::$config->sender_email)
+		{
+			if ($replyTo = $this->message->getReplyTo())
 			{
-				$data['sender_email'] = $email;
-				$data['sender_nickname'] = $name;
+				reset($replyTo);
+				$from_email = key($replyTo);
 			}
 		}
 		
-		if(self::$config->woorimail_account_type === 'paid')
+		$data['sender_email'] = $from_email;
+		$data['sender_nickname'] = $from_name;
+		if (self::$config->woorimail_account_type === 'paid')
 		{
-			$sender_email = explode('@', $data['sender_email']);
-			if(count($sender_email) === 2)
-			{
-				$data['wms_nick'] = $sender_email[0];
-				$data['wms_domain'] = $sender_email[1];
-			}
+			$wms_email = explode('@', $wms_email);
+			$data['wms_nick'] = $wms_email[0];
+			$data['wms_domain'] = $wms_email[1];
 		}
-		else
-		{
-			/*
-			$replyTo = $this->message->getReplyTo();
-			if(count($replyTo))
-			{
-				reset($replyTo);
-				$data['sender_email'] = key($replyTo);
-			}
-			*/
-		}
+		
 		if ($to = $this->message->getTo())
 		{
 			foreach($to as $email => $name)
