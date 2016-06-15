@@ -82,6 +82,7 @@ class Woorimail extends Base
 			foreach($to as $email => $name)
 			{
 				$data['receiver_email'][] = $email;
+				$name = trim($name) ?: preg_replace('/@.+$/', '', $email);
 				$data['receiver_nickname'][] = str_replace(',', '', $name);
 			}
 		}
@@ -90,6 +91,7 @@ class Woorimail extends Base
 			foreach($cc as $email => $name)
 			{
 				$data['receiver_email'][] = $email;
+				$name = trim($name) ?: preg_replace('/@.+$/', '', $email);
 				$data['receiver_nickname'][] = str_replace(',', '', $name);
 			}
 		}
@@ -98,6 +100,7 @@ class Woorimail extends Base
 			foreach($bcc as $email => $name)
 			{
 				$data['receiver_email'][] = $email;
+				$name = trim($name) ?: preg_replace('/@.+$/', '', $email);
 				$data['receiver_nickname'][] = str_replace(',', '', $name);
 			}
 		}
