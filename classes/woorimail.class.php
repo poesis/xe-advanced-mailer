@@ -117,24 +117,36 @@ class Woorimail extends Base
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
 		curl_setopt($ch, CURLOPT_CAINFO, dirname(dirname(__FILE__)) . '/tpl/cacert/cacert.pem');
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json, text/javascript, */*; q=0.1'));
 		$result = curl_exec($ch);
 		curl_close($ch);
 		
-		if($result !== false && ($result = @json_decode($result, true)) && $result['result'] === 'OK')
+		if ($result === false)
+		{
+			$this->errors = array('Woorimail: cannot connect to API server');
+			return false;
+		}
+		
+		$result = @json_decode($result, true);
+		if ($result['result'] === 'OK')
 		{
 			return true;
 		}
+		elseif (isset($result['error_msg']))
+		{
+			if(isset(self::$_error_codes[$result['error_msg']]))
+			{
+				$result['error_msg'] .= ' ' . self::$_error_codes[$result['error_msg']];
+			}
+			$this->errors = array('Woorimail: ' . $result['error_msg']);
+			return false;
+		}
 		else
 		{
-			if(isset($result['error_msg']))
-			{
-				if(isset(self::$_error_codes[$result['error_msg']]))
-				{
-					$result['error_msg'] .= ' ' . self::$_error_codes[$result['error_msg']];
-				}
-				$this->errors = array('Woorimail: ' . $result['error_msg']);
-			}
+			$this->errors = array('Woorimail: server returned invalid JSON response');
 			return false;
 		}
 	}
