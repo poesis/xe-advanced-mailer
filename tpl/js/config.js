@@ -50,17 +50,17 @@
 			}
 			if (auto_fill === 'naver') {
 				$("#advanced_mailer_smtp_host").val('smtp.naver.com');
-				$("#advanced_mailer_smtp_port").val('587');
-				$("#advanced_mailer_smtp_security_tls").prop("checked", true).parent().addClass("checked");
-				$("#advanced_mailer_smtp_security_ssl").parent().removeClass("checked");
+				$("#advanced_mailer_smtp_port").val('465');
+				$("#advanced_mailer_smtp_security_ssl").prop("checked", true).parent().addClass("checked");
+				$("#advanced_mailer_smtp_security_tls").parent().removeClass("checked");
 				$("#advanced_mailer_smtp_security_none").parent().removeClass("checked");
 				$("#advanced_mailer_force_sender").prop("checked", true).parent().addClass("checked");
 			}
 			if (auto_fill === 'worksmobile') {
 				$("#advanced_mailer_smtp_host").val('smtp.worksmobile.com');
-				$("#advanced_mailer_smtp_port").val('587');
-				$("#advanced_mailer_smtp_security_tls").prop("checked", true).parent().addClass("checked");
-				$("#advanced_mailer_smtp_security_ssl").parent().removeClass("checked");
+				$("#advanced_mailer_smtp_port").val('465');
+				$("#advanced_mailer_smtp_security_ssl").prop("checked", true).parent().addClass("checked");
+				$("#advanced_mailer_smtp_security_tls").parent().removeClass("checked");
 				$("#advanced_mailer_smtp_security_none").parent().removeClass("checked");
 				$("#advanced_mailer_force_sender").prop("checked", true).parent().addClass("checked");
 			}
