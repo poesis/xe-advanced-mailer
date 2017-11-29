@@ -202,7 +202,7 @@ class Advanced_Mailer extends ModuleObject
 	public function moduleInstall()
 	{
 		$this->registerTriggers();
-		return new Object();
+		return $this->createObject();
 	}
 	
 	public function checkUpdate()
@@ -213,11 +213,19 @@ class Advanced_Mailer extends ModuleObject
 	public function moduleUpdate()
 	{
 		$this->registerTriggers();
-		return new Object(0, 'success_updated');
+		return $this->createObject(0, 'success_updated');
 	}
 	
 	public function recompileCache()
 	{
 		// no-op
 	}
+
+    protected function createObject($error = 0, $message = 'success') {
+        if(class_exists("BaseObject")) {
+            return new BaseObject($error, $message);
+        } else {
+            return new Object($error, $message);
+        }
+    }
 }

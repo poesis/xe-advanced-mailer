@@ -18,7 +18,7 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 		$validation = $this->validateConfiguration($config);
 		if ($validation !== true)
 		{
-			return new Object(-1, $validation);
+		    return $this->createObject(-1, $validation);
 		}
 		
 		// Update the webmaster's name and email in the member module.
@@ -68,7 +68,7 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 			{
 				if ($method !== 'default' && !isset($this->sending_methods[$method]))
 				{
-					return new Object(-1, 'msg_advanced_mailer_sending_method_is_invalid');
+					return $this->createObject(-1, 'msg_advanced_mailer_sending_method_is_invalid');
 				}
 				if ($method !== 'default')
 				{
@@ -76,7 +76,7 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 					{
 						if (!isset($config->{$method . '_' . $conf_name}) || strval($config->{$method . '_' . $conf_name}) === '')
 						{
-							return new Object(-1, sprintf(
+							return $this->createObject(-1, sprintf(
 								Context::getLang('msg_advanced_mailer_sending_method_is_not_configured'),
 								Context::getLang('cmd_advanced_mailer_sending_method_' . $method)));
 						}
@@ -161,11 +161,11 @@ class Advanced_MailerAdminController extends Advanced_Mailer
 		$clear_before_days = intval(Context::get('clear_before_days'));
 		if (!in_array($status, array('success', 'error')))
 		{
-			return new Object(-1, 'msg_invalid_request');
+			return $this->createObject(-1, 'msg_invalid_request');
 		}
 		if ($clear_before_days < 0)
 		{
-			return new Object(-1, 'msg_invalid_request');
+			return $this->createObject(-1, 'msg_invalid_request');
 		}
 		
 		$obj = new stdClass();
