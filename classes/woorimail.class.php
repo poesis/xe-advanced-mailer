@@ -37,7 +37,7 @@ class Woorimail extends Base
 			'sender_nickname' => '',
 			'receiver_email' => array(),
 			'receiver_nickname' => array(),
-			'member_regdate' => date('YmdHis'),
+			'member_regdate' => array(),
 			'domain' => self::$config->woorimail_domain,
 			'authkey' => self::$config->woorimail_api_key,
 			'wms_domain' => 'woorimail.com',
@@ -105,6 +105,7 @@ class Woorimail extends Base
 			}
 		}
 		
+		$data['member_regdate'] = implode(',', array_fill(0, count($data['receiver_email']), date('YmdHis')));
 		$data['receiver_email'] = implode(',', $data['receiver_email']);
 		$data['receiver_nickname'] = implode(',', $data['receiver_nickname']);
 		
