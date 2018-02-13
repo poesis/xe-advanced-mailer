@@ -79,13 +79,6 @@
 			var advanced_mailer_sending_methods = {json_encode($sending_methods)};
 		</script>
 		
-		<div class="x_control-group hidden-by-default show-for-dummy">
-			<label class="x_control-label"></label>
-			<div class="x_controls">
-				<p class="x_help-block">{$lang->msg_advanced_mailer_about_dummy}<br />{$lang->msg_advanced_mailer_about_dummy_exceptions}</p>
-			</div>
-		</div>
-		
 		<!--@foreach($sending_methods as $sending_method => $sending_conf)-->
 		<!--@foreach($sending_conf['conf'] as $conf_name)-->
 		{@ $conf_value = $advanced_mailer_config[$sending_method . '_' . $conf_name]}
@@ -207,6 +200,27 @@
 		
 		<!--@end-->
 		<!--@end-->
+		
+		<div class="x_control-group hidden-by-default show-for-dummy">
+			<label class="x_control-label"></label>
+			<div class="x_controls">
+				<p class="x_help-block">{$lang->msg_advanced_mailer_about_dummy}</p>
+			</div>
+		</div>
+		
+		<div class="x_control-group hidden-by-default show-for-mail">
+			<label class="x_control-label"></label>
+			<div class="x_controls">
+				<p class="x_help-block">{$lang->msg_advanced_mailer_about_mail}</p>
+			</div>
+		</div>
+		
+		<div class="x_control-group hidden-by-default show-for-smtp">
+			<label class="x_control-label"></label>
+			<div class="x_controls">
+				<p class="x_help-block">{$lang->msg_advanced_mailer_about_smtp}</p>
+			</div>
+		</div>
 		
 	</section>
 	
