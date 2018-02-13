@@ -19,7 +19,7 @@ class Base
 	public $cidAttachments = array();
 	
 	/**
-	 * Properties used by Xternal Mailer
+	 * Properties used by Advanced Mailer
 	 */
 	public static $config = array();
 	public $errors = array();
