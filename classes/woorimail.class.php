@@ -109,7 +109,7 @@ class Woorimail extends Base
 		$data['receiver_email'] = implode(',', $data['receiver_email']);
 		$data['receiver_nickname'] = implode(',', $data['receiver_nickname']);
 		
-		$url = 'https://woorimail.com:20080/index.php';
+		$url = 'https://woorimail.com/index.php';
 		
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);
