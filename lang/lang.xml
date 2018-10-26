@@ -61,16 +61,16 @@
 		<value xml:lang="en"><![CDATA[Exceptions]]></value>
 	</item>
 	<item name="cmd_advanced_mailer_sending_method_mail">
-		<value xml:lang="ko"><![CDATA[PHP mail() 함수]]></value>
-		<value xml:lang="en"><![CDATA[PHP mail() function]]></value>
+		<value xml:lang="ko"><![CDATA[PHP 내장 함수 (발송 성공률 낮음)]]></value>
+		<value xml:lang="en"><![CDATA[PHP internal function (Low Deliverability)]]></value>
 	</item>
 	<item name="cmd_advanced_mailer_sending_method_dummy">
-		<value xml:lang="ko"><![CDATA[더미 - 테스트 전용]]></value>
-		<value xml:lang="en"><![CDATA[Dummy - for Testing Only]]></value>
+		<value xml:lang="ko"><![CDATA[더미 (메일 발송 금지)]]></value>
+		<value xml:lang="en"><![CDATA[Dummy (Sending Forbidden)]]></value>
 	</item>
 	<item name="cmd_advanced_mailer_sending_method_smtp">
-		<value xml:lang="ko"><![CDATA[외부 SMTP 서버]]></value>
-		<value xml:lang="en"><![CDATA[External SMTP server]]></value>
+		<value xml:lang="ko"><![CDATA[외부 SMTP 서버 (권장하지 않음)]]></value>
+		<value xml:lang="en"><![CDATA[External SMTP (Not Recommended)]]></value>
 	</item>
 	<item name="cmd_advanced_mailer_sending_method_ses">
 		<value xml:lang="ko"><![CDATA[Amazon SES API]]></value>
@@ -341,12 +341,12 @@
 		<value xml:lang="en"><![CDATA[Ignore exceptions and only test the default sending method]]></value>
 	</item>
 	<item name="msg_advanced_mailer_about_dummy">
-		<value xml:lang="ko"><![CDATA[더미는 실제로 메일을 발송하지 않고 기록만 하는 옵션입니다. 테스트에 사용하십시오.<br />더미를 선택하더라도 예외 도메인을 지정한 경우 메일이 발송될 수 있으니 주의하십시오.]]></value>
-		<value xml:lang="en"><![CDATA[Dummy does not actually send any email. It only records them. Use this option for testing.<br />Caution: if you have set up exception domains, email will be sent to those domains.]]></value>
+		<value xml:lang="ko"><![CDATA[메일을 발송하지 않고 로그 기록만 하도록 강제합니다. 테스트 중 원치 않는 메일이 발송되는 것을 막기 위해 사용할 수 있습니다.<br />이 옵션을 선택하더라도 예외 도메인을 지정한 경우 메일이 발송될 수 있으니 주의하십시오.]]></value>
+		<value xml:lang="en"><![CDATA[Dummy does not actually send any email, but logs them. Use this option for testing.<br />Caution: if you have set up exception domains, unwanted email may be sent using other methods.]]></value>
 	</item>
 	<item name="msg_advanced_mailer_about_mail">
-		<value xml:lang="ko"><![CDATA[mail() 함수는 XE에서 사용하는 것과 동일한 발송 방식입니다.<br />기존에 메일 발송이 원활하지 않아서 이 모듈을 설치하셨다면 다른 방식을 선택하시기 바랍니다.]]></value>
-		<value xml:lang="en"><![CDATA[This is the same method that XE uses without this module.<br />If you installed this module because your emails weren't getting through, please use a different sending method.]]></value>
+		<value xml:lang="ko"><![CDATA[PHP에 내장된 mail() 함수를 사용합니다. <b>발송 성공률이 매우 낮습니다.</b><br />기존에 메일 발송이 원활하지 않아서 이 모듈을 설치하셨다면 다른 방식을 선택하시기 바랍니다.]]></value>
+		<value xml:lang="en"><![CDATA[This method uses the mail() function that comes with PHP itself. <b>It has very low deliverability.</b><br />If you installed this module because your emails weren't getting through, please use a different sending method.]]></value>
 	</item>
 	<item name="msg_advanced_mailer_about_smtp">
 		<value xml:lang="ko"><![CDATA[SMTP를 사용하여 메일을 발송하는 것은 매우 느리고, 구글 등 무료 메일은 발송량 제한이 있습니다.<br />가능하면 SMTP 사용을 피하고 메일 발송 전문 API를 사용하시기를 권장합니다.]]></value>
