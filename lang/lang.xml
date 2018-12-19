@@ -516,4 +516,8 @@
 		<value xml:lang="ko"><![CDATA[오래된 기록 삭제]]></value>
 		<value xml:lang="en"><![CDATA[Clear old logs]]></value>
 	</item>
+	<item name="cmd_advanced_mailer_not_rhymix">
+		<value xml:lang="ko"><![CDATA[이 모듈은 XE용으로, 라이믹스와는 호환되지 않습니다. 라이믹스에 기본 포함된 버전을 사용하시기 바랍니다.]]></value>
+		<value xml:lang="en"><![CDATA[This module is for XE. It is incompatible with Rhymix. Please use the version included with Rhymix.]]></value>
+	</item>
 </lang>
