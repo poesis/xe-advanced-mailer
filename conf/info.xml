@@ -8,8 +8,8 @@
 	<description xml:lang="en">
 		Send mail using an external SMTP server or API service.
 	</description>
-	<version>1.8.3</version>
-	<date>2018-02-13</date>
+	<version>1.8.4</version>
+	<date>2018-12-19</date>
 	<author link="https://www.poesis.org">
 		<name xml:lang="ko">포에시스</name>
 		<name xml:lang="en">POESIS</name>
