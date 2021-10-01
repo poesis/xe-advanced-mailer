@@ -1,758 +1,814 @@
-[
-    {
-        "name": "guzzlehttp/streams",
-        "version": "3.0.0",
-        "version_normalized": "3.0.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/guzzle/streams.git",
-            "reference": "47aaa48e27dae43d39fc1cea0ccf0d84ac1a2ba5"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/guzzle/streams/zipball/47aaa48e27dae43d39fc1cea0ccf0d84ac1a2ba5",
-            "reference": "47aaa48e27dae43d39fc1cea0ccf0d84ac1a2ba5",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.4.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "~4.0"
-        },
-        "time": "2014-10-12 19:18:40",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "3.0-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "GuzzleHttp\\Stream\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Michael Dowling",
-                "email": "mtdowling@gmail.com",
-                "homepage": "https://github.com/mtdowling"
-            }
-        ],
-        "description": "Provides a simple abstraction over streams of data",
-        "homepage": "http://guzzlephp.org/",
-        "keywords": [
-            "Guzzle",
-            "stream"
-        ]
-    },
-    {
-        "name": "guzzlehttp/ringphp",
-        "version": "1.1.0",
-        "version_normalized": "1.1.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/guzzle/RingPHP.git",
-            "reference": "dbbb91d7f6c191e5e405e900e3102ac7f261bc0b"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/guzzle/RingPHP/zipball/dbbb91d7f6c191e5e405e900e3102ac7f261bc0b",
-            "reference": "dbbb91d7f6c191e5e405e900e3102ac7f261bc0b",
-            "shasum": ""
-        },
-        "require": {
-            "guzzlehttp/streams": "~3.0",
-            "php": ">=5.4.0",
-            "react/promise": "~2.0"
-        },
-        "require-dev": {
-            "ext-curl": "*",
-            "phpunit/phpunit": "~4.0"
-        },
-        "suggest": {
-            "ext-curl": "Guzzle will use specific adapters if cURL is present"
-        },
-        "time": "2015-05-20 03:37:09",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.1-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "GuzzleHttp\\Ring\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Michael Dowling",
-                "email": "mtdowling@gmail.com",
-                "homepage": "https://github.com/mtdowling"
-            }
-        ],
-        "description": "Provides a simple API and specification that abstracts away the details of HTTP into a single PHP function."
-    },
-    {
-        "name": "guzzlehttp/guzzle",
-        "version": "5.3.0",
-        "version_normalized": "5.3.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/guzzle/guzzle.git",
-            "reference": "f3c8c22471cb55475105c14769644a49c3262b93"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/guzzle/guzzle/zipball/f3c8c22471cb55475105c14769644a49c3262b93",
-            "reference": "f3c8c22471cb55475105c14769644a49c3262b93",
-            "shasum": ""
-        },
-        "require": {
-            "guzzlehttp/ringphp": "^1.1",
-            "php": ">=5.4.0"
-        },
-        "require-dev": {
-            "ext-curl": "*",
-            "phpunit/phpunit": "^4.0",
-            "psr/log": "^1.0"
-        },
-        "time": "2015-05-20 03:47:55",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "5.0-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "GuzzleHttp\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Michael Dowling",
-                "email": "mtdowling@gmail.com",
-                "homepage": "https://github.com/mtdowling"
-            }
-        ],
-        "description": "Guzzle is a PHP HTTP client library and framework for building RESTful web service clients",
-        "homepage": "http://guzzlephp.org/",
-        "keywords": [
-            "client",
-            "curl",
-            "framework",
-            "http",
-            "http client",
-            "rest",
-            "web service"
-        ]
-    },
-    {
-        "name": "mailgun/mailgun-php",
-        "version": "v1.8",
-        "version_normalized": "1.8.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/mailgun/mailgun-php.git",
-            "reference": "225e8005950027df22fc5f5b1ada58f4ad116d60"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/mailgun/mailgun-php/zipball/225e8005950027df22fc5f5b1ada58f4ad116d60",
-            "reference": "225e8005950027df22fc5f5b1ada58f4ad116d60",
-            "shasum": ""
-        },
-        "require": {
-            "guzzlehttp/guzzle": "~5.0"
-        },
-        "require-dev": {
-            "php": ">=5.4.0",
-            "phpunit/phpunit": "~4.6"
-        },
-        "time": "2015-05-06 17:52:51",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Mailgun\\Tests": "tests/",
-                "Mailgun": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Travis Swientek",
-                "email": "travis@mailgunhq.com"
-            }
-        ],
-        "description": "The Mailgun SDK provides methods for all API functions."
-    },
-    {
-        "name": "guzzle/guzzle",
-        "version": "v3.9.3",
-        "version_normalized": "3.9.3.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/guzzle/guzzle3.git",
-            "reference": "0645b70d953bc1c067bbc8d5bc53194706b628d9"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/guzzle/guzzle3/zipball/0645b70d953bc1c067bbc8d5bc53194706b628d9",
-            "reference": "0645b70d953bc1c067bbc8d5bc53194706b628d9",
-            "shasum": ""
-        },
-        "require": {
-            "ext-curl": "*",
-            "php": ">=5.3.3",
-            "symfony/event-dispatcher": "~2.1"
-        },
-        "replace": {
-            "guzzle/batch": "self.version",
-            "guzzle/cache": "self.version",
-            "guzzle/common": "self.version",
-            "guzzle/http": "self.version",
-            "guzzle/inflection": "self.version",
-            "guzzle/iterator": "self.version",
-            "guzzle/log": "self.version",
-            "guzzle/parser": "self.version",
-            "guzzle/plugin": "self.version",
-            "guzzle/plugin-async": "self.version",
-            "guzzle/plugin-backoff": "self.version",
-            "guzzle/plugin-cache": "self.version",
-            "guzzle/plugin-cookie": "self.version",
-            "guzzle/plugin-curlauth": "self.version",
-            "guzzle/plugin-error-response": "self.version",
-            "guzzle/plugin-history": "self.version",
-            "guzzle/plugin-log": "self.version",
-            "guzzle/plugin-md5": "self.version",
-            "guzzle/plugin-mock": "self.version",
-            "guzzle/plugin-oauth": "self.version",
-            "guzzle/service": "self.version",
-            "guzzle/stream": "self.version"
-        },
-        "require-dev": {
-            "doctrine/cache": "~1.3",
-            "monolog/monolog": "~1.0",
-            "phpunit/phpunit": "3.7.*",
-            "psr/log": "~1.0",
-            "symfony/class-loader": "~2.1",
-            "zendframework/zend-cache": "2.*,<2.3",
-            "zendframework/zend-log": "2.*,<2.3"
-        },
-        "suggest": {
-            "guzzlehttp/guzzle": "Guzzle 5 has moved to a new package name. The package you have installed, Guzzle 3, is deprecated."
-        },
-        "time": "2015-03-18 18:23:50",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "3.9-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Guzzle": "src/",
-                "Guzzle\\Tests": "tests/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Michael Dowling",
-                "email": "mtdowling@gmail.com",
-                "homepage": "https://github.com/mtdowling"
+{
+    "packages": [
+        {
+            "name": "guzzle/guzzle",
+            "version": "v3.9.3",
+            "version_normalized": "3.9.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/guzzle3.git",
+                "reference": "0645b70d953bc1c067bbc8d5bc53194706b628d9"
             },
-            {
-                "name": "Guzzle Community",
-                "homepage": "https://github.com/guzzle/guzzle/contributors"
-            }
-        ],
-        "description": "PHP HTTP client. This library is deprecated in favor of https://packagist.org/packages/guzzlehttp/guzzle",
-        "homepage": "http://guzzlephp.org/",
-        "keywords": [
-            "client",
-            "curl",
-            "framework",
-            "http",
-            "http client",
-            "rest",
-            "web service"
-        ]
-    },
-    {
-        "name": "sendgrid/smtpapi",
-        "version": "0.5.0",
-        "version_normalized": "0.5.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/sendgrid/smtpapi-php.git",
-            "reference": "05ccf57bad5d1524e479b6dc0a2dfade88b3fbe5"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/sendgrid/smtpapi-php/zipball/05ccf57bad5d1524e479b6dc0a2dfade88b3fbe5",
-            "reference": "05ccf57bad5d1524e479b6dc0a2dfade88b3fbe5",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3"
-        },
-        "replace": {
-            "sendgrid/smtpapi-php": "*"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "3.7.*"
-        },
-        "time": "2015-04-14 02:37:45",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Smtpapi": "lib/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "description": "Build SendGrid X-SMTPAPI headers in PHP.",
-        "homepage": "http://github.com/sendgrid/smtpapi-php",
-        "keywords": [
-            "X-SMTP",
-            "api",
-            "email",
-            "grid",
-            "send",
-            "sendgrid",
-            "smtp",
-            "smtpapi",
-            "xsmtp"
-        ]
-    },
-    {
-        "name": "jmhobbs/swiftmailer-transport-aws-ses",
-        "version": "0.9.2",
-        "version_normalized": "0.9.2.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/jmhobbs/Swiftmailer-Transport--AWS-SES.git",
-            "reference": "10110a450225a19b5095e7313a5c7c4b43bba3b6"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/jmhobbs/Swiftmailer-Transport--AWS-SES/zipball/10110a450225a19b5095e7313a5c7c4b43bba3b6",
-            "reference": "10110a450225a19b5095e7313a5c7c4b43bba3b6",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.2.0",
-            "swiftmailer/swiftmailer": ">=4.0.0"
-        },
-        "time": "2014-11-12 23:51:28",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "": "classes/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "John Hobbs",
-                "email": "john@velvetcache.org"
-            }
-        ],
-        "description": "Add AWS SES support to Swiftmailer",
-        "keywords": [
-            "aws",
-            "email",
-            "ses",
-            "swiftmailer"
-        ]
-    },
-    {
-        "name": "openbuildings/postmark",
-        "version": "0.3.3",
-        "version_normalized": "0.3.3.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/OpenBuildings/postmark.git",
-            "reference": "8909fc0512346e11267c21ce95b4bb0112db31fd"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/OpenBuildings/postmark/zipball/8909fc0512346e11267c21ce95b4bb0112db31fd",
-            "reference": "8909fc0512346e11267c21ce95b4bb0112db31fd",
-            "shasum": ""
-        },
-        "require": {
-            "lib-curl": "*",
-            "php": ">=5.3.2"
-        },
-        "require-dev": {
-            "swiftmailer/swiftmailer": "~5.0"
-        },
-        "suggest": {
-            "openbuildings/swiftmailer-css-inliner": "Inline the CSS of your HTML emails",
-            "openbuildings/swiftmailer-filter": "Whitelist or blacklist domains or emails from To, Cc and Bcc",
-            "openbuildings/swiftmailer-google-campaign": "Append to all email links Google UTM campaign parameters"
-        },
-        "time": "2015-11-09 15:55:13",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Openbuildings\\Postmark\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Ivan Kerin",
-                "email": "ivan@openbuildings.com",
-                "role": "Author"
-            }
-        ],
-        "description": "Swiftmailer Transport Class for Postmark"
-    },
-    {
-        "name": "mandrill/mandrill",
-        "version": "1.0.55",
-        "version_normalized": "1.0.55.0",
-        "source": {
-            "type": "git",
-            "url": "https://bitbucket.org/mailchimp/mandrill-api-php.git",
-            "reference": "da3adc10042eafac2e53de141b358a52b8e53596"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://bitbucket.org/mailchimp/mandrill-api-php/get/da3adc10042eafac2e53de141b358a52b8e53596.zip",
-            "reference": "da3adc10042eafac2e53de141b358a52b8e53596",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.2.0"
-        },
-        "time": "2015-09-22 13:58:03",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Mandrill": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "Apache-2.0"
-        ],
-        "authors": [
-            {
-                "name": "Mandrill Devs",
-                "email": "community@mandrill.com",
-                "homepage": "http://mandrill.com",
-                "role": "Developer"
-            }
-        ],
-        "description": "API client library for the Mandrill email as a service platform",
-        "homepage": "https://bitbucket.org/mailchimp/mandrill-api-php",
-        "keywords": [
-            "api",
-            "email"
-        ]
-    },
-    {
-        "name": "swiftmailer/swiftmailer",
-        "version": "v5.4.1",
-        "version_normalized": "5.4.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/swiftmailer/swiftmailer.git",
-            "reference": "0697e6aa65c83edf97bb0f23d8763f94e3f11421"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/0697e6aa65c83edf97bb0f23d8763f94e3f11421",
-            "reference": "0697e6aa65c83edf97bb0f23d8763f94e3f11421",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3"
-        },
-        "require-dev": {
-            "mockery/mockery": "~0.9.1,<0.9.4"
-        },
-        "time": "2015-06-06 14:19:39",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "5.4-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "files": [
-                "lib/swift_required.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Chris Corbyn"
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/guzzle3/zipball/0645b70d953bc1c067bbc8d5bc53194706b628d9",
+                "reference": "0645b70d953bc1c067bbc8d5bc53194706b628d9",
+                "shasum": ""
             },
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
-            }
-        ],
-        "description": "Swiftmailer, free feature-rich PHP mailer",
-        "homepage": "http://swiftmailer.org",
-        "keywords": [
-            "email",
-            "mail",
-            "mailer"
-        ]
-    },
-    {
-        "name": "symfony/event-dispatcher",
-        "version": "v2.8.3",
-        "version_normalized": "2.8.3.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/event-dispatcher.git",
-            "reference": "78c468665c9568c3faaa9c416a7134308f2d85c3"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/78c468665c9568c3faaa9c416a7134308f2d85c3",
-            "reference": "78c468665c9568c3faaa9c416a7134308f2d85c3",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.9"
-        },
-        "require-dev": {
-            "psr/log": "~1.0",
-            "symfony/config": "~2.0,>=2.0.5|~3.0.0",
-            "symfony/dependency-injection": "~2.6|~3.0.0",
-            "symfony/expression-language": "~2.6|~3.0.0",
-            "symfony/stopwatch": "~2.3|~3.0.0"
-        },
-        "suggest": {
-            "symfony/dependency-injection": "",
-            "symfony/http-kernel": ""
-        },
-        "time": "2016-01-27 05:14:19",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.8-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Symfony\\Component\\EventDispatcher\\": ""
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.3.3",
+                "symfony/event-dispatcher": "~2.1"
             },
-            "exclude-from-classmap": [
-                "/Tests/"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
+            "replace": {
+                "guzzle/batch": "self.version",
+                "guzzle/cache": "self.version",
+                "guzzle/common": "self.version",
+                "guzzle/http": "self.version",
+                "guzzle/inflection": "self.version",
+                "guzzle/iterator": "self.version",
+                "guzzle/log": "self.version",
+                "guzzle/parser": "self.version",
+                "guzzle/plugin": "self.version",
+                "guzzle/plugin-async": "self.version",
+                "guzzle/plugin-backoff": "self.version",
+                "guzzle/plugin-cache": "self.version",
+                "guzzle/plugin-cookie": "self.version",
+                "guzzle/plugin-curlauth": "self.version",
+                "guzzle/plugin-error-response": "self.version",
+                "guzzle/plugin-history": "self.version",
+                "guzzle/plugin-log": "self.version",
+                "guzzle/plugin-md5": "self.version",
+                "guzzle/plugin-mock": "self.version",
+                "guzzle/plugin-oauth": "self.version",
+                "guzzle/service": "self.version",
+                "guzzle/stream": "self.version"
             },
-            {
-                "name": "Symfony Community",
-                "homepage": "https://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony EventDispatcher Component",
-        "homepage": "https://symfony.com"
-    },
-    {
-        "name": "sendgrid/sendgrid",
-        "version": "4.0.4",
-        "version_normalized": "4.0.4.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/sendgrid/sendgrid-php.git",
-            "reference": "b7d88a78b5ef7c029237e449e0adcaa1b7b70092"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/sendgrid/sendgrid-php/zipball/b7d88a78b5ef7c029237e449e0adcaa1b7b70092",
-            "reference": "b7d88a78b5ef7c029237e449e0adcaa1b7b70092",
-            "shasum": ""
-        },
-        "require": {
-            "guzzle/guzzle": "~3.9",
-            "php": ">=5.3",
-            "sendgrid/smtpapi": "~0.5"
-        },
-        "replace": {
-            "sendgrid/sendgrid-php": "*"
-        },
-        "require-dev": {
-            "mockery/mockery": "~0.9",
-            "phpunit/phpunit": "~4.4",
-            "vlucas/phpdotenv": "~1.0"
-        },
-        "time": "2016-02-18 21:40:14",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "SendGrid": "lib/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "description": "This library allows you to quickly and easily send emails through SendGrid using PHP.",
-        "homepage": "http://github.com/sendgrid/sendgrid-php",
-        "keywords": [
-            "email",
-            "grid",
-            "send",
-            "sendgrid"
-        ]
-    },
-    {
-        "name": "react/promise",
-        "version": "v2.2.2",
-        "version_normalized": "2.2.2.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/reactphp/promise.git",
-            "reference": "3aacad8bf10c7d83e6fa2089d413529888c2bedf"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/reactphp/promise/zipball/3aacad8bf10c7d83e6fa2089d413529888c2bedf",
-            "reference": "3aacad8bf10c7d83e6fa2089d413529888c2bedf",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.4.0"
-        },
-        "time": "2016-02-26 19:09:02",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.0-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "React\\Promise\\": "src/"
+            "require-dev": {
+                "doctrine/cache": "~1.3",
+                "monolog/monolog": "~1.0",
+                "phpunit/phpunit": "3.7.*",
+                "psr/log": "~1.0",
+                "symfony/class-loader": "~2.1",
+                "zendframework/zend-cache": "2.*,<2.3",
+                "zendframework/zend-log": "2.*,<2.3"
             },
-            "files": [
-                "src/functions_include.php"
-            ]
+            "suggest": {
+                "guzzlehttp/guzzle": "Guzzle 5 has moved to a new package name. The package you have installed, Guzzle 3, is deprecated."
+            },
+            "time": "2015-03-18T18:23:50+00:00",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.9-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "Guzzle": "src/",
+                    "Guzzle\\Tests": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                },
+                {
+                    "name": "Guzzle Community",
+                    "homepage": "https://github.com/guzzle/guzzle/contributors"
+                }
+            ],
+            "description": "PHP HTTP client. This library is deprecated in favor of https://packagist.org/packages/guzzlehttp/guzzle",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "client",
+                "curl",
+                "framework",
+                "http",
+                "http client",
+                "rest",
+                "web service"
+            ],
+            "install-path": "../guzzle/guzzle"
         },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Jan Sorgalla",
-                "email": "jsorgalla@gmail.com"
-            }
-        ],
-        "description": "A lightweight implementation of CommonJS Promises/A for PHP"
-    },
-    {
-        "name": "rmccue/requests",
-        "version": "v1.6.1",
-        "version_normalized": "1.6.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/rmccue/Requests.git",
-            "reference": "6aac485666c2955077d77b796bbdd25f0013a4ea"
+        {
+            "name": "guzzlehttp/guzzle",
+            "version": "5.3.4",
+            "version_normalized": "5.3.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/guzzle.git",
+                "reference": "b87eda7a7162f95574032da17e9323c9899cb6b2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/b87eda7a7162f95574032da17e9323c9899cb6b2",
+                "reference": "b87eda7a7162f95574032da17e9323c9899cb6b2",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/ringphp": "^1.1",
+                "php": ">=5.4.0",
+                "react/promise": "^2.2"
+            },
+            "require-dev": {
+                "ext-curl": "*",
+                "phpunit/phpunit": "^4.0"
+            },
+            "time": "2019-10-30T09:32:00+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "GuzzleHttp\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Guzzle is a PHP HTTP client library and framework for building RESTful web service clients",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "client",
+                "curl",
+                "framework",
+                "http",
+                "http client",
+                "rest",
+                "web service"
+            ],
+            "support": {
+                "issues": "https://github.com/guzzle/guzzle/issues",
+                "source": "https://github.com/guzzle/guzzle/tree/5.3"
+            },
+            "install-path": "../guzzlehttp/guzzle"
         },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/rmccue/Requests/zipball/6aac485666c2955077d77b796bbdd25f0013a4ea",
-            "reference": "6aac485666c2955077d77b796bbdd25f0013a4ea",
-            "shasum": ""
+        {
+            "name": "guzzlehttp/ringphp",
+            "version": "1.1.1",
+            "version_normalized": "1.1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/RingPHP.git",
+                "reference": "5e2a174052995663dd68e6b5ad838afd47dd615b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/RingPHP/zipball/5e2a174052995663dd68e6b5ad838afd47dd615b",
+                "reference": "5e2a174052995663dd68e6b5ad838afd47dd615b",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/streams": "~3.0",
+                "php": ">=5.4.0",
+                "react/promise": "~2.0"
+            },
+            "require-dev": {
+                "ext-curl": "*",
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "ext-curl": "Guzzle will use specific adapters if cURL is present"
+            },
+            "time": "2018-07-31T13:22:33+00:00",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "GuzzleHttp\\Ring\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Provides a simple API and specification that abstracts away the details of HTTP into a single PHP function.",
+            "support": {
+                "issues": "https://github.com/guzzle/RingPHP/issues",
+                "source": "https://github.com/guzzle/RingPHP/tree/1.1.1"
+            },
+            "abandoned": true,
+            "install-path": "../guzzlehttp/ringphp"
         },
-        "require": {
-            "php": ">=5.2"
+        {
+            "name": "guzzlehttp/streams",
+            "version": "3.0.0",
+            "version_normalized": "3.0.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/streams.git",
+                "reference": "47aaa48e27dae43d39fc1cea0ccf0d84ac1a2ba5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/streams/zipball/47aaa48e27dae43d39fc1cea0ccf0d84ac1a2ba5",
+                "reference": "47aaa48e27dae43d39fc1cea0ccf0d84ac1a2ba5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "time": "2014-10-12T19:18:40+00:00",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "GuzzleHttp\\Stream\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Provides a simple abstraction over streams of data",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "Guzzle",
+                "stream"
+            ],
+            "install-path": "../guzzlehttp/streams"
         },
-        "require-dev": {
-            "satooshi/php-coveralls": "dev-master"
+        {
+            "name": "jmhobbs/swiftmailer-transport-aws-ses",
+            "version": "0.9.2",
+            "version_normalized": "0.9.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jmhobbs/Swiftmailer-Transport--AWS-SES.git",
+                "reference": "10110a450225a19b5095e7313a5c7c4b43bba3b6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jmhobbs/Swiftmailer-Transport--AWS-SES/zipball/10110a450225a19b5095e7313a5c7c4b43bba3b6",
+                "reference": "10110a450225a19b5095e7313a5c7c4b43bba3b6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0",
+                "swiftmailer/swiftmailer": ">=4.0.0"
+            },
+            "time": "2014-11-12T23:51:28+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "": "classes/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "John Hobbs",
+                    "email": "john@velvetcache.org"
+                }
+            ],
+            "description": "Add AWS SES support to Swiftmailer",
+            "keywords": [
+                "aws",
+                "email",
+                "ses",
+                "swiftmailer"
+            ],
+            "install-path": "../jmhobbs/swiftmailer-transport-aws-ses"
         },
-        "time": "2014-05-18 04:59:02",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Requests": "library/"
-            }
+        {
+            "name": "mailgun/mailgun-php",
+            "version": "v1.8",
+            "version_normalized": "1.8.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mailgun/mailgun-php.git",
+                "reference": "225e8005950027df22fc5f5b1ada58f4ad116d60"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mailgun/mailgun-php/zipball/225e8005950027df22fc5f5b1ada58f4ad116d60",
+                "reference": "225e8005950027df22fc5f5b1ada58f4ad116d60",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "~5.0"
+            },
+            "require-dev": {
+                "php": ">=5.4.0",
+                "phpunit/phpunit": "~4.6"
+            },
+            "time": "2015-05-06T17:52:51+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "Mailgun\\Tests": "tests/",
+                    "Mailgun": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Travis Swientek",
+                    "email": "travis@mailgunhq.com"
+                }
+            ],
+            "description": "The Mailgun SDK provides methods for all API functions.",
+            "install-path": "../mailgun/mailgun-php"
         },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "ISC"
-        ],
-        "authors": [
-            {
-                "name": "Ryan McCue",
-                "homepage": "http://ryanmccue.info"
-            }
-        ],
-        "description": "A HTTP library written in PHP, for human beings.",
-        "homepage": "http://github.com/rmccue/Requests",
-        "keywords": [
-            "curl",
-            "fsockopen",
-            "http",
-            "idna",
-            "ipv6",
-            "iri",
-            "sockets"
-        ]
-    }
-]
+        {
+            "name": "mandrill/mandrill",
+            "version": "1.0.55",
+            "version_normalized": "1.0.55.0",
+            "source": {
+                "type": "git",
+                "url": "https://bitbucket.org/mailchimp/mandrill-api-php.git",
+                "reference": "da3adc10042eafac2e53de141b358a52b8e53596"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://bitbucket.org/mailchimp/mandrill-api-php/get/da3adc10042eafac2e53de141b358a52b8e53596.zip",
+                "reference": "da3adc10042eafac2e53de141b358a52b8e53596",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0"
+            },
+            "time": "2015-09-22T13:58:03+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "Mandrill": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Mandrill Devs",
+                    "email": "community@mandrill.com",
+                    "homepage": "http://mandrill.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "API client library for the Mandrill email as a service platform",
+            "homepage": "https://bitbucket.org/mailchimp/mandrill-api-php",
+            "keywords": [
+                "api",
+                "email"
+            ],
+            "install-path": "../mandrill/mandrill"
+        },
+        {
+            "name": "openbuildings/postmark",
+            "version": "0.3.3",
+            "version_normalized": "0.3.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/OpenBuildings/postmark.git",
+                "reference": "8909fc0512346e11267c21ce95b4bb0112db31fd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/OpenBuildings/postmark/zipball/8909fc0512346e11267c21ce95b4bb0112db31fd",
+                "reference": "8909fc0512346e11267c21ce95b4bb0112db31fd",
+                "shasum": ""
+            },
+            "require": {
+                "lib-curl": "*",
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "swiftmailer/swiftmailer": "~5.0"
+            },
+            "suggest": {
+                "openbuildings/swiftmailer-css-inliner": "Inline the CSS of your HTML emails",
+                "openbuildings/swiftmailer-filter": "Whitelist or blacklist domains or emails from To, Cc and Bcc",
+                "openbuildings/swiftmailer-google-campaign": "Append to all email links Google UTM campaign parameters"
+            },
+            "time": "2015-11-09T15:55:13+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Openbuildings\\Postmark\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Ivan Kerin",
+                    "email": "ivan@openbuildings.com",
+                    "role": "Author"
+                }
+            ],
+            "description": "Swiftmailer Transport Class for Postmark",
+            "install-path": "../openbuildings/postmark"
+        },
+        {
+            "name": "react/promise",
+            "version": "v2.8.0",
+            "version_normalized": "2.8.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/reactphp/promise.git",
+                "reference": "f3cff96a19736714524ca0dd1d4130de73dbbbc4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/reactphp/promise/zipball/f3cff96a19736714524ca0dd1d4130de73dbbbc4",
+                "reference": "f3cff96a19736714524ca0dd1d4130de73dbbbc4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.0 || ^6.5 || ^5.7 || ^4.8.36"
+            },
+            "time": "2020-05-12T15:16:56+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "React\\Promise\\": "src/"
+                },
+                "files": [
+                    "src/functions_include.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jan Sorgalla",
+                    "email": "jsorgalla@gmail.com"
+                }
+            ],
+            "description": "A lightweight implementation of CommonJS Promises/A for PHP",
+            "keywords": [
+                "promise",
+                "promises"
+            ],
+            "support": {
+                "issues": "https://github.com/reactphp/promise/issues",
+                "source": "https://github.com/reactphp/promise/tree/v2.8.0"
+            },
+            "install-path": "../react/promise"
+        },
+        {
+            "name": "rmccue/requests",
+            "version": "v1.8.1",
+            "version_normalized": "1.8.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/WordPress/Requests.git",
+                "reference": "82e6936366eac3af4d836c18b9d8c31028fe4cd5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/WordPress/Requests/zipball/82e6936366eac3af4d836c18b9d8c31028fe4cd5",
+                "reference": "82e6936366eac3af4d836c18b9d8c31028fe4cd5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.7",
+                "php-parallel-lint/php-console-highlighter": "^0.5.0",
+                "php-parallel-lint/php-parallel-lint": "^1.3",
+                "phpcompatibility/php-compatibility": "^9.0",
+                "phpunit/phpunit": "^4.8 || ^5.7 || ^6.5 || ^7.5",
+                "requests/test-server": "dev-master",
+                "squizlabs/php_codesniffer": "^3.5",
+                "wp-coding-standards/wpcs": "^2.0"
+            },
+            "time": "2021-06-04T09:56:25+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "Requests": "library/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "ISC"
+            ],
+            "authors": [
+                {
+                    "name": "Ryan McCue",
+                    "homepage": "http://ryanmccue.info"
+                }
+            ],
+            "description": "A HTTP library written in PHP, for human beings.",
+            "homepage": "http://github.com/WordPress/Requests",
+            "keywords": [
+                "curl",
+                "fsockopen",
+                "http",
+                "idna",
+                "ipv6",
+                "iri",
+                "sockets"
+            ],
+            "support": {
+                "issues": "https://github.com/WordPress/Requests/issues",
+                "source": "https://github.com/WordPress/Requests/tree/v1.8.1"
+            },
+            "install-path": "../rmccue/requests"
+        },
+        {
+            "name": "sendgrid/sendgrid",
+            "version": "4.0.4",
+            "version_normalized": "4.0.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sendgrid/sendgrid-php.git",
+                "reference": "b7d88a78b5ef7c029237e449e0adcaa1b7b70092"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sendgrid/sendgrid-php/zipball/b7d88a78b5ef7c029237e449e0adcaa1b7b70092",
+                "reference": "b7d88a78b5ef7c029237e449e0adcaa1b7b70092",
+                "shasum": ""
+            },
+            "require": {
+                "guzzle/guzzle": "~3.9",
+                "php": ">=5.3",
+                "sendgrid/smtpapi": "~0.5"
+            },
+            "replace": {
+                "sendgrid/sendgrid-php": "*"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "~4.4",
+                "vlucas/phpdotenv": "~1.0"
+            },
+            "time": "2016-02-18T21:40:14+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "SendGrid": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "This library allows you to quickly and easily send emails through SendGrid using PHP.",
+            "homepage": "http://github.com/sendgrid/sendgrid-php",
+            "keywords": [
+                "email",
+                "grid",
+                "send",
+                "sendgrid"
+            ],
+            "install-path": "../sendgrid/sendgrid"
+        },
+        {
+            "name": "sendgrid/smtpapi",
+            "version": "0.6.7",
+            "version_normalized": "0.6.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sendgrid/smtpapi-php.git",
+                "reference": "cf63bd353c25f775a1fb2654a0a3fff22f573a37"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sendgrid/smtpapi-php/zipball/cf63bd353c25f775a1fb2654a0a3fff22f573a37",
+                "reference": "cf63bd353c25f775a1fb2654a0a3fff22f573a37",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6"
+            },
+            "replace": {
+                "sendgrid/smtpapi-php": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "5.7.* || 6.5.*",
+                "squizlabs/php_codesniffer": "2.9.* || 3.3.*"
+            },
+            "suggest": {
+                "swiftmailer/swiftmailer": "^5.4 - Needed to run the example scripts"
+            },
+            "time": "2020-10-14T18:37:39+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "Smtpapi": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Build SendGrid X-SMTPAPI headers in PHP.",
+            "homepage": "http://github.com/sendgrid/smtpapi-php",
+            "keywords": [
+                "X-SMTP",
+                "api",
+                "email",
+                "grid",
+                "send",
+                "sendgrid",
+                "smtp",
+                "smtpapi",
+                "twilio",
+                "xsmtp"
+            ],
+            "support": {
+                "issues": "https://github.com/sendgrid/smtpapi-php/issues",
+                "source": "https://github.com/sendgrid/smtpapi-php/tree/0.6.7"
+            },
+            "install-path": "../sendgrid/smtpapi"
+        },
+        {
+            "name": "swiftmailer/swiftmailer",
+            "version": "v5.4.12",
+            "version_normalized": "5.4.12.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/swiftmailer/swiftmailer.git",
+                "reference": "181b89f18a90f8925ef805f950d47a7190e9b950"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/181b89f18a90f8925ef805f950d47a7190e9b950",
+                "reference": "181b89f18a90f8925ef805f950d47a7190e9b950",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9.1",
+                "symfony/phpunit-bridge": "~3.2"
+            },
+            "time": "2018-07-31T09:26:32+00:00",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.4-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "lib/swift_required.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chris Corbyn"
+                },
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                }
+            ],
+            "description": "Swiftmailer, free feature-rich PHP mailer",
+            "homepage": "https://swiftmailer.symfony.com",
+            "keywords": [
+                "email",
+                "mail",
+                "mailer"
+            ],
+            "support": {
+                "issues": "https://github.com/swiftmailer/swiftmailer/issues",
+                "source": "https://github.com/swiftmailer/swiftmailer/tree/v5.4.12"
+            },
+            "install-path": "../swiftmailer/swiftmailer"
+        },
+        {
+            "name": "symfony/event-dispatcher",
+            "version": "v2.8.52",
+            "version_normalized": "2.8.52.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/event-dispatcher.git",
+                "reference": "a77e974a5fecb4398833b0709210e3d5e334ffb0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/a77e974a5fecb4398833b0709210e3d5e334ffb0",
+                "reference": "a77e974a5fecb4398833b0709210e3d5e334ffb0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "require-dev": {
+                "psr/log": "~1.0",
+                "symfony/config": "^2.0.5|~3.0.0",
+                "symfony/dependency-injection": "~2.6|~3.0.0",
+                "symfony/expression-language": "~2.6|~3.0.0",
+                "symfony/stopwatch": "~2.3|~3.0.0"
+            },
+            "suggest": {
+                "symfony/dependency-injection": "",
+                "symfony/http-kernel": ""
+            },
+            "time": "2018-11-21T14:20:20+00:00",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.8-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\EventDispatcher\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony EventDispatcher Component",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/event-dispatcher/tree/v2.8.50"
+            },
+            "install-path": "../symfony/event-dispatcher"
+        }
+    ],
+    "dev": false,
+    "dev-package-names": []
+}

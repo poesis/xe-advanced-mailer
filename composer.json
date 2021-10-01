@@ -3,7 +3,7 @@
 		"mailgun/mailgun-php": "1.8.*",
 		"mandrill/mandrill": "1.0.*",
 		"openbuildings/postmark": "0.3.3",
-		"rmccue/requests": "1.6.*",
+		"rmccue/requests": "1.8.*",
 		"sendgrid/sendgrid": "4.0.*",
 		"swiftmailer/swiftmailer": "5.4.*",
 		"jmhobbs/swiftmailer-transport-aws-ses": "0.9.2"

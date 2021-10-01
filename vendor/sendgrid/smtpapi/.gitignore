@@ -1,8 +1,8 @@
 .DS_Store
-composer.lock
 vendor
+*.lock
 test/coverage/*
-examples/*
 dist/
 .env*
-smtpapi-php.php
+smtpapi-php.zip
+.idea

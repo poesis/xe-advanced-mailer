@@ -14,6 +14,13 @@
  */
 class Requests_Utility_FilteredIterator extends ArrayIterator {
 	/**
+	 * Callback to run as a filter
+	 *
+	 * @var callable
+	 */
+	protected $callback;
+
+	/**
 	 * Create a new iterator
 	 *
 	 * @param array $data
@@ -32,7 +39,27 @@ class Requests_Utility_FilteredIterator extends ArrayIterator {
 	 */
 	public function current() {
 		$value = parent::current();
-		$value = call_user_func($this->callback, $value);
+
+		if (is_callable($this->callback)) {
+			$value = call_user_func($this->callback, $value);
+		}
+
 		return $value;
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function unserialize($serialized) {}
+
+	/**
+	 * @inheritdoc
+	 *
+	 * @phpcs:disable PHPCompatibility.FunctionNameRestrictions.NewMagicMethods.__unserializeFound
+	 */
+	public function __unserialize($serialized) {}
+
+	public function __wakeup() {
+		unset($this->callback);
 	}
 }

@@ -1,11 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "hash": "9c23862fe2617c038fe86b44bea1c987",
-    "content-hash": "e1df6600889de3a0340ea355b6b9d802",
+    "content-hash": "d4eae33869c031855615a6014a2299dd",
     "packages": [
         {
             "name": "guzzle/guzzle",
@@ -100,37 +99,37 @@
                 "rest",
                 "web service"
             ],
-            "time": "2015-03-18 18:23:50"
+            "support": {
+                "issues": "https://github.com/guzzle/guzzle3/issues",
+                "source": "https://github.com/guzzle/guzzle3/tree/master"
+            },
+            "abandoned": "guzzlehttp/guzzle",
+            "time": "2015-03-18T18:23:50+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "5.3.0",
+            "version": "5.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "f3c8c22471cb55475105c14769644a49c3262b93"
+                "reference": "b87eda7a7162f95574032da17e9323c9899cb6b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/f3c8c22471cb55475105c14769644a49c3262b93",
-                "reference": "f3c8c22471cb55475105c14769644a49c3262b93",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/b87eda7a7162f95574032da17e9323c9899cb6b2",
+                "reference": "b87eda7a7162f95574032da17e9323c9899cb6b2",
                 "shasum": ""
             },
             "require": {
                 "guzzlehttp/ringphp": "^1.1",
-                "php": ">=5.4.0"
+                "php": ">=5.4.0",
+                "react/promise": "^2.2"
             },
             "require-dev": {
                 "ext-curl": "*",
-                "phpunit/phpunit": "^4.0",
-                "psr/log": "^1.0"
+                "phpunit/phpunit": "^4.0"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "5.0-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "GuzzleHttp\\": "src/"
@@ -158,20 +157,24 @@
                 "rest",
                 "web service"
             ],
-            "time": "2015-05-20 03:47:55"
+            "support": {
+                "issues": "https://github.com/guzzle/guzzle/issues",
+                "source": "https://github.com/guzzle/guzzle/tree/5.3"
+            },
+            "time": "2019-10-30T09:32:00+00:00"
         },
         {
             "name": "guzzlehttp/ringphp",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/RingPHP.git",
-                "reference": "dbbb91d7f6c191e5e405e900e3102ac7f261bc0b"
+                "reference": "5e2a174052995663dd68e6b5ad838afd47dd615b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/RingPHP/zipball/dbbb91d7f6c191e5e405e900e3102ac7f261bc0b",
-                "reference": "dbbb91d7f6c191e5e405e900e3102ac7f261bc0b",
+                "url": "https://api.github.com/repos/guzzle/RingPHP/zipball/5e2a174052995663dd68e6b5ad838afd47dd615b",
+                "reference": "5e2a174052995663dd68e6b5ad838afd47dd615b",
                 "shasum": ""
             },
             "require": {
@@ -209,7 +212,12 @@
                 }
             ],
             "description": "Provides a simple API and specification that abstracts away the details of HTTP into a single PHP function.",
-            "time": "2015-05-20 03:37:09"
+            "support": {
+                "issues": "https://github.com/guzzle/RingPHP/issues",
+                "source": "https://github.com/guzzle/RingPHP/tree/1.1.1"
+            },
+            "abandoned": true,
+            "time": "2018-07-31T13:22:33+00:00"
         },
         {
             "name": "guzzlehttp/streams",
@@ -259,7 +267,12 @@
                 "Guzzle",
                 "stream"
             ],
-            "time": "2014-10-12 19:18:40"
+            "support": {
+                "issues": "https://github.com/guzzle/streams/issues",
+                "source": "https://github.com/guzzle/streams/tree/master"
+            },
+            "abandoned": true,
+            "time": "2014-10-12T19:18:40+00:00"
         },
         {
             "name": "jmhobbs/swiftmailer-transport-aws-ses",
@@ -302,7 +315,12 @@
                 "ses",
                 "swiftmailer"
             ],
-            "time": "2014-11-12 23:51:28"
+            "support": {
+                "issues": "https://github.com/jmhobbs/Swiftmailer-Transport--AWS-SES/issues",
+                "source": "https://github.com/jmhobbs/Swiftmailer-Transport--AWS-SES/tree/0.9.2"
+            },
+            "abandoned": "https://github.com/jmhobbs/Swiftmailer-Transport--AWS-SES/blob/master/SMTP.md",
+            "time": "2014-11-12T23:51:28+00:00"
         },
         {
             "name": "mailgun/mailgun-php",
@@ -343,7 +361,11 @@
                 }
             ],
             "description": "The Mailgun SDK provides methods for all API functions.",
-            "time": "2015-05-06 17:52:51"
+            "support": {
+                "issues": "https://github.com/mailgun/mailgun-php/issues",
+                "source": "https://github.com/mailgun/mailgun-php/tree/master"
+            },
+            "time": "2015-05-06T17:52:51+00:00"
         },
         {
             "name": "mandrill/mandrill",
@@ -386,7 +408,8 @@
                 "api",
                 "email"
             ],
-            "time": "2015-09-22 13:58:03"
+            "abandoned": "mailchimp/transactional",
+            "time": "2015-09-22T13:58:03+00:00"
         },
         {
             "name": "openbuildings/postmark",
@@ -432,31 +455,33 @@
                 }
             ],
             "description": "Swiftmailer Transport Class for Postmark",
-            "time": "2015-11-09 15:55:13"
+            "support": {
+                "issues": "https://github.com/OpenBuildings/postmark/issues",
+                "source": "https://github.com/OpenBuildings/postmark/tree/master"
+            },
+            "time": "2015-11-09T15:55:13+00:00"
         },
         {
             "name": "react/promise",
-            "version": "v2.2.2",
+            "version": "v2.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/reactphp/promise.git",
-                "reference": "3aacad8bf10c7d83e6fa2089d413529888c2bedf"
+                "reference": "f3cff96a19736714524ca0dd1d4130de73dbbbc4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reactphp/promise/zipball/3aacad8bf10c7d83e6fa2089d413529888c2bedf",
-                "reference": "3aacad8bf10c7d83e6fa2089d413529888c2bedf",
+                "url": "https://api.github.com/repos/reactphp/promise/zipball/f3cff96a19736714524ca0dd1d4130de73dbbbc4",
+                "reference": "f3cff96a19736714524ca0dd1d4130de73dbbbc4",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.4.0"
             },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0-dev"
-                }
+            "require-dev": {
+                "phpunit/phpunit": "^7.0 || ^6.5 || ^5.7 || ^4.8.36"
             },
+            "type": "library",
             "autoload": {
                 "psr-4": {
                     "React\\Promise\\": "src/"
@@ -476,27 +501,42 @@
                 }
             ],
             "description": "A lightweight implementation of CommonJS Promises/A for PHP",
-            "time": "2016-02-26 19:09:02"
+            "keywords": [
+                "promise",
+                "promises"
+            ],
+            "support": {
+                "issues": "https://github.com/reactphp/promise/issues",
+                "source": "https://github.com/reactphp/promise/tree/v2.8.0"
+            },
+            "time": "2020-05-12T15:16:56+00:00"
         },
         {
             "name": "rmccue/requests",
-            "version": "v1.6.1",
+            "version": "v1.8.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/rmccue/Requests.git",
-                "reference": "6aac485666c2955077d77b796bbdd25f0013a4ea"
+                "url": "https://github.com/WordPress/Requests.git",
+                "reference": "82e6936366eac3af4d836c18b9d8c31028fe4cd5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rmccue/Requests/zipball/6aac485666c2955077d77b796bbdd25f0013a4ea",
-                "reference": "6aac485666c2955077d77b796bbdd25f0013a4ea",
+                "url": "https://api.github.com/repos/WordPress/Requests/zipball/82e6936366eac3af4d836c18b9d8c31028fe4cd5",
+                "reference": "82e6936366eac3af4d836c18b9d8c31028fe4cd5",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.2"
             },
             "require-dev": {
-                "satooshi/php-coveralls": "dev-master"
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.7",
+                "php-parallel-lint/php-console-highlighter": "^0.5.0",
+                "php-parallel-lint/php-parallel-lint": "^1.3",
+                "phpcompatibility/php-compatibility": "^9.0",
+                "phpunit/phpunit": "^4.8 || ^5.7 || ^6.5 || ^7.5",
+                "requests/test-server": "dev-master",
+                "squizlabs/php_codesniffer": "^3.5",
+                "wp-coding-standards/wpcs": "^2.0"
             },
             "type": "library",
             "autoload": {
@@ -515,7 +555,7 @@
                 }
             ],
             "description": "A HTTP library written in PHP, for human beings.",
-            "homepage": "http://github.com/rmccue/Requests",
+            "homepage": "http://github.com/WordPress/Requests",
             "keywords": [
                 "curl",
                 "fsockopen",
@@ -525,7 +565,11 @@
                 "iri",
                 "sockets"
             ],
-            "time": "2014-05-18 04:59:02"
+            "support": {
+                "issues": "https://github.com/WordPress/Requests/issues",
+                "source": "https://github.com/WordPress/Requests/tree/v1.8.1"
+            },
+            "time": "2021-06-04T09:56:25+00:00"
         },
         {
             "name": "sendgrid/sendgrid",
@@ -572,30 +616,38 @@
                 "send",
                 "sendgrid"
             ],
-            "time": "2016-02-18 21:40:14"
+            "support": {
+                "issues": "https://github.com/sendgrid/sendgrid-php/issues",
+                "source": "https://github.com/sendgrid/sendgrid-php/tree/master"
+            },
+            "time": "2016-02-18T21:40:14+00:00"
         },
         {
             "name": "sendgrid/smtpapi",
-            "version": "0.5.0",
+            "version": "0.6.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sendgrid/smtpapi-php.git",
-                "reference": "05ccf57bad5d1524e479b6dc0a2dfade88b3fbe5"
+                "reference": "cf63bd353c25f775a1fb2654a0a3fff22f573a37"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sendgrid/smtpapi-php/zipball/05ccf57bad5d1524e479b6dc0a2dfade88b3fbe5",
-                "reference": "05ccf57bad5d1524e479b6dc0a2dfade88b3fbe5",
+                "url": "https://api.github.com/repos/sendgrid/smtpapi-php/zipball/cf63bd353c25f775a1fb2654a0a3fff22f573a37",
+                "reference": "cf63bd353c25f775a1fb2654a0a3fff22f573a37",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3"
+                "php": ">=5.6"
             },
             "replace": {
                 "sendgrid/smtpapi-php": "*"
             },
             "require-dev": {
-                "phpunit/phpunit": "3.7.*"
+                "phpunit/phpunit": "5.7.* || 6.5.*",
+                "squizlabs/php_codesniffer": "2.9.* || 3.3.*"
+            },
+            "suggest": {
+                "swiftmailer/swiftmailer": "^5.4 - Needed to run the example scripts"
             },
             "type": "library",
             "autoload": {
@@ -618,29 +670,35 @@
                 "sendgrid",
                 "smtp",
                 "smtpapi",
+                "twilio",
                 "xsmtp"
             ],
-            "time": "2015-04-14 02:37:45"
+            "support": {
+                "issues": "https://github.com/sendgrid/smtpapi-php/issues",
+                "source": "https://github.com/sendgrid/smtpapi-php/tree/0.6.7"
+            },
+            "time": "2020-10-14T18:37:39+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
-            "version": "v5.4.1",
+            "version": "v5.4.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "0697e6aa65c83edf97bb0f23d8763f94e3f11421"
+                "reference": "181b89f18a90f8925ef805f950d47a7190e9b950"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/0697e6aa65c83edf97bb0f23d8763f94e3f11421",
-                "reference": "0697e6aa65c83edf97bb0f23d8763f94e3f11421",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/181b89f18a90f8925ef805f950d47a7190e9b950",
+                "reference": "181b89f18a90f8925ef805f950d47a7190e9b950",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
             "require-dev": {
-                "mockery/mockery": "~0.9.1,<0.9.4"
+                "mockery/mockery": "~0.9.1",
+                "symfony/phpunit-bridge": "~3.2"
             },
             "type": "library",
             "extra": {
@@ -667,26 +725,30 @@
                 }
             ],
             "description": "Swiftmailer, free feature-rich PHP mailer",
-            "homepage": "http://swiftmailer.org",
+            "homepage": "https://swiftmailer.symfony.com",
             "keywords": [
                 "email",
                 "mail",
                 "mailer"
             ],
-            "time": "2015-06-06 14:19:39"
+            "support": {
+                "issues": "https://github.com/swiftmailer/swiftmailer/issues",
+                "source": "https://github.com/swiftmailer/swiftmailer/tree/v5.4.12"
+            },
+            "time": "2018-07-31T09:26:32+00:00"
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.8.3",
+            "version": "v2.8.52",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "78c468665c9568c3faaa9c416a7134308f2d85c3"
+                "reference": "a77e974a5fecb4398833b0709210e3d5e334ffb0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/78c468665c9568c3faaa9c416a7134308f2d85c3",
-                "reference": "78c468665c9568c3faaa9c416a7134308f2d85c3",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/a77e974a5fecb4398833b0709210e3d5e334ffb0",
+                "reference": "a77e974a5fecb4398833b0709210e3d5e334ffb0",
                 "shasum": ""
             },
             "require": {
@@ -694,7 +756,7 @@
             },
             "require-dev": {
                 "psr/log": "~1.0",
-                "symfony/config": "~2.0,>=2.0.5|~3.0.0",
+                "symfony/config": "^2.0.5|~3.0.0",
                 "symfony/dependency-injection": "~2.6|~3.0.0",
                 "symfony/expression-language": "~2.6|~3.0.0",
                 "symfony/stopwatch": "~2.3|~3.0.0"
@@ -733,7 +795,10 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2016-01-27 05:14:19"
+            "support": {
+                "source": "https://github.com/symfony/event-dispatcher/tree/v2.8.50"
+            },
+            "time": "2018-11-21T14:20:20+00:00"
         }
     ],
     "packages-dev": [],
@@ -743,5 +808,6 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.0.0"
 }
